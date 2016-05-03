@@ -1,0 +1,20 @@
+Projektstyring 
+	Referencelinje plan
+	fase/iterationsplan
+	roller
+	værktøjer til deling af projektet
+	Fulgte UP processen
+
+
+Systemudvikling
+	OC
+	UC
+	DCD
+	SD
+	osv osv
+
+Mockups
+	Udviklingen af mockups
+	
+Brugertest
+	
