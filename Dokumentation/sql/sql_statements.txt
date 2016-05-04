@@ -9,19 +9,33 @@ tlf_nummer double NOT NULL,
 CREATE TABLE Koersler
 (
 KoerselsID bigint IDENTITY,
+kundenummer bigint,
+FOREIGN KEY(kundenummer) REFERENCES profiler(kundenummer),
 start_adresse varchar(255) NOT NULL,
 start_postnummer decimal NOT NULL,
-FOREIGN KEY(start_postnummer) REFERENCES regioner(POSTNR),
+--FOREIGN KEY(start_postnummer) REFERENCES regioner(POSTNR),
 tidspunkt Date NOT NULL,
 slut_adresse varchar(255) NOT NULL,
 slut_postnummer decimal NOT NULL,
-FOREIGN KEY(slut_postnummer) REFERENCES regioner(POSTNR),
+--FOREIGN KEY(slut_postnummer) REFERENCES regioner(POSTNR),
 antal_KM double NOT NULL,
 beregnet_pris double NOT NULL,
-bruger_kommentar varchar(1000),
-adminstration_kommentar varchar(1000),
-godkendt_kørsel boolean(false),
+godkendt_kørsel boolean
 )
+
+ALTER TABLE koersler
+ADD brugerkommentar varchar(1000)
+
+ALTER TABLE koersler
+ADD adminstrationskommentar varchar(1000)
+
+
+start_adresse varchar(255) NOT NULL,
+
+bruger_kommentar varchar(255),
+adminstration_kommentar varchar(255),
+godkendt_kørsel boolean(false),
+
 
 CREATE TABLE Koerselstildeling
 (
