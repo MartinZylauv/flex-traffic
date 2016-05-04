@@ -1,3 +1,4 @@
 3/5/2016:
 OC blev ikke færdiglavet  i dag men igangsat grundet at et gruppemedlem kom en time for sent. Tidsplanen bliver dog holdt da der er plads  til at sætte OC'et til UC1 til at blive færddigjort i morgen. Ellers blev tidsplanen holdt 100%.
 4/5/2016
+Tidsplan overholdt i dag, dog var der problemer med database prototype, som så gjorde at vi arbejdede med den for at overkomme denne forhindring. Dermed kom vi frem til en virkende foreløbig database, som vi sparer 2 timer med på mandag med. Martin laver hjemmearbejde i ferien for at se om der er andre forhindringer, og for at gøre dokumentationen klar til en snak med vejleder på mandag. Email er skrevet til vejleder. Snak med vejleder skal forekomme da vi er usikre på noget Systemudviklings dokumentation vi har lavet.
