@@ -5,13 +5,11 @@ import java.util.Date;
 import Domain.SlutDestination;
 import Domain.StartDestination;
 
-public class KørselImp implements Kørsel {
+public class KoerselImp implements Koersel {
 
-	@Override
+		@Override
 	public void angivInformationer(StartDestination startDestination, SlutDestination slutDestination, Date dato,
-			int antalPersoner, int antalHjælpemidler, int antalBagage, String kommentarer) {
+			int antalPersoner, int antalHjaelpemidler, int antalBagage, String kommentarer) {
 		// TODO Auto-generated method stub
 		
-	}
-
-}
+	}}
