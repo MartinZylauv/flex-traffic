@@ -4,6 +4,7 @@ import java.util.Date;
 
 import domain.SlutDestination;
 import domain.StartDestination;
+import domain.Profil;
 
 public interface FTPController {
 
@@ -14,4 +15,6 @@ public interface FTPController {
 			Date dato, int antalPersoner, int antalHjaelpemidler, int antalBagage, String kommentarer);
 	
 	public boolean accepterPris();
+	
+	public Profil anmodOmProfil(double kundeNummer);
 }
