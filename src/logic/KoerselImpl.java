@@ -1,5 +1,6 @@
 package logic;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 import domain.KoerselDom;
@@ -14,7 +15,20 @@ public class KoerselImpl implements Koersel {
 	
 	@Override
 	public boolean validerInformationer() {
-		//tjek af information og logikken omkring det heri.
+		int difference = koerselDom.getDate().compareTo(LocalDate.now());
+		if(startDestination.getAdresse()!=null && startDestination.getPostnummer()!=Double.NaN 
+				&& slutDestination.getAdresse()!=null && slutDestination.getPostnummer()!=Double.NaN 
+				&& difference >=0 && koerselDom.getAntalPersoner()>0 && koerselDom.getAntalPersoner()<10 
+				&& koerselDom.getHjaelpemidler()>=0 && koerselDom.getAntalBagage()>=0 
+				&& koerselDom.getBrugerNummer()!=Double.NaN){
+			
+			PrisBeregner pb = new PrisBeregner();
+			pb.run();
+			
+			
+		} else{
+			
+		}
 		return false;
 	}
 
@@ -25,8 +39,8 @@ public class KoerselImpl implements Koersel {
 		this.startDestination=startDestination;
 		this.slutDestination=slutDestination;
 		//validerinformationer kommer her
-		//hvis ikke valid så kaldt en update til gui med en fejlbesked
-		//hvis rigtig så
+		//hvis ikke valid sï¿½ kaldt en update til gui med en fejlbesked
+		//hvis rigtig sï¿½
 		//beregnpris bliver kaldt og en update til gui med beregnerpris besked bliver kaldt.
 		
 		
