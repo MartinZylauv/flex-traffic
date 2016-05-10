@@ -3,7 +3,7 @@ package domain;
 import java.time.LocalDate;
 import java.util.Date;
 
-public interface KoerselDom {
+public interface Koersel {
 	
 	public void setDato(LocalDate dato);
 	public LocalDate getDate();

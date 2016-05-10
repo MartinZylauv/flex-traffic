@@ -2,14 +2,14 @@ package logic;
 
 import java.util.Date;
 
-import domain.KoerselDom;
+import domain.Koersel;
 import domain.SlutDestination;
 import domain.StartDestination;
 
-public interface Koersel {
+public interface Validator {
 
 	public double angivInformationer(StartDestination startDestination, SlutDestination slutDestination, 
-			KoerselDom koerselDom);
+			Koersel koerselDom);
 	
 	public boolean validerInformationer();
 }

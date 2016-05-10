@@ -1,5 +1,6 @@
 package domain;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public interface StartDestination {
@@ -10,6 +11,6 @@ public interface StartDestination {
 	public void setPostnummer(int postnummer);
 	public String getBynavn();
 	public void setBynavn(String bynavn);
-	public Date getDato();
-	public void setDato(Date dato);
+	public LocalDate getDato();
+	public void setDato(LocalDate localDate);
 }
