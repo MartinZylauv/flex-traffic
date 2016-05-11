@@ -18,9 +18,9 @@
       </Label>
       <Label layoutX="14.0" layoutY="49.0" text="Adresse:" />
       <Label layoutX="221.0" layoutY="49.0" text="Postnr.:" />
-      <TextField layoutX="59.0" layoutY="45.0" promptText="eks. Silkeborg Vej 2" />
+      <TextField layoutX="59.0" layoutY="45.0" prefHeight="31.0" prefWidth="153.0" promptText="eks. Silkeborg Vej 2" />
       <TextField layoutX="261.0" layoutY="45.0" prefHeight="25.0" prefWidth="67.0" promptText="eks. 7400" />
-      <TextField layoutX="359.0" layoutY="45.0" promptText="eks. Herning" />
+      <TextField layoutX="359.0" layoutY="45.0" prefHeight="31.0" prefWidth="146.0" promptText="eks. Herning" />
       <Label layoutX="343.0" layoutY="49.0" text="By:" />
       <Label layoutX="15.0" layoutY="85.0" prefHeight="35.0" prefWidth="108.0" text="Slutdestination">
          <font>
@@ -29,9 +29,9 @@
       </Label>
       <Label layoutX="15.0" layoutY="120.0" text="Adresse:" />
       <Label layoutX="222.0" layoutY="120.0" text="Postnr.:" />
-      <TextField layoutX="60.0" layoutY="116.0" promptText="eks. Herningvej 5" />
+      <TextField layoutX="60.0" layoutY="116.0" prefHeight="31.0" prefWidth="153.0" promptText="eks. Herningvej 5" />
       <TextField layoutX="262.0" layoutY="116.0" prefHeight="25.0" prefWidth="67.0" promptText="eks. 7500" />
-      <TextField layoutX="360.0" layoutY="116.0" promptText="eks. Holstebro" />
+      <TextField layoutX="360.0" layoutY="116.0" prefHeight="31.0" prefWidth="146.0" promptText="eks. Holstebro" />
       <Label layoutX="344.0" layoutY="120.0" text="By:" />
       <Separator layoutX="14.0" layoutY="148.0" prefHeight="0.0" prefWidth="498.0" />
       <Separator layoutX="12.0" layoutY="184.0" prefHeight="0.0" prefWidth="498.0" />
@@ -44,10 +44,10 @@
       <Label layoutX="231.0" layoutY="204.0" text="Antal personer:" />
       <Label layoutX="11.0" layoutY="247.0" text="Antal hjælpemidler:" />
       <Label layoutX="238.0" layoutY="247.0" text="Antal bagage:" />
-      <ChoiceBox layoutX="115.0" layoutY="243.0" prefHeight="25.0" prefWidth="98.0" />
-      <ChoiceBox layoutX="312.0" layoutY="243.0" prefHeight="25.0" prefWidth="98.0" />
-      <ChoiceBox layoutX="312.0" layoutY="200.0" prefHeight="25.0" prefWidth="98.0" />
-      <DatePicker layoutX="38.0" layoutY="200.0" />
+      <ChoiceBox layoutX="131.0" layoutY="242.0" prefHeight="25.0" prefWidth="98.0" />
+      <ChoiceBox layoutX="343.0" layoutY="243.0" prefHeight="25.0" prefWidth="98.0" />
+      <ChoiceBox layoutX="343.0" layoutY="200.0" prefHeight="25.0" prefWidth="98.0" />
+      <DatePicker layoutX="47.0" layoutY="200.0" prefHeight="31.0" prefWidth="186.0" />
       <Label layoutX="12.0" layoutY="281.0" text="Kommentarer:" />
       <TextArea layoutX="88.0" layoutY="281.0" prefHeight="80.0" prefWidth="420.0" promptText="Kommentarer til chaufføren om evt. hjælpemidler eller andre informationer" wrapText="true" />
    </children>
