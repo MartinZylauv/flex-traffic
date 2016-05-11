@@ -6,5 +6,5 @@ import domain.Profil;
 
 public interface ProfilKartotek {
 
-	public Profil anmodOmProfil(double kundeNummer) throws SQLException;
+	public Profil anmodOmProfil(long kundeNummer) throws SQLException;
 }

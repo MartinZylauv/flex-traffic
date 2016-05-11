@@ -71,7 +71,7 @@ public class FTPControllerImpl extends Observable implements FTPController,Obser
 	}
 
 	@Override
-	public Profil anmodOmProfil(double kundeNummer) throws SQLException {
+	public Profil anmodOmProfil(long kundeNummer) throws SQLException {
 		ProfilKartotekImpl profilkartotek = new ProfilKartotekImpl();
 		Profil profil = new ProfilImpl(); 
 		profil=profilkartotek.anmodOmProfil(kundeNummer);
