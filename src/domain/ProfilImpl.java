@@ -2,55 +2,59 @@ package domain;
 
 public class ProfilImpl implements Profil {
 
-	double kundeNummer;
+	long kundeNummer;
 	String fuldtNavn;
+	String email;
+	long tlfNummer;
 	
 	@Override
-	public double getKundeNummer() {
-		// TODO Auto-generated method stub
-		return 0;
+	public long getKundeNummer() {
+		
+		return  kundeNummer;
 	}
 
 	@Override
-	public void setKundeNummer(double kundeNummer) {
-		// TODO Auto-generated method stub
+	public void setKundeNummer(long kundeNummer) {
+		this.kundeNummer = kundeNummer;
 
 	}
 
 	@Override
 	public String getFuldtNavn() {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return fuldtNavn;
 	}
 
 	@Override
 	public void setFuldtNavn(String fuldtNavn) {
-		// TODO Auto-generated method stub
+		this.fuldtNavn = fuldtNavn;
 
 	}
 
 	@Override
 	public String getEmail() {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return email;
 	}
 
 	@Override
 	public void setEmail(String email) {
-		// TODO Auto-generated method stub
+		this.email = email;
 
 	}
 
 	@Override
-	public double getTlfNummer() {
-		// TODO Auto-generated method stub
-		return 0;
+	public long getTlfNummer() {
+		
+		return tlfNummer;
 	}
 
 	@Override
-	public void setTlfNummer(double tlfNummer) {
-		// TODO Auto-generated method stub
+	public void setTlfNummer(long tlfNummer) {
+		this.tlfNummer = tlfNummer;
 
 	}
+
+	
 
 }

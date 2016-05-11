@@ -18,5 +18,5 @@ public interface FTPController {
 	
 	public boolean accepterPris();
 	
-	public Profil anmodOmProfil(double kundeNummer) throws SQLException;
+	public Profil anmodOmProfil(long kundeNummer) throws SQLException;
 }
