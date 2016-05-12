@@ -30,6 +30,7 @@ public class PrisBeregnerImpl extends Observable implements PrisBeregner  {
 	SlutDestination slutDestination;
 	
 	double pris;
+	double sats;
 
 	
 
@@ -60,7 +61,8 @@ public class PrisBeregnerImpl extends Observable implements PrisBeregner  {
 		
 		Sats s = Sats.i();
 		System.out.println(Arrays.toString(s.getKommuner()));
-		System.out.println(s.getSats("Aarhus", "Herning", 2017, 07, 07));
+		System.out.println("sats:"+s.getSats("Aarhus", "Herning", 2017, 07, 07));
+		sats = s.getSats("Aarhus", "Herning", 2017, 07, 07);
 		//s.getSats(fraKommune, tilKommune, year, month, day);
 		
 		
@@ -69,9 +71,9 @@ public class PrisBeregnerImpl extends Observable implements PrisBeregner  {
 	}
 
 	@Override
-	public double getPris() {
+	public double getPris(double antalKm) {
 		
-		return pris;
+		return sats*antalKm;
 	}
 	
 	public Tilstande getTilstand(){

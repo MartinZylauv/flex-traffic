@@ -1,5 +1,6 @@
 package domain;
 
+import java.sql.Time;
 import java.time.LocalDate;
 import java.util.Date;
 
@@ -17,5 +18,9 @@ public interface Koersel {
 	public String getKommentar();
 	public void setBrugerNummer(int brugerNummer);
 	public int getBrugerNummer();
+	public Time getTid();
+	public void setTime(Time tid);
+	public double getAntalKm();
+	public void setAntalKm(double antalKm);
 
 }

@@ -1,5 +1,6 @@
 package domain;
 
+import java.sql.Time;
 import java.time.LocalDate;
 
 public class KoerselImpl implements Koersel {
@@ -10,6 +11,8 @@ public class KoerselImpl implements Koersel {
 	int antalBagage;
 	int brugerNummer;
 	String kommentar;
+	Time tid;
+	double antalKm;
 
 	@Override
 	public void setDato(LocalDate dato) {
@@ -81,6 +84,30 @@ public class KoerselImpl implements Koersel {
 	public int getBrugerNummer() {
 		
 		return brugerNummer;
+	}
+
+	@Override
+	public Time getTid() {
+		
+		return tid;
+	}
+
+	@Override
+	public void setTime(Time tid) {
+		this.tid=tid;
+		
+	}
+
+	@Override
+	public double getAntalKm() {
+	
+		return antalKm;
+	}
+
+	@Override
+	public void setAntalKm(double antalKm) {
+		this.antalKm = antalKm;
+		
 	}
 
 }

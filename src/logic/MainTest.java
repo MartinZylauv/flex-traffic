@@ -1,8 +1,13 @@
 package logic;
 
 import java.sql.SQLException;
+import java.sql.Time;
+import java.sql.Timestamp;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.Month;
+import java.util.Calendar;
 
 import domain.Profil;
 import domain.ProfilImpl;
@@ -14,6 +19,16 @@ import domain.StartDestinationImpl;
 public class MainTest {
 
 	public static void main(String[] args) throws SQLException {
+		
+		Time t1 = new Time(23,25,00);
+		Time t2 = new Time(System.currentTimeMillis());
+		
+		System.currentTimeMillis();
+		if(t1.compareTo(t2)< 0){
+			System.out.println("hej");
+		}
+		System.out.println();
+		
 		FTPController t = new FTPControllerImpl();
 			
 		
@@ -28,7 +43,9 @@ public class MainTest {
 		slu.setDato(LocalDate.of(2017, Month.JANUARY, 01));
 		slu.setPostnummer(7430);
 		
-		t.angivInformationer(sta, slu, LocalDate.of(2016, Month.MAY, 11), 5, 3, 3, "hej din so", 10);
+		Time tuds = new Time (10,10,00);
+		
+		t.angivInformationer(sta, slu, LocalDate.of(2016, Month.MAY, 11), 5, 3, 3, "hej din so", 10, tuds, 20);
 		Profil p = new ProfilImpl();
 		p = t.anmodOmProfil(0001);
 		System.out.println(p.toString());

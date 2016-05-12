@@ -24,7 +24,8 @@ godkendt_kørsel boolean
 )
 
 ALTER TABLE koersler
-ADD brugerkommentar varchar(1000)
+ADD brugerkommentar varchar(1000),
+ADD Tid_på_dagen Time,
 
 ALTER TABLE koersler
 ADD adminstrationskommentar varchar(1000)

@@ -6,7 +6,6 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="265.0" prefWidth="362.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Label layoutX="136.0" layoutY="14.0" prefHeight="38.0" prefWidth="212.0">
@@ -19,7 +18,7 @@
             <Font size="16.0" />
          </font>
       </Label>
-      <Label layoutX="136.0" layoutY="77.0" prefHeight="38.0" prefWidth="212.0">
+      <Label layoutX="136.0" layoutY="77.0" prefHeight="38.0" prefWidth="212.0" text="sfsdf">
          <font>
             <Font size="16.0" />
          </font>

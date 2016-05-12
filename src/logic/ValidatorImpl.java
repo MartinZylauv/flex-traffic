@@ -1,5 +1,6 @@
 package logic;
 
+import java.sql.Time;
 import java.time.LocalDate;
 import java.util.Date;
 
@@ -18,12 +19,13 @@ public class ValidatorImpl implements Validator {
 		double difference = koerselDom.getDate().compareTo(LocalDate.now());
 		
 		koerselDom.getDate();
+		Time nu = new Time(System.currentTimeMillis());
 		
 		if(startDestination.getAdresse()!=null && startDestination.getPostnummer()!=Double.NaN 
 				&& slutDestination.getAdresse()!=null && slutDestination.getPostnummer()!=Double.NaN 
 				&& difference >=0 && koerselDom.getAntalPersoner()>0 && koerselDom.getAntalPersoner()<10 
 				&& koerselDom.getHjaelpemidler()>=0 && koerselDom.getAntalBagage()>=0 
-				&& koerselDom.getBrugerNummer()!=Double.NaN){
+				&& koerselDom.getBrugerNummer()!=Double.NaN){ //TODO Implementer validation af tidspunkt, fucker lidt op men lav senere.
 			
 			return true;
 			

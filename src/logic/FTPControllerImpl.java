@@ -1,6 +1,7 @@
 package logic;
 
 import java.sql.SQLException;
+import java.sql.Time;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.ArrayList;
@@ -21,16 +22,19 @@ public class FTPControllerImpl extends Observable implements FTPController,Obser
 	PrisBeregnerImpl pb;
 	double pris;
 	Tilstande tilstand;
+	KoerselImpl koersel = new KoerselImpl();
 
 	@Override
 	public double angivInformationer(StartDestination startDestination, SlutDestination slutDestination, LocalDate dato,
-			int antalPersoner, int antalHjaelpemidler, int antalBagage, String kommentarer, int brugerNummer) {
-		KoerselImpl koersel = new KoerselImpl();
+			int antalPersoner, int antalHjaelpemidler, int antalBagage, String kommentarer, int brugerNummer, Time tid, double antalKm) {
+		
 		Validator validator = new ValidatorImpl();
 		koersel.setAntalBagage(antalBagage);
 		koersel.setAntalPersoner(antalPersoner);
 		koersel.setBrugerNummer(brugerNummer);
 		koersel.setDato(dato);
+		koersel.setTime(tid);
+		koersel.setAntalKm(antalKm);
 		
 		
 		koersel.setHjaelplemidler(antalHjaelpemidler);
@@ -83,7 +87,8 @@ public class FTPControllerImpl extends Observable implements FTPController,Obser
 		/*if (pb.getTilstand()== Tilstande.BEREGNER){
 			tilstand = Tilstande.BEREGNER;
 		} else if(pb.getTilstand() == Tilstande.BEREGNET){*/
-			pris = pb.getPris();
+			pris = pb.getPris(koersel.getAntalKm());
+			System.out.println("pris:"+pris);
 			tilstand = Tilstande.BEREGNET;
 			
 		//}
