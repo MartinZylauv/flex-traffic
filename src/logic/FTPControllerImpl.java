@@ -14,8 +14,12 @@ import domain.KoerselImpl;
 import domain.Profil;
 import domain.ProfilImpl;
 import domain.SlutDestination;
+import domain.SlutDestinationImpl;
 import domain.StartDestination;
+import domain.StartDestinationImpl;
+import persistence.KommuneKartotekImpl;
 import persistence.ProfilKartotekImpl;
+import sats.UnknownKommuneException;
 
 public class FTPControllerImpl extends Observable implements FTPController,Observer {
 
@@ -23,12 +27,14 @@ public class FTPControllerImpl extends Observable implements FTPController,Obser
 	double pris;
 	Tilstande tilstand;
 	KoerselImpl koersel = new KoerselImpl();
+	StartDestination startdestination = new StartDestinationImpl();
+	SlutDestination slutdestination = new SlutDestinationImpl();
 
 	@Override
 	public double angivInformationer(StartDestination startDestination, SlutDestination slutDestination, LocalDate dato,
-			int antalPersoner, int antalHjaelpemidler, int antalBagage, String kommentarer, int brugerNummer, Time tid, double antalKm) {
+		int antalPersoner, int antalHjaelpemidler, int antalBagage, String kommentarer, int brugerNummer, Time tid, double antalKm) {
 		
-		Validator validator = new ValidatorImpl();
+		/*Validator validator = new ValidatorImpl();
 		koersel.setAntalBagage(antalBagage);
 		koersel.setAntalPersoner(antalPersoner);
 		koersel.setBrugerNummer(brugerNummer);
@@ -57,7 +63,7 @@ public class FTPControllerImpl extends Observable implements FTPController,Obser
 					break;
 				}
 			}
-		}
+		}*/
 		return pris;
 	}
 
@@ -73,7 +79,8 @@ public class FTPControllerImpl extends Observable implements FTPController,Obser
 		// TODO Auto-generated method stub
 		return false;
 	}
-
+	
+	
 	@Override
 	public Profil anmodOmProfil(long kundeNummer) throws SQLException {
 		ProfilKartotekImpl profilkartotek = new ProfilKartotekImpl();
@@ -87,12 +94,37 @@ public class FTPControllerImpl extends Observable implements FTPController,Obser
 		/*if (pb.getTilstand()== Tilstande.BEREGNER){
 			tilstand = Tilstande.BEREGNER;
 		} else if(pb.getTilstand() == Tilstande.BEREGNET){*/
-			pris = pb.getPris(koersel.getAntalKm());
-			System.out.println("pris:"+pris);
+			this.pris = pb.getPris();
+			System.out.println("PRIIISS" + pris);
+			prisErAendret();
+			Thread.currentThread().stop();
+			
+			
 			tilstand = Tilstande.BEREGNET;
+			
 			
 		//}
 		
 	}
+	
+	public void getPrisTilbud(StartDestination startdestination , SlutDestination slutdestination,double km) throws SQLException, UnknownKommuneException{
+		pb = new PrisBeregnerImpl(startdestination,slutdestination,km);
+		
+		pb.addObserver(this);
+		(new Thread(pb)).start(); //TODO REFACTOR
+		
+	}
+	
+	public double getPris(){
+		return pris;
+		
+	}
+	
+	public void prisErAendret(){
+		System.out.println("hey er ændret");
+		setChanged();
+		notifyObservers();
+	}
 
 }
+;
