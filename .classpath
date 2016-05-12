@@ -2,7 +2,7 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="C:/Users/zylle/Desktop/flextur_sats.jar"/>
-	<classpathentry kind="lib" path="C:/hsqldb.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Steffen.FLIPPY_O/Desktop/eclipse -em/eclipse/configuration/org.eclipse.osgi/627/0/.cp/lib/hsqldb.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Steffen.FLIPPY_O/Desktop/eclipse -em/eclipse/dropins/flextur_sats.jar.zip"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
