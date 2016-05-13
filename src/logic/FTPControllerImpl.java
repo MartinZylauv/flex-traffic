@@ -21,7 +21,7 @@ import persistence.KommuneKartotekImpl;
 import persistence.ProfilKartotekImpl;
 import sats.UnknownKommuneException;
 
-public class FTPControllerImpl extends Observable implements FTPController,Observer {
+public class FTPControllerImpl extends Observable implements FTPController, Observer {
 
 	PrisBeregnerImpl pb;
 	double pris = 0;
@@ -32,8 +32,9 @@ public class FTPControllerImpl extends Observable implements FTPController,Obser
 
 	@Override
 	public double angivInformationer(StartDestination startDestination, SlutDestination slutDestination, LocalDate dato,
-		int antalPersoner, int antalHjaelpemidler, int antalBagage, String kommentarer, int brugerNummer, Time tid, double antalKm) {
-		
+			int antalPersoner, int antalHjaelpemidler, int antalBagage, String kommentarer, int brugerNummer, Time tid,
+			double antalKm) {
+
 		Validator validator = new ValidatorImpl();
 		koersel.setAntalBagage(antalBagage);
 		koersel.setAntalPersoner(antalPersoner);
@@ -41,22 +42,17 @@ public class FTPControllerImpl extends Observable implements FTPController,Obser
 		koersel.setDato(dato);
 		koersel.setTime(tid);
 		koersel.setAntalKm(antalKm);
-		
-		
 		koersel.setHjaelplemidler(antalHjaelpemidler);
 		koersel.setKommentar(kommentarer);
-		
 		validator.angivInformationer(startDestination, slutDestination, koersel);
-		
-		if(validator.validerInformationer() == true){
-			
-			
+
+		if (validator.validerInformationer() == true) {
+
 			System.out.println("den er true, du har rigtige infoer");
-			
-			
-			//TODO returtype skal være en form for besked.
-		}
-		return pris;
+
+			// TODO returtype skal vï¿½re en form for besked.
+		} else
+			return pris;
 	}
 
 	@Override
@@ -67,62 +63,46 @@ public class FTPControllerImpl extends Observable implements FTPController,Obser
 	}
 
 	@Override
-	public boolean accepterPris() {
+	public boolean accepterPris() { // angivInformation skal eventueht herned
+									// istedet, da det jo er en handler for
+									// accepterPris i gui.
 		// TODO Auto-generated method stub
 		return false;
 	}
-	
-	
+
 	@Override
 	public Profil anmodOmProfil(long kundeNummer) throws SQLException {
 		ProfilKartotekImpl profilkartotek = new ProfilKartotekImpl();
-		Profil profil = new ProfilImpl(); 
-		profil=profilkartotek.anmodOmProfil(kundeNummer);
+		Profil profil = new ProfilImpl();
+		profil = profilkartotek.anmodOmProfil(kundeNummer);
 		return profil;
 	}
 
 	@Override
 	public void update(Observable o, Object arg) {
-		/*if (pb.getTilstand()== Tilstande.BEREGNER){
-			tilstand = Tilstande.BEREGNER;
-		} else if(pb.getTilstand() == Tilstande.BEREGNET){*/
-			this.pris = pb.getPris();
-			System.out.println("PRIIISS" + pris);
-			
-			prisErAendret();
-			
-			
-			
-			tilstand = Tilstande.BEREGNET;
-			
-			
-		//}
-		
-	}
-	
-	public void getPrisTilbud(StartDestination startdestination , SlutDestination slutdestination,double km) throws SQLException, UnknownKommuneException{
-		pb = new PrisBeregnerImpl(startdestination,slutdestination,km);
-		
-		pb.addObserver(this);
-		(new Thread(pb)).start(); //TODO REFACTOR
-		
-	}
-	
-	public double getPris(){
-		return pris;
-		
-	}
-	
-	public void setPris(double pris){
-		this.pris = pris;
-		
-	}
-	
-	public void prisErAendret(){
-		//System.out.println("hey er ændret");
-		//setChanged();
-		//notifyObservers();
+
+		this.pris = pb.getPris();
+
+		tilstand = Tilstande.BEREGNET;
+
 	}
 
-}
-;
+	public void getPrisTilbud(StartDestination startdestination, SlutDestination slutdestination, double km)
+			throws SQLException, UnknownKommuneException {
+		pb = new PrisBeregnerImpl(startdestination, slutdestination, km);
+		pb.addObserver(this);
+		(new Thread(pb)).start(); // TODO REFACTOR
+
+	}
+
+	public double getPris() {
+		return pris;
+
+	}
+
+	public void setPris(double pris) {
+		this.pris = pris;
+
+	}
+
+};

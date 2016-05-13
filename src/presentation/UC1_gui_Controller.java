@@ -219,7 +219,7 @@ public class UC1_gui_Controller implements Initializable, Observer {
 				if (kmFelt.getText().isEmpty() == false) {
 					kmAendret = true;
 					try {
-						erAlleIndtastet();
+						erAlleIndtastet();						//TODO disse focused property er noget vi implementerer senere som en nicetohave.
 					} catch (SQLException | UnknownKommuneException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -232,51 +232,42 @@ public class UC1_gui_Controller implements Initializable, Observer {
 		});
 	}
 
-	public void erAlleIndtastet() throws SQLException, UnknownKommuneException {
+	//public void erAlleIndtastet() throws SQLException, UnknownKommuneException {
 
-		
-
-			
-
-		} 
-			
-		
-
-	
+	//}
 
 	@Override
 	public void update(Observable arg0, Object arg) {
 		System.out.println("hej");
 		pris = ftp.getPris();
 		System.out.println(pris);
-		// s();
+		
 
 	}
 
 	@FXML
-	public void haandteerAccepter(){ //TODO STAVEFEJL
-		
+	public void haandteerAccepter() { // TODO STAVEFEJL
+
 		Time t = new Time(System.currentTimeMillis());
-			start.setAdresse(startAdresseFelt.getText());
-			start.setBynavn(startByFelt.getText());
-			start.setPostnummer(Integer.parseInt(startPostnummerFelt.getText()));
-			slut.setAdresse(slutAdresseFelt.getText());
-			slut.setBynavn(slutByFelt.getText());
-			slut.setPostnummer(Integer.parseInt(slutPostnummerFelt.getText()));
-			
-			ftp.angivInformationer(start, slut, LocalDate.of(2017, 01, 01), 8, 5, 5, "sut pæk", 1, t, Double.parseDouble(kmFelt.getText()));
-			
+		start.setAdresse(startAdresseFelt.getText());
+		start.setBynavn(startByFelt.getText());
+		start.setPostnummer(Integer.parseInt(startPostnummerFelt.getText()));
+		slut.setAdresse(slutAdresseFelt.getText());
+		slut.setBynavn(slutByFelt.getText());
+		slut.setPostnummer(Integer.parseInt(slutPostnummerFelt.getText()));
+
+		ftp.angivInformationer(start, slut, LocalDate.of(2017, 01, 01), 8, 5, 5, "sut pï¿½k", 1, t,
+				Double.parseDouble(kmFelt.getText()));
+
 	}
-	
+
 	@FXML
 	public void haandteerUdregn()
 			throws NumberFormatException, SQLException, UnknownKommuneException, InterruptedException {
-		
+
 		progressBar.setVisible(true);
 		prisLabel.setText("Udregner pris, vent venligst...");
-		
-		
-		
+
 		start.setAdresse(startAdresseFelt.getText());
 		start.setBynavn(startByFelt.getText());
 		start.setPostnummer(Integer.parseInt(startPostnummerFelt.getText()));
@@ -285,38 +276,35 @@ public class UC1_gui_Controller implements Initializable, Observer {
 		slut.setPostnummer(Integer.parseInt(slutPostnummerFelt.getText()));
 
 		ftp.getPrisTilbud(start, slut, Double.parseDouble(kmFelt.getText()));
-		
-		
-		
+
 		new Thread(new Runnable() {
-		    @Override public void run() {
-		    	ftp.setPris(0);
-		    	while(ftp.getPris() == 0){
-		    		try {
-		    			System.out.println("hej er i thread");
+			@Override
+			public void run() {
+				ftp.setPris(0);
+				while (ftp.getPris() == 0) {
+					try {
+						System.out.println("hej er i thread");
 						Thread.currentThread().sleep(1000);
 					} catch (InterruptedException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-		    	}
-		        Platform.runLater(new Runnable() {
-		        	
-		            @Override public void run() {
-		               System.out.println("hej er i platform");
-		               prisLabel.setVisible(true);
-		               progressBar.setVisible(false);
-		               prisLabel.setText(String.valueOf(ftp.getPris()));
-		               accepterKnap.setVisible(true);
-		                
-		            }
-		        });
-		       
-		    }
+				}
+				Platform.runLater(new Runnable() {
+
+					@Override
+					public void run() {
+						System.out.println("hej er i platform");
+						prisLabel.setVisible(true);
+						progressBar.setVisible(false);
+						prisLabel.setText(String.valueOf(ftp.getPris()));
+						accepterKnap.setVisible(true);
+
+					}
+				});
+
+			}
 		}).start();
-
-	
-
 
 	}
 }
