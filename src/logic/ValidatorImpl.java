@@ -27,6 +27,7 @@ public class ValidatorImpl implements Validator {
 				&& koerselDom.getHjaelpemidler()>=0 && koerselDom.getAntalBagage()>=0 
 				&& koerselDom.getBrugerNummer()!=Double.NaN){ //TODO Implementer validation af tidspunkt, fucker lidt op men lav senere.
 			
+			
 			return true;
 			
 			

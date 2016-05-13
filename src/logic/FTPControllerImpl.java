@@ -24,7 +24,7 @@ import sats.UnknownKommuneException;
 public class FTPControllerImpl extends Observable implements FTPController,Observer {
 
 	PrisBeregnerImpl pb;
-	double pris;
+	double pris = 0;
 	Tilstande tilstand;
 	KoerselImpl koersel = new KoerselImpl();
 	StartDestination startdestination = new StartDestinationImpl();
@@ -34,7 +34,7 @@ public class FTPControllerImpl extends Observable implements FTPController,Obser
 	public double angivInformationer(StartDestination startDestination, SlutDestination slutDestination, LocalDate dato,
 		int antalPersoner, int antalHjaelpemidler, int antalBagage, String kommentarer, int brugerNummer, Time tid, double antalKm) {
 		
-		/*Validator validator = new ValidatorImpl();
+		Validator validator = new ValidatorImpl();
 		koersel.setAntalBagage(antalBagage);
 		koersel.setAntalPersoner(antalPersoner);
 		koersel.setBrugerNummer(brugerNummer);
@@ -51,19 +51,11 @@ public class FTPControllerImpl extends Observable implements FTPController,Obser
 		if(validator.validerInformationer() == true){
 			
 			
-			PrisBeregnerImpl prisberegner = new PrisBeregnerImpl(startDestination, slutDestination);
-			pb = prisberegner;
-			pb.addObserver(this);
-			(new Thread(pb)).start(); //TODO REFACTOR
+			System.out.println("den er true, du har rigtige infoer");
 			
 			
-			tilstand = Tilstande.BEREGNER;
-			while(tilstand == Tilstande.BEREGNER){
-				if(tilstand == Tilstande.BEREGNET){
-					break;
-				}
-			}
-		}*/
+			//TODO returtype skal være en form for besked.
+		}
 		return pris;
 	}
 
@@ -96,8 +88,9 @@ public class FTPControllerImpl extends Observable implements FTPController,Obser
 		} else if(pb.getTilstand() == Tilstande.BEREGNET){*/
 			this.pris = pb.getPris();
 			System.out.println("PRIIISS" + pris);
+			
 			prisErAendret();
-			Thread.currentThread().stop();
+			
 			
 			
 			tilstand = Tilstande.BEREGNET;
@@ -120,10 +113,15 @@ public class FTPControllerImpl extends Observable implements FTPController,Obser
 		
 	}
 	
+	public void setPris(double pris){
+		this.pris = pris;
+		
+	}
+	
 	public void prisErAendret(){
-		System.out.println("hey er ændret");
-		setChanged();
-		notifyObservers();
+		//System.out.println("hey er ændret");
+		//setChanged();
+		//notifyObservers();
 	}
 
 }

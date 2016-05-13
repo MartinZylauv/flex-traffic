@@ -2,6 +2,8 @@ package presentation;
 
 import java.net.URL;
 import java.sql.SQLException;
+import java.sql.Time;
+import java.time.LocalDate;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.ResourceBundle;
@@ -13,6 +15,7 @@ import domain.StartDestinationImpl;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -27,65 +30,63 @@ import logic.FTPControllerImpl;
 import logic.Tilstande;
 import sats.UnknownKommuneException;
 
-public class UC1_gui_Controller implements Initializable,Observer {
-	
+public class UC1_gui_Controller implements Initializable, Observer {
+
 	FTPControllerImpl ftp = new FTPControllerImpl();
-	
 
 	@FXML
 	private TextField startAdresseFelt;
-	
+
 	@FXML
 	private TextField startPostnummerFelt;
-	
+
 	@FXML
 	private TextField startByFelt;
-	
+
 	@FXML
 	private TextField slutAdresseFelt;
-	
+
 	@FXML
 	private TextField slutPostnummerFelt;
-	
+
 	@FXML
 	private TextField slutByFelt;
-	
+
 	@FXML
 	private TextField kmFelt;
-	
+
 	@FXML
 	private ChoiceBox antalHjaelpleChoice;
-	
+
 	@FXML
 	private ChoiceBox antalBagageChoice;
-	
+
 	@FXML
 	private ChoiceBox antalPersonerChoice;
-	
+
 	@FXML
 	private DatePicker datoVaelger;
-	
+
 	@FXML
 	private TextArea kommentarArea;
-	
-	@FXML 
+
+	@FXML
 	private ChoiceBox tidHChoice;
-	
+
 	@FXML
 	private ChoiceBox tidMChoice;
-	
+
 	@FXML
 	private Label prisLabel;
-	
-	//@FXML
-	//private ProgressBar progressBar;
-	
+
+	@FXML
+	private ProgressBar progressBar;
+
 	@FXML
 	private Button udregnKnap;
-	
-	@FXML 
+
+	@FXML
 	private Button accepterKnap;
-	
 
 	private boolean startAdresseAendret = false;
 	private boolean startPostnummerAendret = false;
@@ -96,10 +97,10 @@ public class UC1_gui_Controller implements Initializable,Observer {
 	private boolean kmAendret = false;
 	Tilstande tilstand;
 	double pris;
-	
+
 	StartDestination start = new StartDestinationImpl();
 	SlutDestination slut = new SlutDestinationImpl();
-	
+
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		Platform.setImplicitExit(false);
@@ -107,7 +108,7 @@ public class UC1_gui_Controller implements Initializable,Observer {
 		startAdresseFelt.focusedProperty().addListener(new ChangeListener<Boolean>() {
 			@Override
 			public void changed(ObservableValue<? extends Boolean> arg0, Boolean arg1, Boolean arg2) {
-				if (startAdresseFelt.getText().isEmpty() == false){
+				if (startAdresseFelt.getText().isEmpty() == false) {
 					startAdresseAendret = true;
 					try {
 						erAlleIndtastet();
@@ -115,18 +116,17 @@ public class UC1_gui_Controller implements Initializable,Observer {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-				}else{
+				} else {
 					startAdresseAendret = false;
 				}
-				
-				
+
 			}
 		});
-		
-startPostnummerFelt.focusedProperty().addListener(new ChangeListener<Boolean>() {
+
+		startPostnummerFelt.focusedProperty().addListener(new ChangeListener<Boolean>() {
 			@Override
 			public void changed(ObservableValue<? extends Boolean> arg0, Boolean arg1, Boolean arg2) {
-				if (startPostnummerFelt.getText().isEmpty() == false){
+				if (startPostnummerFelt.getText().isEmpty() == false) {
 					startPostnummerAendret = true;
 					try {
 						erAlleIndtastet();
@@ -134,111 +134,129 @@ startPostnummerFelt.focusedProperty().addListener(new ChangeListener<Boolean>() 
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-				}else{
+				} else {
 					startPostnummerAendret = false;
 				}
-				
+
 			}
 		});
 
-startByFelt.focusedProperty().addListener(new ChangeListener<Boolean>() {
-	@Override
-	public void changed(ObservableValue<? extends Boolean> arg0, Boolean arg1, Boolean arg2) {
-		if (startByFelt.getText().isEmpty() == false){
-			startByAendret = true;
-			try {
-				erAlleIndtastet();
-			} catch (SQLException | UnknownKommuneException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+		startByFelt.focusedProperty().addListener(new ChangeListener<Boolean>() {
+			@Override
+			public void changed(ObservableValue<? extends Boolean> arg0, Boolean arg1, Boolean arg2) {
+				if (startByFelt.getText().isEmpty() == false) {
+					startByAendret = true;
+					try {
+						erAlleIndtastet();
+					} catch (SQLException | UnknownKommuneException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				} else {
+					startByAendret = false;
+				}
+
 			}
-		}else{
-			startByAendret = false;
-		}
-		
-	}
-});
+		});
 
-slutAdresseFelt.focusedProperty().addListener(new ChangeListener<Boolean>() {
-	@Override
-	public void changed(ObservableValue<? extends Boolean> arg0, Boolean arg1, Boolean arg2) {
-		if (slutAdresseFelt.getText().isEmpty() == false){
-			slutAdresseAendret = true;
-			try {
-				erAlleIndtastet();
-			} catch (SQLException | UnknownKommuneException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+		slutAdresseFelt.focusedProperty().addListener(new ChangeListener<Boolean>() {
+			@Override
+			public void changed(ObservableValue<? extends Boolean> arg0, Boolean arg1, Boolean arg2) {
+				if (slutAdresseFelt.getText().isEmpty() == false) {
+					slutAdresseAendret = true;
+					try {
+						erAlleIndtastet();
+					} catch (SQLException | UnknownKommuneException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				} else {
+					slutAdresseAendret = false;
+				}
+
 			}
-		}else{
-			slutAdresseAendret = false;
-		}
-		
-		
-	}
-});
+		});
 
-slutPostnummerFelt.focusedProperty().addListener(new ChangeListener<Boolean>() {
-	@Override
-	public void changed(ObservableValue<? extends Boolean> arg0, Boolean arg1, Boolean arg2) {
-		if (slutPostnummerFelt.getText().isEmpty() == false){
-			slutPostnummerAendret = true;
-			try {
-				erAlleIndtastet();
-			} catch (SQLException | UnknownKommuneException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+		slutPostnummerFelt.focusedProperty().addListener(new ChangeListener<Boolean>() {
+			@Override
+			public void changed(ObservableValue<? extends Boolean> arg0, Boolean arg1, Boolean arg2) {
+				if (slutPostnummerFelt.getText().isEmpty() == false) {
+					slutPostnummerAendret = true;
+					try {
+						erAlleIndtastet();
+					} catch (SQLException | UnknownKommuneException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				} else {
+					slutPostnummerAendret = false;
+				}
+
 			}
-		}else{
-			slutPostnummerAendret = false;
-		}
+		});
+
+		slutByFelt.focusedProperty().addListener(new ChangeListener<Boolean>() {
+			@Override
+			public void changed(ObservableValue<? extends Boolean> arg0, Boolean arg1, Boolean arg2) {
+				if (slutByFelt.getText().isEmpty() == false) {
+					slutByAendret = true;
+					try {
+						erAlleIndtastet();
+					} catch (SQLException | UnknownKommuneException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				} else {
+					slutByAendret = false;
+				}
+
+			}
+		});
+
+		kmFelt.focusedProperty().addListener(new ChangeListener<Boolean>() {
+			@Override
+			public void changed(ObservableValue<? extends Boolean> arg0, Boolean arg1, Boolean arg2) {
+				if (kmFelt.getText().isEmpty() == false) {
+					kmAendret = true;
+					try {
+						erAlleIndtastet();
+					} catch (SQLException | UnknownKommuneException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				} else {
+					kmAendret = false;
+				}
+
+			}
+		});
+	}
+
+	public void erAlleIndtastet() throws SQLException, UnknownKommuneException {
+
 		
-	}
-});
 
-slutByFelt.focusedProperty().addListener(new ChangeListener<Boolean>() {
-@Override
-public void changed(ObservableValue<? extends Boolean> arg0, Boolean arg1, Boolean arg2) {
-if (slutByFelt.getText().isEmpty() == false){
-	slutByAendret = true;
-	try {
-		erAlleIndtastet();
-	} catch (SQLException | UnknownKommuneException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	}
-}else{
-	slutByAendret = false;
-}
-
-}
-});
-
-kmFelt.focusedProperty().addListener(new ChangeListener<Boolean>() {
-@Override
-public void changed(ObservableValue<? extends Boolean> arg0, Boolean arg1, Boolean arg2) {
-if (kmFelt.getText().isEmpty() == false){
-	kmAendret = true;
-	try {
-		erAlleIndtastet();
-	} catch (SQLException | UnknownKommuneException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	}
-}else{
-	kmAendret = false;
-}
-
-}
-});
-	}
-	
-	public void erAlleIndtastet() throws SQLException, UnknownKommuneException{
-		
-		if(startAdresseAendret == true && startPostnummerAendret == true && startByAendret == true
-				&&slutAdresseAendret == true && slutPostnummerAendret == true && slutByAendret == true && kmAendret == true ){
-			System.out.println("vi kan udregne pris nu.");
 			
+
+		} 
+			
+		
+
+	
+
+	@Override
+	public void update(Observable arg0, Object arg) {
+		System.out.println("hej");
+		pris = ftp.getPris();
+		System.out.println(pris);
+		// s();
+
+	}
+
+	@FXML
+	public void haandteerAccepter(){ //TODO STAVEFEJL
+		
+		Time t = new Time(System.currentTimeMillis());
 			start.setAdresse(startAdresseFelt.getText());
 			start.setBynavn(startByFelt.getText());
 			start.setPostnummer(Integer.parseInt(startPostnummerFelt.getText()));
@@ -246,43 +264,59 @@ if (kmFelt.getText().isEmpty() == false){
 			slut.setBynavn(slutByFelt.getText());
 			slut.setPostnummer(Integer.parseInt(slutPostnummerFelt.getText()));
 			
-			ftp.getPrisTilbud(start, slut,Double.parseDouble(kmFelt.getText()));
-			prisLabel.setVisible(false);
-			//progressBar.setVisible(true);
+			ftp.angivInformationer(start, slut, LocalDate.of(2017, 01, 01), 8, 5, 5, "sut pæk", 1, t, Double.parseDouble(kmFelt.getText()));
 			
-			
-		} else{
-			System.out.println("pris kan ikke udregnes nu");
-			System.out.println("status: " + startAdresseAendret + " " + startPostnummerAendret + " " +startByAendret + " " + slutAdresseAendret + " " + slutPostnummerAendret + " " +slutByAendret );
-		}
-	
-
-}
-
-	@Override
-	public void update(Observable arg0, Object arg) {
-		System.out.println("hej");
-		pris = ftp.getPris();
-		s();
-		
 	}
 	
 	@FXML
-	public void haandteerUdregn() throws NumberFormatException, SQLException, UnknownKommuneException{
+	public void haandteerUdregn()
+			throws NumberFormatException, SQLException, UnknownKommuneException, InterruptedException {
+		
+		progressBar.setVisible(true);
+		prisLabel.setText("Udregner pris, vent venligst...");
+		
+		
+		
 		start.setAdresse(startAdresseFelt.getText());
 		start.setBynavn(startByFelt.getText());
 		start.setPostnummer(Integer.parseInt(startPostnummerFelt.getText()));
 		slut.setAdresse(slutAdresseFelt.getText());
 		slut.setBynavn(slutByFelt.getText());
 		slut.setPostnummer(Integer.parseInt(slutPostnummerFelt.getText()));
+
+		ftp.getPrisTilbud(start, slut, Double.parseDouble(kmFelt.getText()));
 		
-		ftp.getPrisTilbud(start, slut,Double.parseDouble(kmFelt.getText()));
-	}
-	
-	public void s(){
-		prisLabel.setText(String.valueOf(pris));
-	}
+		
+		
+		new Thread(new Runnable() {
+		    @Override public void run() {
+		    	ftp.setPris(0);
+		    	while(ftp.getPris() == 0){
+		    		try {
+		    			System.out.println("hej er i thread");
+						Thread.currentThread().sleep(1000);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+		    	}
+		        Platform.runLater(new Runnable() {
+		        	
+		            @Override public void run() {
+		               System.out.println("hej er i platform");
+		               prisLabel.setVisible(true);
+		               progressBar.setVisible(false);
+		               prisLabel.setText(String.valueOf(ftp.getPris()));
+		               accepterKnap.setVisible(true);
+		                
+		            }
+		        });
+		       
+		    }
+		}).start();
 
 	
-	
+
+
+	}
 }
