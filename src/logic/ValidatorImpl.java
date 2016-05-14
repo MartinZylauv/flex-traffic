@@ -2,6 +2,7 @@ package logic;
 
 import java.sql.Time;
 import java.time.LocalDate;
+import java.util.Calendar;
 import java.util.Date;
 
 import domain.Koersel;
@@ -16,10 +17,12 @@ public class ValidatorImpl implements Validator {
 	
 	@Override
 	public boolean validerInformationer() {
-		double difference = koerselDom.getDate().compareTo(LocalDate.now());
 		
-		koerselDom.getDate();
-		Time nu = new Time(System.currentTimeMillis());
+		
+		Date iDag = new Date(Calendar.getInstance().getTime().getTime()); // http://stackoverflow.com/questions/18257648/get-the-current-date-in-java-sql-date-format
+		double difference = koerselDom.getDate().compareTo(iDag);
+	
+		
 		
 		if(startDestination.getAdresse()!=null && startDestination.getPostnummer()!=Double.NaN 
 				&& slutDestination.getAdresse()!=null && slutDestination.getPostnummer()!=Double.NaN 

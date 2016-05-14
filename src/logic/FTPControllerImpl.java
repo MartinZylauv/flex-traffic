@@ -1,11 +1,12 @@
 package logic;
 
+import java.sql.Date;
 import java.sql.SQLException;
 import java.sql.Time;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.ArrayList;
-import java.util.Date;
+
 import java.util.Observable;
 import java.util.Observer;
 
@@ -35,7 +36,7 @@ public class FTPControllerImpl extends Observable implements FTPController, Obse
 	double antalKm;
 
 	@Override
-	public void angivInformationer(StartDestination startDestination, SlutDestination slutDestination, LocalDate dato,
+	public void angivInformationer(StartDestination startDestination, SlutDestination slutDestination, Date dato,
 			int antalPersoner, int antalHjaelpemidler, int antalBagage, String kommentarer, int brugerNummer, Time tid,
 			double antalKm) throws InvalidInformationException {
 
@@ -48,6 +49,8 @@ public class FTPControllerImpl extends Observable implements FTPController, Obse
 		koersel.setAntalKm(antalKm);
 		koersel.setHjaelplemidler(antalHjaelpemidler);
 		koersel.setKommentar(kommentarer);
+		koersel.setPris(pris);
+		koersel.setAntalKm(antalKm);
 		this.startdestination = startDestination;
 		this.slutdestination = slutDestination;
 		this.tid= tid;
@@ -74,10 +77,10 @@ public class FTPControllerImpl extends Observable implements FTPController, Obse
 	}
 
 	@Override
-	public Beskeder accepterPris() {
+	public Beskeder accepterPris() throws SQLException {
 		Beskeder besked = null;
 		KoerselsKartotek koerselskartotek = new KoerselsKartotekImpl();
-		koerselskartotek.gemKoersel(startdestination, slutdestination, koersel, tid, antalKm);
+		koerselskartotek.gemKoersel(startdestination, slutdestination, koersel, tid);
 		besked = Beskeder.BESTILSUCCESS;
 		return besked;
 	}

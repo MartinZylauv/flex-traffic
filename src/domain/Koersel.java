@@ -1,13 +1,14 @@
 package domain;
 
+import java.sql.Date;
 import java.sql.Time;
 import java.time.LocalDate;
-import java.util.Date;
+
 
 public interface Koersel {
 	
-	public void setDato(LocalDate dato);
-	public LocalDate getDate();
+	public void setDato(Date dato);
+	public Date getDate();
 	public void setAntalPersoner(int antalPersoner);
 	public int getAntalPersoner();
 	public void setHjaelplemidler(int antalHjaelplemidler);
@@ -22,5 +23,7 @@ public interface Koersel {
 	public void setTime(Time tid);
 	public double getAntalKm();
 	public void setAntalKm(double antalKm);
+	public double getPris();
+	public void setPris(double pris);
 
 }

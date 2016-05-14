@@ -1,6 +1,7 @@
 package presentation;
 
 import java.net.URL;
+import java.sql.Date;
 import java.sql.SQLException;
 import java.sql.Time;
 import java.time.LocalDate;
@@ -270,7 +271,8 @@ public class UC1_gui_Controller implements Initializable, Observer {
 		slut.setPostnummer(Integer.parseInt(slutPostnummerFelt.getText()));
 		
 		try {
-			ftp.angivInformationer(start, slut, datoVaelger.getValue(),antalPersonerChoice.getValue() ,antalHjaelpleChoice.getValue(), antalBagageChoice.getValue(), kommentarArea.getText(), brugernummer, t,
+			Date dato = Date.valueOf(datoVaelger.getValue());
+			ftp.angivInformationer(start, slut, dato,antalPersonerChoice.getValue() ,antalHjaelpleChoice.getValue(), antalBagageChoice.getValue(), kommentarArea.getText(), brugernummer, t,
 					Double.parseDouble(kmFelt.getText()));
 		} catch (NumberFormatException e) {
 			// TODO sæt en label med fejlbesked her
@@ -279,7 +281,12 @@ public class UC1_gui_Controller implements Initializable, Observer {
 			
 			//TODO sæt en label med fejlbesked her
 		}
-		System.out.println(ftp.accepterPris());
+		try {
+			System.out.println(ftp.accepterPris());
+		} catch (SQLException e) {
+			System.out.println("sql fejl");
+			e.printStackTrace();//TODO FIX
+		}
 	}
 
 	@FXML
