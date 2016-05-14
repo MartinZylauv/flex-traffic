@@ -21,4 +21,8 @@ public interface FTPController {
 	public Beskeder accepterPris() throws SQLException;
 	
 	public Profil anmodOmProfil(long kundeNummer) throws SQLException;
+	
+	public void indtastNyeInformationer(String fuldtNavn, String email, long tlfNummer) throws SQLException;
+	
+	
 }

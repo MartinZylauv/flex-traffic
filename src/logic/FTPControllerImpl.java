@@ -26,6 +26,7 @@ import sats.UnknownKommuneException;
 
 public class FTPControllerImpl extends Observable implements FTPController, Observer {
 
+	long kundenummer;
 	PrisBeregnerImpl pb;
 	double pris = 0;
 	Tilstande tilstand;
@@ -119,5 +120,24 @@ public class FTPControllerImpl extends Observable implements FTPController, Obse
 		this.pris = pris;
 
 	}
+	
+	public long getKundenummer(){
+		return kundenummer;
+		
+	}
+	
+	public void setKundenummer(long kundenummer){
+		this.kundenummer=kundenummer;
+	}
+
+	@Override
+	public void indtastNyeInformationer(String fuldtNavn, String email, long tlfNummer) throws SQLException {
+		//valider informationer, throw ny exception hvis de er forkerte, eller:
+		ProfilKartotekImpl profilkartotek = new ProfilKartotekImpl();
+		profilkartotek.redigerProfil(fuldtNavn, email, tlfNummer, kundenummer);
+		
+	}
+	
+	
 
 };

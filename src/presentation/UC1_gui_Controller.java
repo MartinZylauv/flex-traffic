@@ -275,11 +275,11 @@ public class UC1_gui_Controller implements Initializable, Observer {
 			ftp.angivInformationer(start, slut, dato,antalPersonerChoice.getValue() ,antalHjaelpleChoice.getValue(), antalBagageChoice.getValue(), kommentarArea.getText(), brugernummer, t,
 					Double.parseDouble(kmFelt.getText()));
 		} catch (NumberFormatException e) {
-			// TODO sÃ¦t en label med fejlbesked her
+			// TODO sæt en label med fejlbesked her
 			e.printStackTrace();
 		} catch (InvalidInformationException e) {
 			
-			//TODO sÃ¦t en label med fejlbesked her
+			//TODO sæt en label med fejlbesked her
 		}
 		try {
 			System.out.println(ftp.accepterPris());

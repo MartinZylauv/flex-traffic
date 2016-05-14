@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="265.0" prefWidth="362.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presentation.UC23_gui_Controller">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="265.0" prefWidth="362.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="UC2_3_gui_Controller">
    <children>
       <Label fx:id="kundeNummer" layoutX="136.0" layoutY="14.0" prefHeight="38.0" prefWidth="212.0">
          <font>
@@ -35,10 +35,9 @@
       </Label>
       <TextField fx:id="email" editable="false" layoutX="136.0" layoutY="122.0" prefHeight="25.0" prefWidth="212.0" />
       <TextField fx:id="tlfnummer" editable="false" layoutX="136.0" layoutY="160.0" prefHeight="25.0" prefWidth="212.0" />
-      <Button fx:id="tilbage" layoutX="278.0" layoutY="227.0" mnemonicParsing="false" onAction="#haandteerTilbage" prefHeight="31.0" prefWidth="72.0" text="Tilbage" />
-      <Button fx:id="rediger" layoutX="154.0" layoutY="227.0" mnemonicParsing="false" onAction="#haandterRediger" text="Rediger" />
-      <Button fx:id="hjaelp" layoutX="14.0" layoutY="227.0" mnemonicParsing="false" onAction="#haandteerHjaelp" prefHeight="31.0" prefWidth="72.0" text="Hjælp" />
-      <TextField fx:id="fulde_navn" editable="false" layoutX="143.0" layoutY="81.0" prefHeight="25.0" prefWidth="212.0" />
-      <Button fx:id="gem" layoutX="226.0" layoutY="227.0" mnemonicParsing="false" onAction="#haandterGem" text="Gem" visible="false" />
+      <Button fx:id="tilbage" layoutX="291.0" layoutY="227.0" mnemonicParsing="false"  prefHeight="25.0" prefWidth="57.0" text="Tilbage" />
+      <Button fx:id="rediger" layoutX="225.0" layoutY="227.0" mnemonicParsing="false" text="Rediger" />
+      <Button fx:id="hjaelp" layoutX="14.0" layoutY="227.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="57.0" text="Hjælp" />
+      <TextField fx:id="fulde_navn" editable="false" layoutX="135.0" layoutY="83.0" prefHeight="25.0" prefWidth="212.0" />
    </children>
 </AnchorPane>
