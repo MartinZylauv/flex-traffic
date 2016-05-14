@@ -102,7 +102,7 @@ public class UC1_gui_Controller implements Initializable, Observer {
 	double pris;
 
 	
-	ObservableList<Integer> cursors = FXCollections.observableArrayList(1,2,3);
+	ObservableList<Integer> cursors = FXCollections.observableArrayList(01,02,03); //husk 00 pls
 	StartDestination start = new StartDestinationImpl();
 	SlutDestination slut = new SlutDestinationImpl();
 
@@ -259,9 +259,9 @@ public class UC1_gui_Controller implements Initializable, Observer {
 	@FXML
 	public void haandteerAccepter() { // TODO STAVEFEJL
 
-		Time t = null;
-		t.setHours(tidHChoice.getValue());
-		t.setMinutes(tidMChoice.getValue());
+	
+		
+		Time t = new Time(tidHChoice.getValue(), tidMChoice.getValue(), 0);
 		start.setAdresse(startAdresseFelt.getText());
 		start.setBynavn(startByFelt.getText());
 		start.setPostnummer(Integer.parseInt(startPostnummerFelt.getText()));
