@@ -27,6 +27,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import logic.FTPController;
 import logic.FTPControllerImpl;
+import logic.InvalidInformationException;
 import logic.Tilstande;
 import sats.UnknownKommuneException;
 
@@ -232,9 +233,9 @@ public class UC1_gui_Controller implements Initializable, Observer {
 		});
 	}
 
-	//public void erAlleIndtastet() throws SQLException, UnknownKommuneException {
-
-	//}
+	public void erAlleIndtastet() throws SQLException, UnknownKommuneException {
+			//fjern
+	}
 
 	@Override
 	public void update(Observable arg0, Object arg) {
@@ -256,9 +257,17 @@ public class UC1_gui_Controller implements Initializable, Observer {
 		slut.setBynavn(slutByFelt.getText());
 		slut.setPostnummer(Integer.parseInt(slutPostnummerFelt.getText()));
 
-		ftp.angivInformationer(start, slut, LocalDate.of(2017, 01, 01), 8, 5, 5, "sut p�k", 1, t,
-				Double.parseDouble(kmFelt.getText()));
-
+		try {
+			ftp.angivInformationer(start, slut, LocalDate.of(2017, 01, 01), 8, 5, 5, "hey", 1, t,
+					Double.parseDouble(kmFelt.getText()));
+		} catch (NumberFormatException e) {
+			// TODO sæt en label med fejlbesked her
+			e.printStackTrace();
+		} catch (InvalidInformationException e) {
+			
+			//TODO sæt en label med fejlbesked her
+		}
+		System.out.println(ftp.accepterPris());
 	}
 
 	@FXML

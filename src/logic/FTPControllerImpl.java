@@ -17,6 +17,8 @@ import domain.SlutDestination;
 import domain.SlutDestinationImpl;
 import domain.StartDestination;
 import domain.StartDestinationImpl;
+import persistence.KoerselsKartotek;
+import persistence.KoerselsKartotekImpl;
 import persistence.KommuneKartotekImpl;
 import persistence.ProfilKartotekImpl;
 import sats.UnknownKommuneException;
@@ -29,11 +31,13 @@ public class FTPControllerImpl extends Observable implements FTPController, Obse
 	KoerselImpl koersel = new KoerselImpl();
 	StartDestination startdestination = new StartDestinationImpl();
 	SlutDestination slutdestination = new SlutDestinationImpl();
+	Time tid;
+	double antalKm;
 
 	@Override
-	public double angivInformationer(StartDestination startDestination, SlutDestination slutDestination, LocalDate dato,
+	public void angivInformationer(StartDestination startDestination, SlutDestination slutDestination, LocalDate dato,
 			int antalPersoner, int antalHjaelpemidler, int antalBagage, String kommentarer, int brugerNummer, Time tid,
-			double antalKm) {
+			double antalKm) throws InvalidInformationException {
 
 		Validator validator = new ValidatorImpl();
 		koersel.setAntalBagage(antalBagage);
@@ -44,15 +48,22 @@ public class FTPControllerImpl extends Observable implements FTPController, Obse
 		koersel.setAntalKm(antalKm);
 		koersel.setHjaelplemidler(antalHjaelpemidler);
 		koersel.setKommentar(kommentarer);
+		this.startdestination = startDestination;
+		this.slutdestination = slutDestination;
+		this.tid= tid;
+		this.antalKm = antalKm;
+		
 		validator.angivInformationer(startDestination, slutDestination, koersel);
-
+		
 		if (validator.validerInformationer() == true) {
 
 			System.out.println("den er true, du har rigtige infoer");
 
 			// TODO returtype skal v�re en form for besked.
-		} else
-			return pris;
+		} else{
+			throw  new InvalidInformationException(Beskeder.VALIDERINGSFEJL.getDescription());
+		}
+			
 	}
 
 	@Override
@@ -63,11 +74,12 @@ public class FTPControllerImpl extends Observable implements FTPController, Obse
 	}
 
 	@Override
-	public boolean accepterPris() { // angivInformation skal eventueht herned
-									// istedet, da det jo er en handler for
-									// accepterPris i gui.
-		// TODO Auto-generated method stub
-		return false;
+	public Beskeder accepterPris() {
+		Beskeder besked = null;
+		KoerselsKartotek koerselskartotek = new KoerselsKartotekImpl();
+		koerselskartotek.gemKoersel(startdestination, slutdestination, koersel, tid, antalKm);
+		besked = Beskeder.BESTILSUCCESS;
+		return besked;
 	}
 
 	@Override

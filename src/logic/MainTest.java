@@ -45,7 +45,7 @@ public class MainTest {
 		
 		Time tuds = new Time (10,10,00);
 		
-		t.angivInformationer(sta, slu, LocalDate.of(2016, Month.MAY, 11), 5, 3, 3, "hej din so", 10, tuds, 20);
+		//t.angivInformationer(sta, slu, LocalDate.of(2016, Month.MAY, 11), 5, 3, 3, "hej din so", 10, tuds, 20);
 		Profil p = new ProfilImpl();
 		p = t.anmodOmProfil(0001);
 		System.out.println(p.toString());

@@ -2,7 +2,8 @@ package logic;
 
 public enum Beskeder {
 	MANGLER(0, "Indtast venligst følgende felter før du kan bestille din kørsel: "),
-	  BESTILSUCCESS(1, "Din bestilling blev succesfuldt udført!");
+	  BESTILSUCCESS(1, "Din bestilling blev succesfuldt udført!"),
+	VALIDERINGSFEJL(2,"Der var en ukendt fejl med dine informationer. Prøv vejligst igen");
 
 	  private final int beskedskode;
 	  private final String description;
