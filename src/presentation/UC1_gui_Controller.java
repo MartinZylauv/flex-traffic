@@ -15,6 +15,8 @@ import domain.StartDestinationImpl;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -34,7 +36,7 @@ import sats.UnknownKommuneException;
 public class UC1_gui_Controller implements Initializable, Observer {
 
 	FTPControllerImpl ftp = new FTPControllerImpl();
-
+	final static int brugernummer = 1;
 	@FXML
 	private TextField startAdresseFelt;
 
@@ -57,13 +59,13 @@ public class UC1_gui_Controller implements Initializable, Observer {
 	private TextField kmFelt;
 
 	@FXML
-	private ChoiceBox antalHjaelpleChoice;
+	private ChoiceBox<Integer> antalHjaelpleChoice;
 
 	@FXML
-	private ChoiceBox antalBagageChoice;
+	private ChoiceBox<Integer> antalBagageChoice;
 
 	@FXML
-	private ChoiceBox antalPersonerChoice;
+	private ChoiceBox<Integer> antalPersonerChoice;
 
 	@FXML
 	private DatePicker datoVaelger;
@@ -72,10 +74,10 @@ public class UC1_gui_Controller implements Initializable, Observer {
 	private TextArea kommentarArea;
 
 	@FXML
-	private ChoiceBox tidHChoice;
+	private ChoiceBox<Integer> tidHChoice;
 
 	@FXML
-	private ChoiceBox tidMChoice;
+	private ChoiceBox<Integer> tidMChoice;
 
 	@FXML
 	private Label prisLabel;
@@ -99,11 +101,19 @@ public class UC1_gui_Controller implements Initializable, Observer {
 	Tilstande tilstand;
 	double pris;
 
+	
+	ObservableList<Integer> cursors = FXCollections.observableArrayList(1,2,3);
 	StartDestination start = new StartDestinationImpl();
 	SlutDestination slut = new SlutDestinationImpl();
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+		tidHChoice.setItems(cursors);
+		tidMChoice.setItems(cursors);
+		antalBagageChoice.setItems(cursors);
+		antalHjaelpleChoice.setItems(cursors);
+		antalPersonerChoice.setItems(cursors);
+		accepterKnap.setVisible(true);
 		Platform.setImplicitExit(false);
 		ftp.addObserver(this);
 		startAdresseFelt.focusedProperty().addListener(new ChangeListener<Boolean>() {
@@ -249,16 +259,18 @@ public class UC1_gui_Controller implements Initializable, Observer {
 	@FXML
 	public void haandteerAccepter() { // TODO STAVEFEJL
 
-		Time t = new Time(System.currentTimeMillis());
+		Time t = null;
+		t.setHours(tidHChoice.getValue());
+		t.setMinutes(tidMChoice.getValue());
 		start.setAdresse(startAdresseFelt.getText());
 		start.setBynavn(startByFelt.getText());
 		start.setPostnummer(Integer.parseInt(startPostnummerFelt.getText()));
 		slut.setAdresse(slutAdresseFelt.getText());
 		slut.setBynavn(slutByFelt.getText());
 		slut.setPostnummer(Integer.parseInt(slutPostnummerFelt.getText()));
-
+		
 		try {
-			ftp.angivInformationer(start, slut, LocalDate.of(2017, 01, 01), 8, 5, 5, "hey", 1, t,
+			ftp.angivInformationer(start, slut, datoVaelger.getValue(),antalPersonerChoice.getValue() ,antalHjaelpleChoice.getValue(), antalBagageChoice.getValue(), kommentarArea.getText(), brugernummer, t,
 					Double.parseDouble(kmFelt.getText()));
 		} catch (NumberFormatException e) {
 			// TODO sæt en label med fejlbesked her
