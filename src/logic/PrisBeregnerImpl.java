@@ -39,7 +39,7 @@ public class PrisBeregnerImpl extends Observable implements PrisBeregner {
 		try {
 			try {
 				pris = beregnPris(startDestination, slutDestination);
-			} catch (SQLException e) {						//TODO fix lige med med multi-catch
+			} catch (SQLException e) { // TODO fix lige med med multi-catch
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
@@ -78,6 +78,7 @@ public class PrisBeregnerImpl extends Observable implements PrisBeregner {
 		return sats * km;
 	}
 
+	@Override
 	public Tilstande getTilstand() {
 
 		return tilstand;
@@ -85,8 +86,8 @@ public class PrisBeregnerImpl extends Observable implements PrisBeregner {
 
 	@Override
 	public double getPris(double antalKm) {
-												//TODO HER SES EKSEMPEL PÅ POLIMORFI
-		return antalKm*sats;
+		// TODO HER SES EKSEMPEL PÅ POLIMORFI
+		return antalKm * sats;
 	}
 
 }

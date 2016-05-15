@@ -44,58 +44,48 @@ import logic.InvalidInformationException;
 import logic.Tilstande;
 import sats.UnknownKommuneException;
 
-public class LoginController implements Initializable{
+public class LoginController implements Initializable {
 
 	LoggedIn loggedin;
-	
-public LoginController(LoggedIn loggedin){
-	this.loggedin=loggedin;
-}
 
-	
-	int kundenummer = 1; //TODO BARE TIL MIDLERTIDIG REFERENCE ER KUNDENUMMERET 1
-	@FXML
-	private TextField kundenr;
-	
-	@FXML
-	private PasswordField kodeord;
-	
-	@FXML
-	private Button logInd;
-	
-	
-
-	@Override
-	public void initialize(URL arg0, ResourceBundle arg1) {
-		System.out.println(kundenummer);
-		
-	
+	public LoginController(LoggedIn loggedin) {
+		this.loggedin = loggedin;
 	}
 
-	
+	@FXML
+	private TextField kundenr;
+	@FXML
+	private PasswordField kodeord;
+	@FXML
+	private Button logInd;
 
+	int kundenummer; 
 	
+	@Override
+	public void initialize(URL arg0, ResourceBundle arg1) {
+		
+
+	}
 
 	@FXML
-	public void haandterLogInd() { 
+	public void haandterLogInd() {
 		loggedin.setkundenummer(kundenummer);
+		//TODO LAV TJEK MED DATABASE OM LOGIND NUMMER ER RIGTIG, KAN DOG VENTE PGA DET IKKE ER NOGET VIGTIGT.
 		MainHubController mainhub = new MainHubController(loggedin);
-	        try {
-	        	FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("MainHub.fxml"));
-	        	fxmlLoader.setController(mainhub);
-	            Parent root1 = (Parent) fxmlLoader.load();
-	            Stage stage = new Stage();
-	            stage.setTitle("ABC");
-	            stage.setScene(new Scene(root1));  
-	            stage.show();
-	            
-	           
-	        } catch (IOException e) {
-	            e.printStackTrace();
-	        }	
-			
-			
+		try {
+			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("MainHub.fxml"));
+			fxmlLoader.setController(mainhub);
+			Parent root1 = (Parent) fxmlLoader.load();
+			Stage stage = new Stage();
+			stage.setTitle("Flexturs Program v1.0");
+			stage.setScene(new Scene(root1));
+			stage.show();
+
+		} catch (IOException e) {
+			//TODO EN FORM FOR FEJLBESKED.
+			e.printStackTrace();
 		}
-	
-	
+
+	}
+
 }

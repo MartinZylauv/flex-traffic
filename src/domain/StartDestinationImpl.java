@@ -9,10 +9,10 @@ public class StartDestinationImpl implements StartDestination {
 	int postnummer;
 	String bynavn;
 	LocalDate localDate;
-	
+
 	@Override
 	public String getAdresse() {
-		
+
 		return adresse;
 	}
 
@@ -24,7 +24,7 @@ public class StartDestinationImpl implements StartDestination {
 
 	@Override
 	public int getPostnummer() {
-		
+
 		return postnummer;
 	}
 
@@ -36,7 +36,7 @@ public class StartDestinationImpl implements StartDestination {
 
 	@Override
 	public String getBynavn() {
-		
+
 		return bynavn;
 	}
 
@@ -48,7 +48,7 @@ public class StartDestinationImpl implements StartDestination {
 
 	@Override
 	public LocalDate getDato() {
-	
+
 		return localDate;
 	}
 

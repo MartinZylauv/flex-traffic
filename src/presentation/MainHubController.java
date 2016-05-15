@@ -42,93 +42,48 @@ import logic.InvalidInformationException;
 import logic.Tilstande;
 import sats.UnknownKommuneException;
 
-public class MainHubController implements Initializable, Observer {
+public class MainHubController implements Initializable {
 
+	public MainHubController(LoggedIn loggedin) {
+		this.loggedin = loggedin;
+	}
 
-public MainHubController(LoggedIn loggedin){
-	this.loggedin=loggedin;
-}
-	
-	
-LoggedIn loggedin = null;
-int kundenummer;
+	LoggedIn loggedin = null;
+	int kundenummer;
 	@FXML
 	private Tab bestilKoersel;
-	
+
 	@FXML
 	private Tab profilOplysninger;
-	
-	
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		try {
-			
-			UC1_gui_Controller uc1 = new UC1_gui_Controller(loggedin); 
+
+			UC1_gui_Controller uc1 = new UC1_gui_Controller(loggedin);
 			UC23_gui_Controller uc23 = new UC23_gui_Controller(loggedin);
 			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("UC1.fxml"));
-			fxmlLoader.setController(uc1); //TODO:sætter controlleren manuelt så der kan kaldes en constructor med brugernavnet så vi ved hvem der er logget ind, hele vejen ned endda.
-            Parent root = (Parent) fxmlLoader.load();
-            bestilKoersel.setContent(root);
-			
-            
-            FXMLLoader fxml2Loader = new FXMLLoader(getClass().getResource("UC2-3.fxml"));
-            fxml2Loader.setController(uc23);
-            Parent root1 = (Parent) fxml2Loader.load();
-            profilOplysninger.setContent(root1);
-			
-			
+			fxmlLoader.setController(uc1); // TODO:sætter controlleren manuelt
+											// så der kan kaldes en constructor
+											// med brugernavnet så vi ved hvem
+											// der er logget ind, hele vejen ned
+											// endda.
+			Parent root = (Parent) fxmlLoader.load();
+			bestilKoersel.setContent(root);
+
+			FXMLLoader fxml2Loader = new FXMLLoader(getClass().getResource("UC2-3.fxml"));
+			fxml2Loader.setController(uc23);
+			Parent root1 = (Parent) fxml2Loader.load();
+			profilOplysninger.setContent(root1);
+
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-	
-	}
-
-	
-
-	@Override
-	public void update(Observable arg0, Object arg) {
-		
-		
 
 	}
 
-	@FXML
-	public void haandterRediger() { // TODO STAVEFEJL
-
-		
-			
-			
-			
-		}
-	
-	@FXML
-	public void haandterGem() { // TODO STAVEFEJL
-		
-			
-		}
-		
-		
-	
-
-	@FXML
-	public void haandteerHjaelp() {
-
-		
-	}
-	
-	@FXML
-	public void haandteerTilbage(){
-
-		
-	}
-	
-	public void setKundenummer(int kundenummer){
-		System.out.println("yo det dur");
-		System.out.println(this.kundenummer);
-		this.kundenummer=kundenummer;
-		System.out.println("lige her"+this.kundenummer);
+	public void setKundenummer(int kundenummer) {
+		this.kundenummer = kundenummer;
 	}
 }

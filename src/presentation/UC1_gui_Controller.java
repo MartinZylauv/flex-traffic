@@ -21,6 +21,8 @@ import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
@@ -28,276 +30,132 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import logic.Beskeder;
 import logic.FTPController;
 import logic.FTPControllerImpl;
 import logic.InvalidInformationException;
 import logic.Tilstande;
 import sats.UnknownKommuneException;
 
-public class UC1_gui_Controller implements Initializable, Observer {
+public class UC1_gui_Controller implements Initializable {
 
-	
 	public UC1_gui_Controller(LoggedIn loggedin) {
 		this.loggedin = loggedin;
 	}
-	LoggedIn loggedin = null;
-	FTPControllerImpl ftp = new FTPControllerImpl();
-	int brugerummer;
+
+	
 	@FXML
 	private TextField startAdresseFelt;
-
 	@FXML
 	private TextField startPostnummerFelt;
-
 	@FXML
 	private TextField startByFelt;
-
 	@FXML
 	private TextField slutAdresseFelt;
-
 	@FXML
 	private TextField slutPostnummerFelt;
-
 	@FXML
 	private TextField slutByFelt;
-
 	@FXML
 	private TextField kmFelt;
-
 	@FXML
 	private ChoiceBox<Integer> antalHjaelpleChoice;
-
 	@FXML
 	private ChoiceBox<Integer> antalBagageChoice;
-
 	@FXML
 	private ChoiceBox<Integer> antalPersonerChoice;
-
 	@FXML
 	private DatePicker datoVaelger;
-
 	@FXML
 	private TextArea kommentarArea;
-
 	@FXML
-	private ChoiceBox<Integer> tidHChoice;
-
+	private ChoiceBox<String> tidHChoice;
 	@FXML
-	private ChoiceBox<Integer> tidMChoice;
-
+	private ChoiceBox<String> tidMChoice;
 	@FXML
 	private Label prisLabel;
-
 	@FXML
 	private ProgressBar progressBar;
-
 	@FXML
 	private Button udregnKnap;
-
 	@FXML
 	private Button accepterKnap;
 
 	private boolean startAdresseAendret = false;
 	private boolean startPostnummerAendret = false;
 	private boolean startByAendret = false;
-	private boolean slutAdresseAendret = false;
+	private boolean slutAdresseAendret = false; // TODO Slet eventuelt, de skal
+												// ikke bruges p.t.
 	private boolean slutPostnummerAendret = false;
 	private boolean slutByAendret = false;
 	private boolean kmAendret = false;
+	
+	
+	
+	LoggedIn loggedin = null;
+	FTPControllerImpl ftp = new FTPControllerImpl();
+	int brugerummer;
 	Tilstande tilstand;
 	double pris;
+	Alert info = new Alert(AlertType.INFORMATION);
+	Alert fejl = new Alert(AlertType.ERROR);
 
-	
-	ObservableList<Integer> cursors = FXCollections.observableArrayList(01,02,03); //husk 00 pls
+	ObservableList<String> minutter = FXCollections.observableArrayList("00", "05", "10", "15", "20", "25", "30", "35",
+			"40", "45", "50", "55");
+	ObservableList<String> timer = FXCollections.observableArrayList("00", "01", "02", "03", "04", "05", "06", "07",
+			"08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23");
+	ObservableList<Integer> nulTilNi = FXCollections.observableArrayList(0, 1, 2, 3, 4, 5, 6, 7, 8, 9);
 	StartDestination start = new StartDestinationImpl();
 	SlutDestination slut = new SlutDestinationImpl();
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		setKundenummer();
-		System.out.println(this.brugerummer);
-		tidHChoice.setItems(cursors);
-		tidMChoice.setItems(cursors);
-		antalBagageChoice.setItems(cursors);
-		antalHjaelpleChoice.setItems(cursors);
-		antalPersonerChoice.setItems(cursors);
-		accepterKnap.setVisible(true);
-		Platform.setImplicitExit(false);
-		ftp.addObserver(this);
-		startAdresseFelt.focusedProperty().addListener(new ChangeListener<Boolean>() {
-			@Override
-			public void changed(ObservableValue<? extends Boolean> arg0, Boolean arg1, Boolean arg2) {
-				if (startAdresseFelt.getText().isEmpty() == false) {
-					startAdresseAendret = true;
-					try {
-						erAlleIndtastet();
-					} catch (SQLException | UnknownKommuneException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				} else {
-					startAdresseAendret = false;
-				}
-
-			}
-		});
-
-		startPostnummerFelt.focusedProperty().addListener(new ChangeListener<Boolean>() {
-			@Override
-			public void changed(ObservableValue<? extends Boolean> arg0, Boolean arg1, Boolean arg2) {
-				if (startPostnummerFelt.getText().isEmpty() == false) {
-					startPostnummerAendret = true;
-					try {
-						erAlleIndtastet();
-					} catch (SQLException | UnknownKommuneException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				} else {
-					startPostnummerAendret = false;
-				}
-
-			}
-		});
-
-		startByFelt.focusedProperty().addListener(new ChangeListener<Boolean>() {
-			@Override
-			public void changed(ObservableValue<? extends Boolean> arg0, Boolean arg1, Boolean arg2) {
-				if (startByFelt.getText().isEmpty() == false) {
-					startByAendret = true;
-					try {
-						erAlleIndtastet();
-					} catch (SQLException | UnknownKommuneException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				} else {
-					startByAendret = false;
-				}
-
-			}
-		});
-
-		slutAdresseFelt.focusedProperty().addListener(new ChangeListener<Boolean>() {
-			@Override
-			public void changed(ObservableValue<? extends Boolean> arg0, Boolean arg1, Boolean arg2) {
-				if (slutAdresseFelt.getText().isEmpty() == false) {
-					slutAdresseAendret = true;
-					try {
-						erAlleIndtastet();
-					} catch (SQLException | UnknownKommuneException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				} else {
-					slutAdresseAendret = false;
-				}
-
-			}
-		});
-
-		slutPostnummerFelt.focusedProperty().addListener(new ChangeListener<Boolean>() {
-			@Override
-			public void changed(ObservableValue<? extends Boolean> arg0, Boolean arg1, Boolean arg2) {
-				if (slutPostnummerFelt.getText().isEmpty() == false) {
-					slutPostnummerAendret = true;
-					try {
-						erAlleIndtastet();
-					} catch (SQLException | UnknownKommuneException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				} else {
-					slutPostnummerAendret = false;
-				}
-
-			}
-		});
-
-		slutByFelt.focusedProperty().addListener(new ChangeListener<Boolean>() {
-			@Override
-			public void changed(ObservableValue<? extends Boolean> arg0, Boolean arg1, Boolean arg2) {
-				if (slutByFelt.getText().isEmpty() == false) {
-					slutByAendret = true;
-					try {
-						erAlleIndtastet();
-					} catch (SQLException | UnknownKommuneException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				} else {
-					slutByAendret = false;
-				}
-
-			}
-		});
-
-		kmFelt.focusedProperty().addListener(new ChangeListener<Boolean>() {
-			@Override
-			public void changed(ObservableValue<? extends Boolean> arg0, Boolean arg1, Boolean arg2) {
-				if (kmFelt.getText().isEmpty() == false) {
-					kmAendret = true;
-					try {
-						erAlleIndtastet();						//TODO disse focused property er noget vi implementerer senere som en nicetohave.
-					} catch (SQLException | UnknownKommuneException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				} else {
-					kmAendret = false;
-				}
-
-			}
-		});
-	}
-
-	public void erAlleIndtastet() throws SQLException, UnknownKommuneException {
-			//fjern
-	}
-
-	@Override
-	public void update(Observable arg0, Object arg) {
-		System.out.println("hej");
-		pris = ftp.getPris();
-		System.out.println(pris);
-		
-
+		brugerummer = loggedin.getKundenummer();
+		tidHChoice.setItems(timer);
+		tidMChoice.setItems(minutter);
+		antalBagageChoice.setItems(nulTilNi);
+		antalHjaelpleChoice.setItems(nulTilNi);
+		antalPersonerChoice.setItems(nulTilNi);
 	}
 
 	@FXML
-	public void haandteerAccepter() { // TODO STAVEFEJL
-
-		System.out.println(this.brugerummer);
-		
-		Time t = new Time(tidHChoice.getValue(), tidMChoice.getValue(), 0);
+	public void haandterAccepter() {
+		Time t = new Time(Integer.parseInt(tidHChoice.getValue()), Integer.parseInt(tidMChoice.getValue()), 0);
 		start.setAdresse(startAdresseFelt.getText());
 		start.setBynavn(startByFelt.getText());
 		start.setPostnummer(Integer.parseInt(startPostnummerFelt.getText()));
 		slut.setAdresse(slutAdresseFelt.getText());
 		slut.setBynavn(slutByFelt.getText());
 		slut.setPostnummer(Integer.parseInt(slutPostnummerFelt.getText()));
-		
+
 		try {
 			Date dato = Date.valueOf(datoVaelger.getValue());
-			ftp.angivInformationer(start, slut, dato,antalPersonerChoice.getValue() ,antalHjaelpleChoice.getValue(), antalBagageChoice.getValue(), kommentarArea.getText(), brugerummer, t,
+			ftp.angivInformationer(start, slut, dato, antalPersonerChoice.getValue(), antalHjaelpleChoice.getValue(),
+					antalBagageChoice.getValue(), kommentarArea.getText(), brugerummer, t,
 					Double.parseDouble(kmFelt.getText()));
-		} catch (NumberFormatException e) {
-			// TODO s�t en label med fejlbesked her
-			e.printStackTrace();
-		} catch (InvalidInformationException e) {
+			Beskeder besked = ftp.accepterPris();
+				info.setTitle("Bestilling udført");
+				info.setHeaderText(besked.toString());
+				info.setContentText("Vi henter dig på: " + start.getAdresse() + "klokken " + t );
+				info.showAndWait();
 			
-			//TODO s�t en label med fejlbesked her
-		}
-		try {
-			System.out.println(ftp.accepterPris());
-		} catch (SQLException e) {
-			System.out.println("sql fejl");
-			e.printStackTrace();//TODO FIX
+		} catch (NumberFormatException e) {
+			fejl.setHeaderText("Der er sket en fejl");
+			fejl.setContentText("Du har desværre indtastet bogstaver hvor der skulle have været tal. Prøv venligst at bestille igen.");
+			fejl.showAndWait();
+		} catch (InvalidInformationException e) {
+			fejl.setHeaderText("Der er sket en fejl");
+			fejl.setContentText("Du har desværre indtastet nogle ugyldige informationer. Prøv at indtaste dine informationer igen, og så at bestille igen."); //TODO FEJLKODER
+			fejl.showAndWait();
+		} catch(SQLException e){
+			fejl.setHeaderText("Der er sket en fejl");
+			fejl.setContentText("En uventet fejl er sket. Prøv venligst at genstarte programmet eller at kontakte kundeservice."); //TODO FEJLKODER
+			fejl.showAndWait();
 		}
 	}
 
 	@FXML
-	public void haandteerUdregn()
+	public void haandterUdregn()
 			throws NumberFormatException, SQLException, UnknownKommuneException, InterruptedException {
 
 		progressBar.setVisible(true);
@@ -316,20 +174,19 @@ public class UC1_gui_Controller implements Initializable, Observer {
 			@Override
 			public void run() {
 				ftp.setPris(0);
-				while (ftp.getPris() == 0) {
+				while (ftp.getPris() == 0 && kmFelt.getText()!="") {
 					try {
-						System.out.println("hej er i thread");
 						Thread.currentThread().sleep(1000);
 					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
+						fejl.setHeaderText("Der er sket en fejl");
+						fejl.setContentText("Der er sket en uventet fejl i programmet. Prøv at genstarte det og prøve at bestille igen. Fortsætter problemet bedes de henvende dem til kundeservice.");
+						fejl.showAndWait();
 					}
 				}
 				Platform.runLater(new Runnable() {
 
 					@Override
 					public void run() {
-						System.out.println("hej er i platform");
 						prisLabel.setVisible(true);
 						progressBar.setVisible(false);
 						prisLabel.setText(String.valueOf(ftp.getPris()));
@@ -341,9 +198,5 @@ public class UC1_gui_Controller implements Initializable, Observer {
 			}
 		}).start();
 
-	}
-	public void setKundenummer(){
-		this.brugerummer = loggedin.getKundenummer();
-		System.out.println("hey vi er her"+this.brugerummer);
 	}
 }

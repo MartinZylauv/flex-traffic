@@ -5,21 +5,22 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DataAccessForSQL {
-	
+
 	protected Connection connection = null;
 
 	public DataAccessForSQL() {
 		try {
 			connection = DriverManager.getConnection("jdbc:hsqldb:hsql://localhost/mydatabase", "SA", "");
-			//connection.setAutoCommit(false);
+			// connection.setAutoCommit(false);
 		} catch (SQLException e) {
 			throw new RuntimeException("No connection to the database", e);
 		}
-		
+
 	}
-	
+
 	/**
 	 * Denne metode retunerer instans af Connection eller null.
+	 * 
 	 * @return
 	 */
 	public Connection getConnection() {
@@ -32,17 +33,17 @@ public class DataAccessForSQL {
 				connection.close();
 			} catch (SQLException e) {
 				throw new RuntimeException("Exception caught", e);
-			}	
+			}
 		}
 	}
-	
+
 	public void commit() {
 		if (connection != null) {
 			try {
 				connection.commit();
 			} catch (SQLException e) {
 				throw new RuntimeException("Exception caught", e);
-			}	
+			}
 		}
 	}
 
@@ -52,7 +53,7 @@ public class DataAccessForSQL {
 				connection.rollback();
 			} catch (SQLException e) {
 				e.printStackTrace();
-			}	
+			}
 		}
 
 	}

@@ -5,15 +5,14 @@ import java.util.Date;
 
 public class SlutDestinationImpl implements SlutDestination {
 
-
 	String adresse;
 	int postnummer;
 	String bynavn;
 	LocalDate localDate;
-	
+
 	@Override
 	public String getAdresse() {
-		
+
 		return adresse;
 	}
 
@@ -25,7 +24,7 @@ public class SlutDestinationImpl implements SlutDestination {
 
 	@Override
 	public int getPostnummer() {
-		
+
 		return postnummer;
 	}
 
@@ -37,7 +36,7 @@ public class SlutDestinationImpl implements SlutDestination {
 
 	@Override
 	public String getBynavn() {
-		
+
 		return bynavn;
 	}
 
@@ -49,7 +48,7 @@ public class SlutDestinationImpl implements SlutDestination {
 
 	@Override
 	public LocalDate getDato() {
-	
+
 		return localDate;
 	}
 

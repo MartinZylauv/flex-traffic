@@ -8,10 +8,10 @@ import java.sql.SQLException;
 import domain.Profil;
 import domain.ProfilImpl;
 
-public class KommuneKartotekImpl {
+public class KommuneKartotekImpl implements KommuneKartotek {
 	final static String SELECT_PROFIL = "SELECT Adresseringsnavn_1 FROM Regioner WHERE postnr = ?";
 
-	
+	@Override
 	public String postnummerTilKommune(int postnummer) throws SQLException {
 		DataAccessForSQL da = new DataAccessForSQL();
 		Connection connection = da.getConnection();
@@ -20,11 +20,11 @@ public class KommuneKartotekImpl {
 		ResultSet resultset = ps.executeQuery();
 		Profil profil = new ProfilImpl();
 		String kommune = null;
-		while(resultset.next()){
-			
-			kommune  = resultset.getString("Adresseringsnavn_1");
-			
+		while (resultset.next()) {
+
+			kommune = resultset.getString("Adresseringsnavn_1");
+
 		}
 		return kommune;
-}
+	}
 }

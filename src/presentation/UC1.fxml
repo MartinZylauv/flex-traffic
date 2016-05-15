@@ -59,8 +59,8 @@
       <ChoiceBox fx:id="tidMChoice" layoutX="284.0" layoutY="90.0" prefHeight="25.0" prefWidth="52.0" />
       <Label layoutX="190.0" layoutY="202.0" text="Antal kilometer:" />
       <TextField fx:id="kmFelt" layoutX="274.0" layoutY="195.0" prefHeight="31.0" prefWidth="52.0" promptText="eks. 34" />
-      <Button fx:id="udregnKnap" layoutX="420.0" layoutY="248.0" mnemonicParsing="false" onAction="#haandteerUdregn" text="Udregn pris" />
-      <Button fx:id="accepterKnap" layoutX="-1.0" layoutY="471.0" mnemonicParsing="false" onAction="#haandteerAccepter" prefHeight="51.0" prefWidth="523.0" text="Accepter pris og bestil" visible="false" />
+      <Button fx:id="udregnKnap" layoutX="420.0" layoutY="248.0" mnemonicParsing="false" onAction="#haandterUdregn" text="Udregn pris" />
+      <Button fx:id="accepterKnap" layoutX="-1.0" layoutY="471.0" mnemonicParsing="false" onAction="#haandterAccepter" prefHeight="51.0" prefWidth="523.0" text="Accepter pris og bestil" visible="false" />
       <ProgressBar fx:id="progressBar" layoutX="8.0" layoutY="246.0" opacity="0.74" prefHeight="35.0" prefWidth="411.0" visible="false" />
    </children>
 </AnchorPane>

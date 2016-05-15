@@ -29,155 +29,126 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import logic.FTPController;
 import logic.FTPControllerImpl;
 import logic.InvalidInformationException;
 import logic.Tilstande;
 import sats.UnknownKommuneException;
 
-public class UC23_gui_Controller implements Initializable, Observer {
+public class UC23_gui_Controller implements Initializable {
 
-
-	public UC23_gui_Controller (LoggedIn loggedin){
-		this.loggedin =loggedin;
+	public UC23_gui_Controller(LoggedIn loggedin) {
+		this.loggedin = loggedin;
 	}
-	LoggedIn loggedin = null;
-	
-	long kundenummer = 1; //TODO BARE TIL MIDLERTIDIG REFERENCE ER KUNDENUMMERET 1
+
 	@FXML
 	private Label kundeNummer;
-	
 	@FXML
 	private TextField fulde_navn;
-	
 	@FXML
 	private TextField email;
-	
 	@FXML
 	private TextField tlfnummer;
-	
 	@FXML
 	private Button hjaelp;
-	
 	@FXML
 	private Button rediger;
-	
 	@FXML
 	private Button tilbage;
-	
 	@FXML
 	private Button gem;
-	
-	String navnDefault;
-	String emailDefault;
-	long tlfDefault;
-	FTPControllerImpl ftp = new FTPControllerImpl();
 	@FXML
 	private Button accepterKnap;
 
-	private boolean startAdresseAendret = false;
-	private boolean startPostnummerAendret = false;
-	private boolean startByAendret = false;
-	private boolean slutAdresseAendret = false;
-	private boolean slutPostnummerAendret = false;
-	private boolean slutByAendret = false;
-	private boolean kmAendret = false;
+	FTPControllerImpl ftp = new FTPControllerImpl();
+	Alert fejl = new Alert(AlertType.WARNING);
 	Tilstande tilstand;
 	double pris;
-
-	
-	ObservableList<Integer> cursors = FXCollections.observableArrayList(01,02,03); //husk 00 pls
-	StartDestination start = new StartDestinationImpl();
-	SlutDestination slut = new SlutDestinationImpl();
+	LoggedIn loggedin = null;
+	long kundenummer;
+	String navnDefault;
+	String emailDefault;
+	long tlfDefault;
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		Profil profil = null;
+		kundenummer = loggedin.getKundenummer();
 		ftp.setKundenummer(kundenummer);
 		try {
-			
 			profil = ftp.anmodOmProfil(kundenummer);
-			navnDefault =profil.getFuldtNavn() ;
-			emailDefault = profil.getEmail();
-			tlfDefault = profil.getTlfNummer();
-			kundeNummer.setText(String.valueOf(kundenummer));
-			fulde_navn.setText(navnDefault);
-			email.setText(emailDefault);
-			tlfnummer.setText(String.valueOf(tlfDefault));
-			
-		} catch (Exception e) {
-			
+		} catch (SQLException e) {
+			fejl.setTitle("Fejl");
+			fejl.setHeaderText("ups..");
+			fejl.setContentText(
+					"Der skete en uventet fejl. Prøv venligst at genstarte programmet, eller at kontakte kundeservice."); // TODO
+																															// fejl
+																															// koder.
 			e.printStackTrace();
 		}
-	
-	}
-
-	
-
-	@Override
-	public void update(Observable arg0, Object arg) {
-		
-		
-
+		navnDefault = profil.getFuldtNavn();
+		emailDefault = profil.getEmail();
+		tlfDefault = profil.getTlfNummer();
+		kundeNummer.setText(String.valueOf(kundenummer));
+		fulde_navn.setText(navnDefault);
+		email.setText(emailDefault);
+		tlfnummer.setText(String.valueOf(tlfDefault));
 	}
 
 	@FXML
-	public void haandterRediger() { // TODO STAVEFEJL
-
+	public void haandterRediger() {
 		gem.setVisible(true);
 		rediger.setVisible(false);
 		email.setEditable(true);
-fulde_navn.setEditable(true);
-tlfnummer.setEditable(true);
-
-		
-			navnDefault = fulde_navn.getText();
-			emailDefault = email.getText();
-			tlfDefault = Long.valueOf(tlfnummer.getText());
-			
-			
-			
-			
-		}
-	
-	@FXML
-	public void haandterGem() { // TODO STAVEFEJL
+		fulde_navn.setEditable(true);
+		tlfnummer.setEditable(true);
+		tilbage.setText("Anullér rediger");
 		navnDefault = fulde_navn.getText();
 		emailDefault = email.getText();
 		tlfDefault = Long.valueOf(tlfnummer.getText());
-		
+	}
 
-		
-	
-			try {
-				ftp.indtastNyeInformationer(navnDefault,emailDefault ,tlfDefault );
-				
-				gem.setVisible(false);
-				rediger.setVisible(true);
-				email.setEditable(false);
-				fulde_navn.setEditable(false);
-				tlfnummer.setEditable(false);
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
-			
-			
+	@FXML
+	public void haandterGem() {
+		navnDefault = fulde_navn.getText();
+		emailDefault = email.getText();
+		tlfDefault = Long.valueOf(tlfnummer.getText());
+
+		try {
+			ftp.indtastNyeInformationer(navnDefault, emailDefault, tlfDefault);
+
+			gem.setVisible(false);
+			rediger.setVisible(true);
+			email.setEditable(false);
+			fulde_navn.setEditable(false);
+			tlfnummer.setEditable(false);
+		} catch (SQLException e) {
+			fejl.setTitle("Fejl");
+			fejl.setHeaderText("ups..");
+			fejl.setContentText(
+					"Der skete en uventet fejl. Prøv venligst at genstarte programmet, eller at kontakte kundeservice."); // TODO
+																															// fejl
+																															// koder.
+			e.printStackTrace();
 		}
-		
-		
-	
+	}
 
 	@FXML
 	public void haandteerHjaelp() {
-
-		
+		// TODO tilføj en form for hjælpe alert boks.
 	}
-	
-	@FXML
-	public void haandteerTilbage(){
 
-		
+	@FXML
+	public void haandteerTilbage() { // TODO måske skal tilbage ikke være med
+										// pga tabs?
+		email.setEditable(true);
+		fulde_navn.setEditable(true);
+		tlfnummer.setEditable(true);
+		email.setText(emailDefault);
+		fulde_navn.setText(navnDefault);
+		tlfnummer.setText(String.valueOf(tlfDefault));
+		tilbage.setText("Tilbage");
 	}
 }

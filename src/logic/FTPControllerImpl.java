@@ -54,27 +54,14 @@ public class FTPControllerImpl extends Observable implements FTPController, Obse
 		koersel.setAntalKm(antalKm);
 		this.startdestination = startDestination;
 		this.slutdestination = slutDestination;
-		this.tid= tid;
+		this.tid = tid;
 		this.antalKm = antalKm;
-		
+
 		validator.angivInformationer(startDestination, slutDestination, koersel);
-		
-		if (validator.validerInformationer() == true) {
 
-			System.out.println("den er true, du har rigtige infoer");
-
-			// TODO returtype skal v�re en form for besked.
-		} else{
-			throw  new InvalidInformationException(Beskeder.VALIDERINGSFEJL.getDescription());
-		}
-			
-	}
-
-	@Override
-	public boolean validerOplysninger(StartDestination startDestination, SlutDestination slutDestination, Date dato,
-			int antalPersoner, int antalHjaelpemidler, int antalBagage, String kommentarer) {
-		// TODO Auto-generated method stub
-		return false;
+		if (validator.validerInformationer() == false) {
+			throw new InvalidInformationException(Beskeder.VALIDERINGSFEJL.getDescription());
+		} 
 	}
 
 	@Override
@@ -103,6 +90,7 @@ public class FTPControllerImpl extends Observable implements FTPController, Obse
 
 	}
 
+	@Override
 	public void getPrisTilbud(StartDestination startdestination, SlutDestination slutdestination, double km)
 			throws SQLException, UnknownKommuneException {
 		pb = new PrisBeregnerImpl(startdestination, slutdestination, km);
@@ -111,33 +99,36 @@ public class FTPControllerImpl extends Observable implements FTPController, Obse
 
 	}
 
+	@Override
 	public double getPris() {
 		return pris;
 
 	}
 
+	@Override
 	public void setPris(double pris) {
 		this.pris = pris;
 
 	}
-	
-	public long getKundenummer(){
+
+	@Override
+	public long getKundenummer() {
 		return kundenummer;
-		
+
 	}
-	
-	public void setKundenummer(long kundenummer){
-		this.kundenummer=kundenummer;
+
+	@Override
+	public void setKundenummer(long kundenummer) {
+		this.kundenummer = kundenummer;
 	}
 
 	@Override
 	public void indtastNyeInformationer(String fuldtNavn, String email, long tlfNummer) throws SQLException {
-		//valider informationer, throw ny exception hvis de er forkerte, eller:
+		// TODO valider informationer, throw ny exception hvis de er forkerte,
+		// eller:
 		ProfilKartotekImpl profilkartotek = new ProfilKartotekImpl();
 		profilkartotek.redigerProfil(fuldtNavn, email, tlfNummer, kundenummer);
-		
+
 	}
-	
-	
 
 };

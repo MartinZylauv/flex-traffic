@@ -6,34 +6,29 @@ public class ProfilImpl implements Profil {
 	String fuldtNavn;
 	String email;
 	long tlfNummer;
-	
+
 	@Override
 	public long getKundeNummer() {
-		
-		return  kundeNummer;
+		return kundeNummer;
 	}
 
 	@Override
 	public void setKundeNummer(long kundeNummer) {
 		this.kundeNummer = kundeNummer;
-
 	}
 
 	@Override
 	public String getFuldtNavn() {
-		
 		return fuldtNavn;
 	}
 
 	@Override
 	public void setFuldtNavn(String fuldtNavn) {
 		this.fuldtNavn = fuldtNavn;
-
 	}
 
 	@Override
 	public String getEmail() {
-		
 		return email;
 	}
 
@@ -45,7 +40,7 @@ public class ProfilImpl implements Profil {
 
 	@Override
 	public long getTlfNummer() {
-		
+
 		return tlfNummer;
 	}
 
@@ -54,7 +49,5 @@ public class ProfilImpl implements Profil {
 		this.tlfNummer = tlfNummer;
 
 	}
-
-	
 
 }

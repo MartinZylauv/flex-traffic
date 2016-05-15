@@ -27,7 +27,7 @@ public class Maingui extends Application {
 			} catch (Exception exc) {
 			}
 	}
-	
+
 	public static void main(String[] args) {
 		launch(args);
 	}
