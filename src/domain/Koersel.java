@@ -2,7 +2,6 @@ package domain;
 
 import java.sql.Date;
 import java.sql.Time;
-import java.time.LocalDate;
 
 public interface Koersel {
 

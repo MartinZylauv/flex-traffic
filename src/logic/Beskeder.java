@@ -28,5 +28,5 @@ public enum Beskeder {
 
 }
 
-// inspiration fra
+// TODO : inspiration fra
 // http://stackoverflow.com/questions/446663/best-way-to-define-error-codes-strings-in-java

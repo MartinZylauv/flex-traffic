@@ -15,7 +15,7 @@ public class ProfilKartotekImpl implements ProfilKartotek {
 																														// refactor
 																														// lige
 																														// med
-																														// småt
+																														// smï¿½t
 																														// pls
 
 	@Override
@@ -54,6 +54,19 @@ public class ProfilKartotekImpl implements ProfilKartotek {
 
 		ps.executeUpdate();
 
+	}
+	
+	@Override
+	public boolean checkProfil(long kundeNummer) throws SQLException {
+		DataAccessForSQL da = new DataAccessForSQL();
+		Connection connection = da.getConnection();
+		PreparedStatement ps = connection.prepareStatement(SELECT_PROFIL);
+		ps.setDouble(1, kundeNummer);
+		ResultSet resultset = ps.executeQuery();
+			if(resultset.next()){
+				return true;
+			} 
+				return false;
 	}
 
 }

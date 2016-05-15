@@ -5,9 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import domain.Profil;
-import domain.ProfilImpl;
-
 public class KommuneKartotekImpl implements KommuneKartotek {
 	final static String SELECT_PROFIL = "SELECT Adresseringsnavn_1 FROM Regioner WHERE postnr = ?";
 
@@ -18,7 +15,6 @@ public class KommuneKartotekImpl implements KommuneKartotek {
 		PreparedStatement ps = connection.prepareStatement(SELECT_PROFIL);
 		ps.setDouble(1, postnummer);
 		ResultSet resultset = ps.executeQuery();
-		Profil profil = new ProfilImpl();
 		String kommune = null;
 		while (resultset.next()) {
 

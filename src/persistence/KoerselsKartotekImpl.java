@@ -1,15 +1,10 @@
 package persistence;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Time;
-
 import domain.Koersel;
-import domain.Profil;
-import domain.ProfilImpl;
 import domain.SlutDestination;
 import domain.StartDestination;
 

@@ -19,7 +19,7 @@ import domain.StartDestinationImpl;
 public class MainTest {
 
 	public static void main(String[] args) throws SQLException {
-		
+		/*
 		Time t1 = new Time(23,25,00);
 		Time t2 = new Time(System.currentTimeMillis());
 		
@@ -53,7 +53,9 @@ public class MainTest {
 		System.out.println(p.getEmail());
 		System.out.println(p.getKundeNummer());
 		System.out.println(p.getTlfNummer());
-
+*/
+		
+		//TODO denne klasse er unødvendig og burde slettes inden programmet er færdig.
 	}
 
 }

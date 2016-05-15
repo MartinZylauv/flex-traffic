@@ -2,45 +2,13 @@ package presentation;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.Date;
-import java.sql.SQLException;
-import java.sql.Time;
-import java.time.LocalDate;
-import java.util.Observable;
-import java.util.Observer;
 import java.util.ResourceBundle;
 
-import domain.Profil;
-import domain.SlutDestination;
-import domain.SlutDestinationImpl;
-import domain.StartDestination;
-import domain.StartDestinationImpl;
-import javafx.application.Platform;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
-import javafx.scene.control.ProgressBar;
 import javafx.scene.control.Tab;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
-import javafx.stage.Stage;
-import logic.FTPController;
-import logic.FTPControllerImpl;
-import logic.InvalidInformationException;
-import logic.Tilstande;
-import sats.UnknownKommuneException;
 
 public class MainHubController implements Initializable {
 

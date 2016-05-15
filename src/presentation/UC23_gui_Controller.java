@@ -1,41 +1,18 @@
 package presentation;
 
 import java.net.URL;
-import java.sql.Date;
 import java.sql.SQLException;
-import java.sql.Time;
-import java.time.LocalDate;
-import java.util.Observable;
-import java.util.Observer;
 import java.util.ResourceBundle;
-
 import domain.Profil;
-import domain.SlutDestination;
-import domain.SlutDestinationImpl;
-import domain.StartDestination;
-import domain.StartDestinationImpl;
-import javafx.application.Platform;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
-import javafx.scene.control.ProgressBar;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
-import logic.FTPController;
 import logic.FTPControllerImpl;
-import logic.InvalidInformationException;
 import logic.Tilstande;
-import sats.UnknownKommuneException;
 
 public class UC23_gui_Controller implements Initializable {
 
@@ -150,6 +127,6 @@ public class UC23_gui_Controller implements Initializable {
 		email.setText(emailDefault);
 		fulde_navn.setText(navnDefault);
 		tlfnummer.setText(String.valueOf(tlfDefault));
-		tilbage.setText("Tilbage");
+		tilbage.setText("Tilbage"); //TODO set til en final static øverst, meget pænere
 	}
 }

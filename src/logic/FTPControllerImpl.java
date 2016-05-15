@@ -3,14 +3,8 @@ package logic;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.sql.Time;
-import java.time.LocalDate;
-import java.time.Month;
-import java.util.ArrayList;
-
 import java.util.Observable;
 import java.util.Observer;
-
-import domain.Koersel;
 import domain.KoerselImpl;
 import domain.Profil;
 import domain.ProfilImpl;
@@ -20,7 +14,6 @@ import domain.StartDestination;
 import domain.StartDestinationImpl;
 import persistence.KoerselsKartotek;
 import persistence.KoerselsKartotekImpl;
-import persistence.KommuneKartotekImpl;
 import persistence.ProfilKartotekImpl;
 import sats.UnknownKommuneException;
 

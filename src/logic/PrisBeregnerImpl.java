@@ -1,13 +1,8 @@
 package logic;
 
-import java.lang.reflect.Method;
-import java.sql.SQLException;
-import java.time.Month;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Observable;
-import java.util.Observer;
 
+import java.sql.SQLException;
+import java.util.Observable;
 import domain.SlutDestination;
 import domain.StartDestination;
 import persistence.KommuneKartotekImpl;
