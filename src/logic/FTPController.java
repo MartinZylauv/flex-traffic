@@ -16,8 +16,7 @@ public interface FTPController {
 			int antalPersoner, int antalHjaelpemidler, int antalBagage, String kommentarer, int brugerNummer, Time tid,
 			double antalKm) throws InvalidInformationException;
 
-	public boolean validerOplysninger(StartDestination startDestination, SlutDestination slutDestination, Date dato,
-			int antalPersoner, int antalHjaelpemidler, int antalBagage, String kommentarer);
+	
 
 	public Beskeder accepterPris() throws SQLException;
 
