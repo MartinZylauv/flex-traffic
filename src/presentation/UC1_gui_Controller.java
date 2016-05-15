@@ -36,8 +36,13 @@ import sats.UnknownKommuneException;
 
 public class UC1_gui_Controller implements Initializable, Observer {
 
+	
+	public UC1_gui_Controller(LoggedIn loggedin) {
+		this.loggedin = loggedin;
+	}
+	LoggedIn loggedin = null;
 	FTPControllerImpl ftp = new FTPControllerImpl();
-	final static int brugernummer = 1;
+	int brugerummer;
 	@FXML
 	private TextField startAdresseFelt;
 
@@ -109,6 +114,8 @@ public class UC1_gui_Controller implements Initializable, Observer {
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+		setKundenummer();
+		System.out.println(this.brugerummer);
 		tidHChoice.setItems(cursors);
 		tidMChoice.setItems(cursors);
 		antalBagageChoice.setItems(cursors);
@@ -260,7 +267,7 @@ public class UC1_gui_Controller implements Initializable, Observer {
 	@FXML
 	public void haandteerAccepter() { // TODO STAVEFEJL
 
-	
+		System.out.println(this.brugerummer);
 		
 		Time t = new Time(tidHChoice.getValue(), tidMChoice.getValue(), 0);
 		start.setAdresse(startAdresseFelt.getText());
@@ -272,14 +279,14 @@ public class UC1_gui_Controller implements Initializable, Observer {
 		
 		try {
 			Date dato = Date.valueOf(datoVaelger.getValue());
-			ftp.angivInformationer(start, slut, dato,antalPersonerChoice.getValue() ,antalHjaelpleChoice.getValue(), antalBagageChoice.getValue(), kommentarArea.getText(), brugernummer, t,
+			ftp.angivInformationer(start, slut, dato,antalPersonerChoice.getValue() ,antalHjaelpleChoice.getValue(), antalBagageChoice.getValue(), kommentarArea.getText(), brugerummer, t,
 					Double.parseDouble(kmFelt.getText()));
 		} catch (NumberFormatException e) {
-			// TODO sæt en label med fejlbesked her
+			// TODO sï¿½t en label med fejlbesked her
 			e.printStackTrace();
 		} catch (InvalidInformationException e) {
 			
-			//TODO sæt en label med fejlbesked her
+			//TODO sï¿½t en label med fejlbesked her
 		}
 		try {
 			System.out.println(ftp.accepterPris());
@@ -334,5 +341,9 @@ public class UC1_gui_Controller implements Initializable, Observer {
 			}
 		}).start();
 
+	}
+	public void setKundenummer(){
+		this.brugerummer = loggedin.getKundenummer();
+		System.out.println("hey vi er her"+this.brugerummer);
 	}
 }

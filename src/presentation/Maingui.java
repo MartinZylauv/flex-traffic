@@ -11,10 +11,13 @@ import javafx.scene.layout.BorderPane;
 public class Maingui extends Application {
 	@Override
 	public void start(Stage primaryStage) {
+		
+		LoggedIn loggedin = new LoggedIn();
 		try {
 			FXMLLoader loader = new FXMLLoader();
-
-			loader.setLocation(Maingui.class.getResource("UC1.fxml"));
+			LoginController logincontroller = new LoginController(loggedin);
+			loader.setLocation(Maingui.class.getResource("Login.fxml"));
+			loader.setController(logincontroller);
 			
 				AnchorPane mainWindow = (AnchorPane) loader.load();
 				Scene scene = new Scene(mainWindow);

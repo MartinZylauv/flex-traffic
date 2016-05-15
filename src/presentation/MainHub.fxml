@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="520.0" prefWidth="523.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" >
+   <children>
+      <TabPane prefHeight="554.0" prefWidth="520.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab fx:id="bestilKoersel" text="Bestil kørsel" />
+          <Tab fx:id="profilOplysninger" text="Profiloplysninger" />
+        </tabs>
+      </TabPane>
+   </children>
+</AnchorPane>

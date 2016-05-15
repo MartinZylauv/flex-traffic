@@ -38,7 +38,10 @@ import sats.UnknownKommuneException;
 public class UC23_gui_Controller implements Initializable, Observer {
 
 
-
+	public UC23_gui_Controller (LoggedIn loggedin){
+		this.loggedin =loggedin;
+	}
+	LoggedIn loggedin = null;
 	
 	long kundenummer = 1; //TODO BARE TIL MIDLERTIDIG REFERENCE ER KUNDENUMMERET 1
 	@FXML
