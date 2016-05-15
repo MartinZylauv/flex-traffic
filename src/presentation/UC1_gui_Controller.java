@@ -136,7 +136,7 @@ public class UC1_gui_Controller implements Initializable {
 			Beskeder besked = ftp.accepterPris();
 				info.setTitle("Bestilling udført");
 				info.setHeaderText(besked.toString());
-				info.setContentText("Vi henter dig på: " + start.getAdresse() + "klokken " + t );
+				info.setContentText("Vi henter dig på:  " + start.getAdresse() + "klokken " + t );
 				info.showAndWait();
 			
 		} catch (NumberFormatException e) {
@@ -151,6 +151,7 @@ public class UC1_gui_Controller implements Initializable {
 			fejl.setHeaderText("Der er sket en fejl");
 			fejl.setContentText("En uventet fejl er sket. Prøv venligst at genstarte programmet eller at kontakte kundeservice."); //TODO FEJLKODER
 			fejl.showAndWait();
+			e.printStackTrace();
 		}
 	}
 

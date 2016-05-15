@@ -76,6 +76,7 @@ public class UC23_gui_Controller implements Initializable {
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		Profil profil = null;
 		kundenummer = loggedin.getKundenummer();
+		System.out.println(loggedin.getKundenummer());
 		ftp.setKundenummer(kundenummer);
 		try {
 			profil = ftp.anmodOmProfil(kundenummer);

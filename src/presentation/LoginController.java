@@ -69,7 +69,8 @@ public class LoginController implements Initializable {
 
 	@FXML
 	public void haandterLogInd() {
-		loggedin.setkundenummer(kundenummer);
+		loggedin.setkundenummer(Integer.parseInt(kundenr.getText()));
+		System.out.println(loggedin.getKundenummer());
 		//TODO LAV TJEK MED DATABASE OM LOGIND NUMMER ER RIGTIG, KAN DOG VENTE PGA DET IKKE ER NOGET VIGTIGT.
 		MainHubController mainhub = new MainHubController(loggedin);
 		try {

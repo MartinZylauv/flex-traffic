@@ -59,7 +59,7 @@ public class MainHubController implements Initializable {
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		try {
-
+			System.out.println(loggedin.getKundenummer());
 			UC1_gui_Controller uc1 = new UC1_gui_Controller(loggedin);
 			UC23_gui_Controller uc23 = new UC23_gui_Controller(loggedin);
 			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("UC1.fxml"));
