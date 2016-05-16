@@ -1,7 +1,5 @@
 package logic;
 
-import java.util.Date;
-
 import domain.Koersel;
 import domain.SlutDestination;
 import domain.StartDestination;

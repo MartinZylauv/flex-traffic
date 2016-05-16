@@ -2,7 +2,6 @@ package logic;
 
 import java.sql.SQLException;
 
-import domain.Koersel;
 import domain.SlutDestination;
 import domain.StartDestination;
 import sats.UnknownKommuneException;

@@ -11,30 +11,26 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="520.0" prefWidth="523.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" >
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="520.0" prefWidth="523.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label layoutX="14.0" layoutY="14.0" prefHeight="35.0" prefWidth="108.0" text="Startdestination">
+      <Label layoutX="14.0" layoutY="14.0" prefHeight="35.0" prefWidth="138.0" text="Startdestination" />
+      <Label layoutX="3.0" layoutY="49.0" text="Adresse:" />
+      <Label layoutX="216.0" layoutY="49.0" text="Postnr.:" />
+      <TextField fx:id="startAdresseFelt" layoutX="60.0" layoutY="42.0" prefHeight="31.0" prefWidth="153.0" promptText="eks. Silkeborg Vej 2" />
+      <TextField fx:id="startPostnummerFelt" layoutX="266.0" layoutY="42.0" prefHeight="31.0" prefWidth="80.0" promptText="eks. 7400" />
+      <TextField fx:id="startByFelt" layoutX="371.0" layoutY="42.0" prefHeight="31.0" prefWidth="146.0" promptText="eks. Herning" />
+      <Label layoutX="345.0" layoutY="49.0" text="By:" />
+      <Label layoutX="15.0" layoutY="121.0" prefHeight="35.0" prefWidth="108.0" text="Slutdestination">
          <font>
             <Font size="15.0" />
          </font>
       </Label>
-      <Label layoutX="14.0" layoutY="49.0" text="Adresse:" />
-      <Label layoutX="221.0" layoutY="49.0" text="Postnr.:" />
-      <TextField fx:id="startAdresseFelt" layoutX="59.0" layoutY="42.0" prefHeight="31.0" prefWidth="153.0" promptText="eks. Silkeborg Vej 2" />
-      <TextField fx:id="startPostnummerFelt" layoutX="261.0" layoutY="42.0" prefHeight="31.0" prefWidth="67.0" promptText="eks. 7400" />
-      <TextField fx:id="startByFelt" layoutX="359.0" layoutY="42.0" prefHeight="31.0" prefWidth="146.0" promptText="eks. Herning" />
-      <Label layoutX="343.0" layoutY="49.0" text="By:" />
-      <Label layoutX="15.0" layoutY="123.0" prefHeight="35.0" prefWidth="108.0" text="Slutdestination">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Label>
-      <Label layoutX="14.0" layoutY="158.0" text="Adresse:" />
-      <Label layoutX="222.0" layoutY="158.0" text="Postnr.:" />
-      <TextField fx:id="slutAdresseFelt" layoutX="59.0" layoutY="151.0" prefHeight="31.0" prefWidth="153.0" promptText="eks. Herningvej 5" />
-      <TextField fx:id="slutPostnummerFelt" layoutX="262.0" layoutY="151.0" prefHeight="31.0" prefWidth="67.0" promptText="eks. 7500" />
-      <TextField fx:id="slutByFelt" layoutX="360.0" layoutY="151.0" prefHeight="31.0" prefWidth="146.0" promptText="eks. Holstebro" />
-      <Label layoutX="343.0" layoutY="158.0" text="By:" />
+      <Label layoutX="4.0" layoutY="158.0" text="Adresse:" />
+      <Label layoutX="217.0" layoutY="158.0" text="Postnr.:" />
+      <TextField fx:id="slutAdresseFelt" layoutX="61.0" layoutY="151.0" prefHeight="31.0" prefWidth="153.0" promptText="eks. Herningvej 5" />
+      <TextField fx:id="slutPostnummerFelt" layoutX="267.0" layoutY="151.0" prefHeight="31.0" prefWidth="80.0" promptText="eks. 7500" />
+      <TextField fx:id="slutByFelt" layoutX="377.0" layoutY="151.0" prefHeight="31.0" prefWidth="138.0" promptText="eks. Holstebro" />
+      <Label layoutX="352.0" layoutY="158.0" text="By:" />
       <Separator layoutX="14.0" layoutY="244.0" prefHeight="0.0" prefWidth="498.0" />
       <Separator layoutX="12.0" layoutY="280.0" prefHeight="0.0" prefWidth="498.0" />
       <Label fx:id="prisLabel" alignment="CENTER" layoutX="18.0" layoutY="249.0" prefHeight="30.0" prefWidth="411.0" text="0 Kr" textAlignment="CENTER">
@@ -46,19 +42,19 @@
       <Label layoutX="258.0" layoutY="300.0" text="Antal personer:" />
       <Label layoutX="11.0" layoutY="343.0" text="Antal hjælpemidler:" />
       <Label layoutX="264.0" layoutY="343.0" text="Antal bagage:" />
-      <ChoiceBox fx:id="antalHjaelpleChoice" layoutX="131.0" layoutY="338.0" prefHeight="25.0" prefWidth="98.0" />
-      <ChoiceBox fx:id="antalBagageChoice" layoutX="343.0" layoutY="339.0" prefHeight="25.0" prefWidth="98.0" />
-      <ChoiceBox fx:id="antalPersonerChoice" layoutX="343.0" layoutY="296.0" prefHeight="25.0" prefWidth="98.0" />
-      <DatePicker fx:id="datoVaelger" layoutX="47.0" layoutY="296.0" prefHeight="31.0" prefWidth="186.0" />
-      <Label layoutX="12.0" layoutY="377.0" text="Kommentarer:" />
-      <TextArea fx:id="kommentarArea" layoutX="88.0" layoutY="377.0" prefHeight="80.0" prefWidth="420.0" promptText="Kommentarer til chaufføren om evt. hjælpemidler eller andre informationer" wrapText="true" />
+      <ChoiceBox fx:id="antalHjaelpleChoice" layoutX="145.0" layoutY="338.0" prefHeight="25.0" prefWidth="98.0" />
+      <ChoiceBox fx:id="antalBagageChoice" layoutX="362.0" layoutY="339.0" prefHeight="25.0" prefWidth="98.0" />
+      <ChoiceBox fx:id="antalPersonerChoice" layoutX="362.0" layoutY="296.0" prefHeight="25.0" prefWidth="98.0" />
+      <DatePicker fx:id="datoVaelger" layoutX="58.0" layoutY="296.0" prefHeight="31.0" prefWidth="186.0" />
+      <Label layoutX="2.0" layoutY="377.0" text="Kommentarer:" />
+      <TextArea fx:id="kommentarArea" layoutX="101.0" layoutY="376.0" prefHeight="80.0" prefWidth="420.0" promptText="Kommentarer til chaufføren om evt. hjælpemidler eller andre informationer" wrapText="true" />
       <Label layoutX="181.0" layoutY="94.0" text="Tid:" />
       <ChoiceBox fx:id="tidHChoice" layoutX="221.0" layoutY="90.0" prefHeight="25.0" prefWidth="52.0" />
       <Label layoutX="209.0" layoutY="94.0" text="kl" />
       <Label layoutX="277.0" layoutY="94.0" text=":" />
       <ChoiceBox fx:id="tidMChoice" layoutX="284.0" layoutY="90.0" prefHeight="25.0" prefWidth="52.0" />
-      <Label layoutX="190.0" layoutY="202.0" text="Antal kilometer:" />
-      <TextField fx:id="kmFelt" layoutX="274.0" layoutY="195.0" prefHeight="31.0" prefWidth="52.0" promptText="eks. 34" />
+      <Label layoutX="177.0" layoutY="202.0" text="Antal kilometer:" />
+      <TextField fx:id="kmFelt" layoutX="284.0" layoutY="195.0" prefHeight="31.0" prefWidth="67.0" promptText="eks. 34" />
       <Button fx:id="udregnKnap" layoutX="420.0" layoutY="248.0" mnemonicParsing="false" onAction="#haandterUdregn" text="Udregn pris" />
       <Button fx:id="accepterKnap" layoutX="-1.0" layoutY="471.0" mnemonicParsing="false" onAction="#haandterAccepter" prefHeight="51.0" prefWidth="523.0" text="Accepter pris og bestil" visible="false" />
       <ProgressBar fx:id="progressBar" layoutX="8.0" layoutY="246.0" opacity="0.74" prefHeight="35.0" prefWidth="411.0" visible="false" />

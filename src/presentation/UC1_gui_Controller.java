@@ -4,9 +4,6 @@ import java.net.URL;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.sql.Time;
-import java.time.LocalDate;
-import java.util.Observable;
-import java.util.Observer;
 import java.util.ResourceBundle;
 
 import domain.SlutDestination;
@@ -14,11 +11,8 @@ import domain.SlutDestinationImpl;
 import domain.StartDestination;
 import domain.StartDestinationImpl;
 import javafx.application.Platform;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
@@ -31,7 +25,6 @@ import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import logic.Beskeder;
-import logic.FTPController;
 import logic.FTPControllerImpl;
 import logic.InvalidInformationException;
 import logic.Tilstande;
@@ -117,9 +110,8 @@ public class UC1_gui_Controller implements Initializable {
 		antalHjaelpleChoice.setItems(nulTilNi);
 		antalPersonerChoice.setItems(nulTilNi);
 	}
-
-	@FXML
-	public void haandterAccepter() {
+	//TODO check hvad decrepated er herunder på stackoverflow.
+	public void haandterAccepter() {   //TODO lav noteditable textfields for de ting prisen udregnes for .
 		Time t = new Time(Integer.parseInt(tidHChoice.getValue()), Integer.parseInt(tidMChoice.getValue()), 0);
 		start.setAdresse(startAdresseFelt.getText());
 		start.setBynavn(startByFelt.getText());
@@ -136,7 +128,7 @@ public class UC1_gui_Controller implements Initializable {
 			Beskeder besked = ftp.accepterPris();
 				info.setTitle("Bestilling udført");
 				info.setHeaderText(besked.toString());
-				info.setContentText("Vi henter dig på:  " + start.getAdresse() + "klokken " + t );
+				info.setContentText("Vi henter dig på:  " + start.getAdresse() + " klokken " + t );
 				info.showAndWait();
 			
 		} catch (NumberFormatException e) {
