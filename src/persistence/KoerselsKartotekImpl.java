@@ -17,7 +17,7 @@ public class KoerselsKartotekImpl implements KoerselsKartotek {
 	final static String INSERT_KOERSEL = "INSERT INTO KOERSLER( KOERSELSID, KUNDENUMMER,"
 			+ " START_ADRESSE, START_POSTNUMMER, TIDSPUNKT, SLUT_ADRESSE, SLUT_POSTNUMMER,"
 			+ " ANTAL_KM, BEREGNET_PRIS, GODKENDT_KØRSEL, BRUGERKOMMENTAR, ADMINSTRATIONSKOMMENTAR,"
-			+ " TID_PÅ_DAGE )VALUES ( null,? , ?,? ,? , ?,? ,? ,? ,? , ?, null,? )";
+			+ " TID_PÅ_DAGE )VALUES ( null,? , ?,? ,? , ?,? ,? ,? ,? , ?, null,? )"; //TODO: tilføj de sidste par informationer der mangler ift. ssdet osv.
 
 	@Override
 	public void gemKoersel(StartDestination startDestination, SlutDestination slutDestination, Koersel koersel,
