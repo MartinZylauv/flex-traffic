@@ -111,7 +111,7 @@ public class UC1_gui_Controller implements Initializable {
 		antalPersonerChoice.setItems(nulTilNi);
 	}
 	//TODO check hvad decrepated er herunder på stackoverflow.
-	public void haandterAccepter() {
+	public void haandterAccepter() {   //TODO lav noteditable textfields for de ting prisen udregnes for .
 		Time t = new Time(Integer.parseInt(tidHChoice.getValue()), Integer.parseInt(tidMChoice.getValue()), 0);
 		start.setAdresse(startAdresseFelt.getText());
 		start.setBynavn(startByFelt.getText());
@@ -128,7 +128,7 @@ public class UC1_gui_Controller implements Initializable {
 			Beskeder besked = ftp.accepterPris();
 				info.setTitle("Bestilling udført");
 				info.setHeaderText(besked.toString());
-				info.setContentText("Vi henter dig på:  " + start.getAdresse() + "klokken " + t );
+				info.setContentText("Vi henter dig på:  " + start.getAdresse() + " klokken " + t );
 				info.showAndWait();
 			
 		} catch (NumberFormatException e) {
