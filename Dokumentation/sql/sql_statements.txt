@@ -30,6 +30,11 @@ ADD Tid_på_dagen Time,
 ALTER TABLE koersler
 ADD adminstrationskommentar varchar(1000)
 
+ALTER TABLE koersler
+ADD personer int(10),
+ADD hjaelpemidler int(10),
+ADD bagage int(10)
+
 
 start_adresse varchar(255) NOT NULL,
 

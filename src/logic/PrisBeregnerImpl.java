@@ -60,7 +60,7 @@ public class PrisBeregnerImpl extends Observable implements PrisBeregner {
 		Sats s = Sats.i();
 		tilstand = Tilstande.BEREGNET;
 
-		sats = s.getSats(startKommune, slutKommune, 2017, 07, 07);
+		sats = s.getSats(startKommune, slutKommune, 2017, 07, 07); //TODO FIX LIGE MED RIGTIG DATO
 		setChanged();
 		notifyObservers();
 

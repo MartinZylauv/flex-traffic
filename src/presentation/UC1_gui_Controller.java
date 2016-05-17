@@ -161,7 +161,7 @@ public class UC1_gui_Controller implements Initializable {
 		slut.setBynavn(slutByFelt.getText());
 		slut.setPostnummer(Integer.parseInt(slutPostnummerFelt.getText()));
 
-		ftp.getPrisTilbud(start, slut, Double.parseDouble(kmFelt.getText()));
+		ftp.getPrisTilbud(start, slut, Double.parseDouble(kmFelt.getText())); //TODO vi skal have dato med på denne.
 
 		new Thread(new Runnable() {
 			@Override
