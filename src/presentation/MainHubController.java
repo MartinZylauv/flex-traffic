@@ -23,6 +23,9 @@ public class MainHubController implements Initializable {
 
 	@FXML
 	private Tab profilOplysninger;
+	
+	@FXML
+	private Tab koerselshistorik;
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -30,6 +33,8 @@ public class MainHubController implements Initializable {
 			System.out.println(loggedin.getKundenummer());
 			UC1_gui_Controller uc1 = new UC1_gui_Controller(loggedin);
 			UC23_gui_Controller uc23 = new UC23_gui_Controller(loggedin);
+			UC45_gui_Controller uc45 = new UC45_gui_Controller(loggedin);
+			
 			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("UC1.fxml"));
 			fxmlLoader.setController(uc1); // TODO:sætter controlleren manuelt
 											// så der kan kaldes en constructor
@@ -43,6 +48,11 @@ public class MainHubController implements Initializable {
 			fxml2Loader.setController(uc23);
 			Parent root1 = (Parent) fxml2Loader.load();
 			profilOplysninger.setContent(root1);
+			
+			FXMLLoader fxml3Loader = new FXMLLoader(getClass().getResource("UC4-5.fxml"));
+			fxml3Loader.setController(uc45);
+			Parent root2 = (Parent) fxml3Loader.load();
+			koerselshistorik.setContent(root2);
 
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

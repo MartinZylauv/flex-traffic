@@ -3,8 +3,11 @@ package logic;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.sql.Time;
+import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
+
+import domain.KoerselHistorikImpl;
 import domain.KoerselImpl;
 import domain.Profil;
 import domain.ProfilImpl;
@@ -122,6 +125,28 @@ public class FTPControllerImpl extends Observable implements FTPController, Obse
 		ProfilKartotekImpl profilkartotek = new ProfilKartotekImpl();
 		profilkartotek.redigerProfil(fuldtNavn, email, tlfNummer, kundenummer);
 
+	}
+
+	@Override
+	public ArrayList<KoerselHistorikImpl> anmodOmBrugeresKørselHistorik(int kundenummer, Date dato1, Date dato2) throws SQLException {
+		KoerselsKartotekImpl koerselkartotek = new KoerselsKartotekImpl();
+		ArrayList<KoerselHistorikImpl> liste = new ArrayList<>();
+		if(kundenummer == 0){
+			if(dato1 == null || dato2 == null){
+				liste = koerselkartotek.visFlereBrugerKørsler();
+			}else{
+			liste = koerselkartotek.visFlereBrugerKørslerTidsinterval(dato1, dato2);
+			}
+		}else{
+			if(dato1 == null || dato2 == null){
+			liste = koerselkartotek.visEnkeltBrugerKørsler(kundenummer);
+			} else{
+				liste = koerselkartotek.visEnkeltBrugerKørslerTidsinterval(kundenummer, dato1, dato2);
+			}
+		}
+		
+		
+		return liste;
 	}
 
 };

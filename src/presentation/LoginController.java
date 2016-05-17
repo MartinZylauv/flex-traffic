@@ -47,7 +47,7 @@ public class LoginController implements Initializable {
 		ProfilKartotekImpl profilkartotek = new ProfilKartotekImpl();
 		try {
 			loggedin.setkundenummer(Integer.parseInt(kundenr.getText()));
-			if(profilkartotek.checkProfil(loggedin.getKundenummer()) == true){
+			if(profilkartotek.checkProfil(loggedin.getKundenummer()) == true){ //TODO: FIX TIL AT DEN SPØRGER PÅ EN NY INSTANS AF CONTROLLEREN DER SÅ SENDER DEN VIDERE
 
 				MainHubController mainhub = new MainHubController(loggedin);
 				FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("MainHub.fxml"));

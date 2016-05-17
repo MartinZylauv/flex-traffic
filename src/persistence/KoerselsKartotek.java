@@ -6,6 +6,7 @@ import java.sql.Time;
 import java.util.ArrayList;
 
 import domain.Koersel;
+import domain.KoerselHistorikImpl;
 import domain.KoerselImpl;
 import domain.SlutDestination;
 import domain.StartDestination;

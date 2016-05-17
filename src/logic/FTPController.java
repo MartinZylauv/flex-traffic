@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import domain.SlutDestination;
 import domain.StartDestination;
 import sats.UnknownKommuneException;
+import domain.KoerselHistorikImpl;
 import domain.KoerselImpl;
 import domain.Profil;
 
@@ -36,5 +37,5 @@ public interface FTPController {
 
 	void setKundenummer(long kundenummer);
 
-	public ArrayList<KoerselHistorikImpl> anmodOmBrugeresKørselHistorik(int kundenummer, Date dato1, Date dato2);
+	public ArrayList<KoerselHistorikImpl> anmodOmBrugeresKørselHistorik(int kundenummer, Date dato1, Date dato2) throws SQLException;
 }

@@ -8,26 +8,26 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="403.0" prefWidth="910.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="403.0" prefWidth="1010.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <TableView layoutX="14.0" layoutY="14.0" prefHeight="261.0" prefWidth="886.0">
+      <TableView fx:id="koerselsHistorik" layoutX="8.0" layoutY="14.0" prefHeight="261.0" prefWidth="999.0">
         <columns>
-          <TableColumn prefWidth="75.0" text="Dato" />
-            <TableColumn prefWidth="64.0" text="Tidspunkt" />
-          <TableColumn prefWidth="90.0" text="Start Adresse" />
-            <TableColumn prefWidth="77.0" text="Start Postnr." />
-            <TableColumn prefWidth="74.0" text="Slut Adresse" />
-            <TableColumn prefWidth="70.0" text="Slut Postnr." />
-            <TableColumn minWidth="4.0" prefWidth="59.0" text="Antal km" />
-            <TableColumn minWidth="8.0" prefWidth="67.0" text="Pris" />
-            <TableColumn prefWidth="90.0" text="Kommentarer" />
-            <TableColumn prefWidth="86.0" text="Hjælpemidler" />
-            <TableColumn prefWidth="58.0" text="Bagage" />
-            <TableColumn prefWidth="75.0" text="Personer" />
+          <TableColumn fx:id="dato" prefWidth="43.0" text="Dato" />
+            <TableColumn fx:id="tidspunkt" prefWidth="77.0" text="Tidspunkt" />
+          <TableColumn fx:id="startAdresse" prefWidth="103.0" text="Start Adresse" />
+            <TableColumn fx:id="startPostnr" prefWidth="99.0" text="Start Postnr." />
+            <TableColumn fx:id="slutAdresse" prefWidth="105.0" text="Slut Adresse" />
+            <TableColumn fx:id="slutPostnr" minWidth="0.0" prefWidth="88.0" text="Slut Postnr." />
+            <TableColumn fx:id="antalKm" minWidth="0.0" prefWidth="81.0" text="Antal km" />
+            <TableColumn fx:id="pris" minWidth="8.0" prefWidth="35.0" text="Pris" />
+            <TableColumn fx:id="kommentar" prefWidth="112.0" text="Kommentarer" />
+            <TableColumn fx:id="hjaelpemidler" prefWidth="108.0" text="Hjælpemidler" />
+            <TableColumn fx:id="bagage" prefWidth="62.0" text="Bagage" />
+            <TableColumn fx:id="antalPersoner" prefWidth="84.0" text="Personer" />
         </columns>
       </TableView>
-      <DatePicker layoutX="375.0" layoutY="326.0" prefHeight="25.0" prefWidth="139.0" />
-      <DatePicker layoutX="375.0" layoutY="363.0" prefHeight="25.0" prefWidth="139.0" />
+      <DatePicker fx:id="startDato" layoutX="375.0" layoutY="326.0" prefHeight="25.0" prefWidth="139.0" />
+      <DatePicker fx:id="slutDato" layoutX="375.0" layoutY="363.0" prefHeight="25.0" prefWidth="139.0" />
       <Label layoutX="346.0" layoutY="292.0" text="Tidsinterval">
          <font>
             <Font size="16.0" />
@@ -40,12 +40,12 @@
             <Font size="42.0" />
          </font>
       </Label>
-      <Button layoutX="802.0" layoutY="313.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="94.0" text="Søg">
+      <Button fx:id="soeg" layoutX="802.0" layoutY="313.0" mnemonicParsing="false" onAction="#haandterSoeg" prefHeight="53.0" prefWidth="94.0" text="Søg">
          <font>
             <Font size="23.0" />
          </font>
       </Button>
-      <Button layoutX="561.0" layoutY="313.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="230.0" text="Eksporter til CSV">
+      <Button fx:id="eksporter" layoutX="561.0" layoutY="313.0" mnemonicParsing="false" onAction="#haandterEksporter" prefHeight="53.0" prefWidth="230.0" text="Eksporter til CSV">
          <font>
             <Font size="23.0" />
          </font>

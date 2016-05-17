@@ -1,10 +1,17 @@
 package persistence;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Time;
+import java.util.ArrayList;
+
 import domain.Koersel;
+import domain.KoerselHistorikImpl;
+import domain.Profil;
+import domain.ProfilImpl;
 import domain.SlutDestination;
 import domain.StartDestination;
 
@@ -13,6 +20,12 @@ public class KoerselsKartotekImpl implements KoerselsKartotek {
 			+ " START_ADRESSE, START_POSTNUMMER, TIDSPUNKT, SLUT_ADRESSE, SLUT_POSTNUMMER,"
 			+ " ANTAL_KM, BEREGNET_PRIS, GODKENDT_KØRSEL, BRUGERKOMMENTAR, ADMINSTRATIONSKOMMENTAR,"
 			+ " TID_PÅ_DAGE,PERSONER,HJAELPEMIDLER,BAGAGE )VALUES ( null,? , ?,? ,? , ?,? ,? ,? ,? , ?, null,?,?,?,? )"; //TODO: tilføj de sidste par informationer der mangler ift. ssdet osv.
+	
+	
+	final static String GET_ENKEL_TID = "SELECT * FROM KOERSLER WHERE kundenummer = ? AND tidspunkt>= ? AND tidspunkt <= ?";
+	final static String GET_ENKEL ="SELECT * FROM KOERSLER WHERE kundenummer = ?";
+	final static String GET_FLERE_TID= "SELECT * FROM KOERSLER WHERE tidspunkt>= ? AND tidspunkt <= ?";
+	final static String GET_FLERE ="SELECT * FROM KOERSLER";
 
 	@Override
 	public void gemKoersel(StartDestination startDestination, SlutDestination slutDestination, Koersel koersel,
@@ -38,6 +51,164 @@ public class KoerselsKartotekImpl implements KoerselsKartotek {
 
 		ps.executeUpdate();
 
+	}
+
+	@Override
+	public ArrayList<KoerselHistorikImpl> visEnkeltBrugerKørslerTidsinterval(int kundenummer, Date dato1, Date dato2)
+			throws SQLException {
+		DataAccessForSQL da = new DataAccessForSQL();
+		Connection connection = da.getConnection();
+		PreparedStatement ps = connection.prepareStatement(GET_ENKEL_TID);
+		ps.setInt(1, kundenummer);
+		ps.setDate(2, dato1);
+		ps.setDate(3, dato2);
+		ResultSet resultset = ps.executeQuery();
+		ArrayList<KoerselHistorikImpl> liste = new ArrayList();
+
+		while (resultset.next()) {
+			KoerselHistorikImpl koersel = new KoerselHistorikImpl();
+			koersel.setBrugerNummer(resultset.getInt("kundenummer"));
+			koersel.setStartAdresse(resultset.getString("start_adresse"));
+			koersel.setStartPostnummer(resultset.getInt("start_postnummer"));
+			koersel.setDato(resultset.getDate("tidspunkt"));
+			koersel.setSlutAdresse(resultset.getString("slut_adresse"));
+			koersel.setSlutPostnummer(resultset.getInt("slut_postnummer"));
+			koersel.setAntalKm(resultset.getDouble("antal_km"));
+			koersel.setPris(resultset.getDouble("beregnet_pris"));
+			koersel.setKommentar(resultset.getString("brugerkommentar"));
+			koersel.setTime(resultset.getTime("tid_på_dage"));
+			koersel.setAntalPersoner(resultset.getInt("personer"));
+			koersel.setHjaelplemidler(resultset.getInt("hjaelpemidler"));
+			koersel.setAntalBagage(resultset.getInt("bagage"));
+			liste.add(koersel);
+			
+		}
+
+		return liste;
+		
+
+	}
+
+	@Override
+	public ArrayList<KoerselHistorikImpl> visEnkeltBrugerKørsler(int kundenummer) throws SQLException {
+		DataAccessForSQL da = new DataAccessForSQL();
+		Connection connection = da.getConnection();
+		PreparedStatement ps = connection.prepareStatement(GET_ENKEL);
+		ps.setInt(1, kundenummer);
+		ResultSet resultset = ps.executeQuery();
+		ArrayList<KoerselHistorikImpl> liste = new ArrayList();
+
+		while (resultset.next()) {
+			KoerselHistorikImpl koersel = new KoerselHistorikImpl();
+			koersel.setBrugerNummer(resultset.getInt("kundenummer"));
+			koersel.setStartAdresse(resultset.getString("start_adresse"));
+			koersel.setStartPostnummer(resultset.getInt("start_postnummer"));
+			koersel.setDato(resultset.getDate("tidspunkt"));
+			koersel.setSlutAdresse(resultset.getString("slut_adresse"));
+			koersel.setSlutPostnummer(resultset.getInt("slut_postnummer"));
+			koersel.setAntalKm(resultset.getDouble("antal_km"));
+			koersel.setPris(resultset.getDouble("beregnet_pris"));
+			koersel.setKommentar(resultset.getString("brugerkommentar"));
+			koersel.setTime(resultset.getTime("tid_på_dage"));
+			koersel.setAntalPersoner(resultset.getInt("personer"));
+			koersel.setHjaelplemidler(resultset.getInt("hjaelpemidler"));
+			koersel.setAntalBagage(resultset.getInt("bagage"));
+			liste.add(koersel);
+			
+		}
+
+		return liste;
+		
+	}
+
+	@Override
+	public ArrayList<KoerselHistorikImpl> visFlereBrugerKørslerTidsinterval(Date dato1, Date dato2)
+			throws SQLException {
+		DataAccessForSQL da = new DataAccessForSQL();
+		Connection connection = da.getConnection();
+		PreparedStatement ps = connection.prepareStatement(GET_FLERE_TID);
+		ps.setDate(1, dato1);
+		ps.setDate(2, dato2);
+		
+		ResultSet resultset = ps.executeQuery();
+		ArrayList<KoerselHistorikImpl> liste = new ArrayList();
+
+		while (resultset.next()) {
+			KoerselHistorikImpl koersel = new KoerselHistorikImpl();
+			koersel.setBrugerNummer(resultset.getInt("kundenummer"));
+			koersel.setStartAdresse(resultset.getString("start_adresse"));
+			koersel.setStartPostnummer(resultset.getInt("start_postnummer"));
+			koersel.setDato(resultset.getDate("tidspunkt"));
+			koersel.setSlutAdresse(resultset.getString("slut_adresse"));
+			koersel.setSlutPostnummer(resultset.getInt("slut_postnummer"));
+			koersel.setAntalKm(resultset.getDouble("antal_km"));
+			koersel.setPris(resultset.getDouble("beregnet_pris"));
+			koersel.setKommentar(resultset.getString("brugerkommentar"));
+			koersel.setTime(resultset.getTime("tid_på_dage"));
+			koersel.setAntalPersoner(resultset.getInt("personer"));
+			koersel.setHjaelplemidler(resultset.getInt("hjaelpemidler"));
+			koersel.setAntalBagage(resultset.getInt("bagage"));
+			liste.add(koersel);
+			
+		}
+
+		return liste;
+		
+	}
+
+	@Override
+	public ArrayList<KoerselHistorikImpl> visFlereBrugerKørsler() throws SQLException {
+		DataAccessForSQL da = new DataAccessForSQL();
+		Connection connection = da.getConnection();
+		PreparedStatement ps = connection.prepareStatement(GET_FLERE);
+		
+		ResultSet resultset = ps.executeQuery();
+		ArrayList<KoerselHistorikImpl> liste = new ArrayList();
+
+		while (resultset.next()) {
+			KoerselHistorikImpl koersel = new KoerselHistorikImpl();
+			koersel.setBrugerNummer(resultset.getInt("kundenummer"));
+			koersel.setStartAdresse(resultset.getString("start_adresse"));
+			koersel.setStartPostnummer(resultset.getInt("start_postnummer"));
+			koersel.setDato(resultset.getDate("tidspunkt"));
+			koersel.setSlutAdresse(resultset.getString("slut_adresse"));
+			koersel.setSlutPostnummer(resultset.getInt("slut_postnummer"));
+			koersel.setAntalKm(resultset.getDouble("antal_km"));
+			koersel.setPris(resultset.getDouble("beregnet_pris"));
+			koersel.setKommentar(resultset.getString("brugerkommentar"));
+			koersel.setTime(resultset.getTime("tid_på_dage"));
+			koersel.setAntalPersoner(resultset.getInt("personer"));
+			koersel.setHjaelplemidler(resultset.getInt("hjaelpemidler"));
+			koersel.setAntalBagage(resultset.getInt("bagage"));
+			liste.add(koersel);
+		}
+		return liste;
+	}
+
+	@Override
+	public ArrayList<KoerselHistorikImpl> visEnkeltBrugerKørslerTidsintervalAdmin(int kundenummer, Date dato1,
+			Date dato2) throws SQLException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ArrayList<KoerselHistorikImpl> visEnkeltBrugerKørslerAdmin(int kundenummer) throws SQLException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ArrayList<KoerselHistorikImpl> visFlereBrugerKørslerTidsintervalAdmin(Date dato1, Date dato2)
+			throws SQLException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ArrayList<KoerselHistorikImpl> visFlereBrugerKørslerAdmin() throws SQLException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
