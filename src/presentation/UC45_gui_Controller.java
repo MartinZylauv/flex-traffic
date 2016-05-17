@@ -131,8 +131,10 @@ public class UC45_gui_Controller implements Initializable {
          CSVWriter csv = new CSVWriter();
          
          File file = fileChooser.showSaveDialog(eksporter.getScene().getWindow());
-         
-         System.out.println(file.toString());
+         if(!file.toString().toLowerCase().endsWith(".csv")){
+        	 file = new File(file + ".csv");
+         }
+       
          try {
 			csv.writeToCSV(koerselhistorik, file);
 		} catch (IOException e) {
