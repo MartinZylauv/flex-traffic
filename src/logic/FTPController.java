@@ -3,11 +3,12 @@ package logic;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.sql.Time;
-
+import java.util.ArrayList;
 
 import domain.SlutDestination;
 import domain.StartDestination;
 import sats.UnknownKommuneException;
+import domain.KoerselImpl;
 import domain.Profil;
 
 public interface FTPController {
@@ -35,4 +36,5 @@ public interface FTPController {
 
 	void setKundenummer(long kundenummer);
 
+	public ArrayList<KoerselImpl> anmodOmBrugeresKørselHistorik(int kundenummer, Date dato1, Date dato2);
 }
