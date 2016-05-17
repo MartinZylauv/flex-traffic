@@ -26,7 +26,7 @@ public interface FTPController {
 
 	public void indtastNyeInformationer(String fuldtNavn, String email, long tlfNummer) throws SQLException;
 
-	void getPrisTilbud(StartDestination startdestination, SlutDestination slutdestination, double km)
+	void getPrisTilbud(StartDestination startdestination, SlutDestination slutdestination, double km, Date dato)
 			throws SQLException, UnknownKommuneException;
 
 	double getPris();

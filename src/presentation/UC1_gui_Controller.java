@@ -43,7 +43,7 @@ public class UC1_gui_Controller implements Initializable {
 	private TextField startPostnummerFelt;
 	@FXML
 	private TextField startByFelt;
-	@FXML
+	@FXML  
 	private TextField slutAdresseFelt;
 	@FXML
 	private TextField slutPostnummerFelt;
@@ -161,8 +161,8 @@ public class UC1_gui_Controller implements Initializable {
 		slut.setBynavn(slutByFelt.getText());
 		slut.setPostnummer(Integer.parseInt(slutPostnummerFelt.getText()));
 
-		ftp.getPrisTilbud(start, slut, Double.parseDouble(kmFelt.getText())); //TODO vi skal have dato med på denne.
-
+		ftp.getPrisTilbud(start, slut, Double.parseDouble(kmFelt.getText()),Date.valueOf(datoVaelger.getValue())); //TODO vi skal have dato med på denne.
+		//TODO vi skal have en form at håndtere hvis man har glemt at indtaste noget. Ryk dato felt op over prisen så er vi good også.
 		new Thread(new Runnable() {
 			@Override
 			public void run() {

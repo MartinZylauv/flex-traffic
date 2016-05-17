@@ -159,7 +159,7 @@ public class KoerselHistorikImpl implements KoerselHistorik {
 	@Override
 	public String getStartBynavn() {
 		
-		return startAdresse;
+		return startBynavn;
 	}
 
 	@Override

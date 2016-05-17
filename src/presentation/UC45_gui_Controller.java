@@ -85,7 +85,7 @@ public class UC45_gui_Controller implements Initializable {
 	String navnDefault;
 	String emailDefault;
 	long tlfDefault;
-	ArrayList test;
+	ArrayList koerselhistorik;
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -109,7 +109,7 @@ public class UC45_gui_Controller implements Initializable {
 		 
 		 ObservableList<KoerselHistorikImpl> oListHistorik = null;
 		try {
-			test = ftp.anmodOmBrugeresKørselHistorik(kundenummer, null, null);
+			koerselhistorik = ftp.anmodOmBrugeresKørselHistorik(kundenummer, null, null);
 			oListHistorik = FXCollections.observableArrayList(ftp.anmodOmBrugeresKørselHistorik(kundenummer, null, null));
 		} catch (SQLException e) {
 			// TODO FEJLBESKED ALERT HER
@@ -129,12 +129,14 @@ public class UC45_gui_Controller implements Initializable {
 		FileChooser fileChooser = new FileChooser();
 		fileChooser.setTitle("Eksporter historik");
          CSVWriter csv = new CSVWriter();
+         
          File file = fileChooser.showSaveDialog(eksporter.getScene().getWindow());
+         
          System.out.println(file.toString());
          try {
-			csv.writeToCSV(test, file);
+			csv.writeToCSV(koerselhistorik, file);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			// TODO fejlbesked her
 			e.printStackTrace();
 		}
 	}
@@ -155,6 +157,7 @@ public class UC45_gui_Controller implements Initializable {
 		
 		 ObservableList<KoerselHistorikImpl> oListHistorik = null;
 			try {
+				koerselhistorik = ftp.anmodOmBrugeresKørselHistorik(kundenummer, startDato, slutDato);
 				oListHistorik = FXCollections.observableArrayList(ftp.anmodOmBrugeresKørselHistorik(kundenummer, startDato, slutDato));
 			} catch (SQLException e) {
 				// TODO FEJLBESKED ALERT HER

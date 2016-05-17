@@ -9,11 +9,9 @@ public interface KoerselHistorik {
 	
 	
 	public void setDato(Date dato);
-
 	public void setAntalPersoner(int antalPersoner);
 	public int getAntalPersoner();
 	public void setHjaelplemidler(int antalHjaelplemidler);
-	
 	public void setAntalBagage(int antalBagage);
 	public int getAntalBagage();
 	public void setKommentar(String kommentar);
