@@ -36,5 +36,5 @@ public interface FTPController {
 
 	void setKundenummer(long kundenummer);
 
-	public ArrayList<KoerselImpl> anmodOmBrugeresKørselHistorik(int kundenummer, Date dato1, Date dato2);
+	public ArrayList<KoerselHistorikImpl> anmodOmBrugeresKørselHistorik(int kundenummer, Date dato1, Date dato2);
 }
