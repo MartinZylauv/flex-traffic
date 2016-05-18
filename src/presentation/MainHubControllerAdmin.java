@@ -8,8 +8,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Tab;
-import javafx.scene.control.TabPane;
+import javafx.scene.control.Alert.AlertType;
+import logic.Beskeder;
+
 
 public class MainHubControllerAdmin implements Initializable {
 	public MainHubControllerAdmin(LoggedIn loggedin, boolean erAdmin) {
@@ -19,7 +22,7 @@ public class MainHubControllerAdmin implements Initializable {
 	boolean erAdmin;
 	LoggedIn loggedin = null;
 	int kundenummer;
-	
+	Alert fejl = new Alert(AlertType.ERROR);
 	@FXML
 	private Tab koerselshistorik;
 
@@ -40,7 +43,7 @@ public class MainHubControllerAdmin implements Initializable {
 			
 
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			IOFejl();
 			e.printStackTrace();
 		}
 
@@ -48,6 +51,13 @@ public class MainHubControllerAdmin implements Initializable {
 
 	public void setKundenummer(int kundenummer) {
 		this.kundenummer = kundenummer;
+	}
+	
+	public void IOFejl(){
+		fejl.setTitle("I/O fejl");
+		fejl.setHeaderText("Ukendt fejl");
+		fejl.setContentText(Beskeder.UKENDT_FEJL.getDescription()); 
+		fejl.showAndWait();
 	}
 }
 

@@ -35,17 +35,16 @@ public class PrisBeregnerImpl extends Observable implements PrisBeregner {
 
 		tilstand = Tilstande.BEREGNER;
 
-		try {
-			try {
-				pris = beregnPris(startDestination, slutDestination,dato);
-			} catch (SQLException e) { // TODO fix lige med med multi-catch
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		} catch (UnknownKommuneException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
+
+				try {
+					pris = beregnPris(startDestination, slutDestination,dato);
+				} catch (UnknownKommuneException | SQLException e) {
+					
+					e.printStackTrace();
+				}
+
+			
 		tilstand = Tilstande.BEREGNET;
 
 	}
@@ -64,7 +63,7 @@ public class PrisBeregnerImpl extends Observable implements PrisBeregner {
 		Sats s = Sats.i();
 		tilstand = Tilstande.BEREGNET;
 
-		sats = s.getSats(startKommune, slutKommune, dato.getYear(),dato.getMonth(),dato.getDay()); //TODO FIX LIGE MED RIGTIG DATO
+		sats = s.getSats(startKommune, slutKommune, dato.getYear(),dato.getMonth(),dato.getDay());
 		setChanged();
 		notifyObservers();
 

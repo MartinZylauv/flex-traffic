@@ -150,19 +150,20 @@ public class UC1_gui_Controller implements Initializable {
 	@FXML
 	public void haandterUdregn()
 			throws NumberFormatException, SQLException, UnknownKommuneException, InterruptedException {
-
-		progressBar.setVisible(true);
-		prisLabel.setText("Udregner pris, vent venligst...");
-
+		
+		
+		
 		start.setAdresse(startAdresseFelt.getText());
 		start.setBynavn(startByFelt.getText());
 		start.setPostnummer(Integer.parseInt(startPostnummerFelt.getText()));
 		slut.setAdresse(slutAdresseFelt.getText());
 		slut.setBynavn(slutByFelt.getText());
 		slut.setPostnummer(Integer.parseInt(slutPostnummerFelt.getText()));
-
-		ftp.getPrisTilbud(start, slut, Double.parseDouble(kmFelt.getText()),Date.valueOf(datoVaelger.getValue())); //TODO vi skal have dato med på denne.
-		//TODO vi skal have en form at håndtere hvis man har glemt at indtaste noget. Ryk dato felt op over prisen så er vi good også.
+		
+		ftp.getPrisTilbud(start, slut, Double.parseDouble(kmFelt.getText()),Date.valueOf(datoVaelger.getValue()));
+		progressBar.setVisible(true);
+		prisLabel.setText("Udregner pris, vent venligst...");
+		//TODO vi skal have en form at håndtere hvis man har glemt at indtaste noget. 
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
@@ -191,5 +192,8 @@ public class UC1_gui_Controller implements Initializable {
 			}
 		}).start();
 
+	}
+	
+	
 	}
 }

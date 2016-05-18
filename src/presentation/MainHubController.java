@@ -8,8 +8,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
+import javafx.scene.control.Alert.AlertType;
+import logic.Beskeder;
 
 public class MainHubController implements Initializable {
 
@@ -23,7 +26,7 @@ public class MainHubController implements Initializable {
 	@FXML
 	private Tab bestilKoersel;
 	
-	private Tab adminKoersler;
+	Alert fejl = new Alert(AlertType.ERROR);
 
 	@FXML
 	private Tab profilOplysninger;
@@ -40,7 +43,6 @@ public class MainHubController implements Initializable {
 			UC1_gui_Controller uc1 = new UC1_gui_Controller(loggedin);
 			UC23_gui_Controller uc23 = new UC23_gui_Controller(loggedin);
 			UC45_gui_Controller uc45 = new UC45_gui_Controller(loggedin);
-			UC6_gui_Controller uc6 = new UC6_gui_Controller(loggedin);
 			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("UC1.fxml"));
 			fxmlLoader.setController(uc1); // TODO:sætter controlleren manuelt
 											// så der kan kaldes en constructor
@@ -67,7 +69,7 @@ public class MainHubController implements Initializable {
 			
 
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			IOFejl();
 			e.printStackTrace();
 		}
 
@@ -75,5 +77,12 @@ public class MainHubController implements Initializable {
 
 	public void setKundenummer(int kundenummer) {
 		this.kundenummer = kundenummer;
+	}
+	
+	public void IOFejl(){
+		fejl.setTitle("I/O fejl");
+		fejl.setHeaderText("Ukendt fejl");
+		fejl.setContentText(Beskeder.UKENDT_FEJL.getDescription()); 
+		fejl.showAndWait();
 	}
 }

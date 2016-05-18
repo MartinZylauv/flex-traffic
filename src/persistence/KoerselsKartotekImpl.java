@@ -10,8 +10,6 @@ import java.util.ArrayList;
 
 import domain.Koersel;
 import domain.KoerselHistorikImpl;
-import domain.Profil;
-import domain.ProfilImpl;
 import domain.SlutDestination;
 import domain.StartDestination;
 
@@ -66,7 +64,7 @@ public class KoerselsKartotekImpl implements KoerselsKartotek {
 		ps.setDate(2, dato1);
 		ps.setDate(3, dato2);
 		ResultSet resultset = ps.executeQuery();
-		ArrayList<KoerselHistorikImpl> liste = new ArrayList();
+		ArrayList<KoerselHistorikImpl> liste = new ArrayList<KoerselHistorikImpl>();
 
 		while (resultset.next()) {
 			KoerselHistorikImpl koersel = new KoerselHistorikImpl();
@@ -83,6 +81,8 @@ public class KoerselsKartotekImpl implements KoerselsKartotek {
 			koersel.setAntalPersoner(resultset.getInt("personer"));
 			koersel.setHjaelplemidler(resultset.getInt("hjaelpemidler"));
 			koersel.setAntalBagage(resultset.getInt("bagage"));
+			koersel.setBrugerNummer(resultset.getInt("kundenummer"));
+			koersel.setAdminKommentar(resultset.getString("administrationskommentar"));
 			liste.add(koersel);
 			
 		}
@@ -102,7 +102,7 @@ public class KoerselsKartotekImpl implements KoerselsKartotek {
 		PreparedStatement ps = connection.prepareStatement(GET_ENKEL);
 		ps.setInt(1, kundenummer);
 		ResultSet resultset = ps.executeQuery();
-		ArrayList<KoerselHistorikImpl> liste = new ArrayList();
+		ArrayList<KoerselHistorikImpl> liste = new ArrayList<KoerselHistorikImpl>();
 
 		while (resultset.next()) {
 			KoerselHistorikImpl koersel = new KoerselHistorikImpl();
@@ -141,7 +141,7 @@ public class KoerselsKartotekImpl implements KoerselsKartotek {
 		ps.setDate(2, dato2);
 		
 		ResultSet resultset = ps.executeQuery();
-		ArrayList<KoerselHistorikImpl> liste = new ArrayList();
+		ArrayList<KoerselHistorikImpl> liste = new ArrayList<KoerselHistorikImpl>();
 
 		while (resultset.next()) {
 			KoerselHistorikImpl koersel = new KoerselHistorikImpl();
@@ -177,7 +177,7 @@ public class KoerselsKartotekImpl implements KoerselsKartotek {
 		PreparedStatement ps = connection.prepareStatement(GET_FLERE);
 		
 		ResultSet resultset = ps.executeQuery();
-		ArrayList<KoerselHistorikImpl> liste = new ArrayList();
+		ArrayList<KoerselHistorikImpl> liste = new ArrayList<KoerselHistorikImpl>();
 
 		while (resultset.next()) {
 			KoerselHistorikImpl koersel = new KoerselHistorikImpl();

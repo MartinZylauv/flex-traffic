@@ -11,7 +11,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import logic.Beskeder;
 import logic.FTPControllerImpl;
+import logic.InvalidInformationException;
 import logic.Tilstande;
 
 public class UC23_gui_Controller implements Initializable {
@@ -52,20 +54,15 @@ public class UC23_gui_Controller implements Initializable {
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {				//TODO: vi skal have cpr-nummer med.
 		Profil profil = null;
+
 		kundenummer = loggedin.getKundenummer();
 		System.out.println(loggedin.getKundenummer());
 		ftp.setKundenummer(kundenummer);
 		try {
 			profil = ftp.anmodOmProfil(kundenummer);
 		} catch (SQLException e) {
-			fejl.setTitle("Fejl");
-			fejl.setHeaderText("ups..");
-			fejl.setContentText(
-					"Der skete en uventet fejl. Prøv venligst at genstarte programmet, eller at kontakte kundeservice."); // TODO
-																															// fejl
-																															// koder.
-			e.printStackTrace();
-		}
+			setFejlSQL();																																																			
+			e.printStackTrace();}
 		navnDefault = profil.getFuldtNavn();
 		emailDefault = profil.getEmail();
 		tlfDefault = profil.getTlfNummer();
@@ -92,7 +89,12 @@ public class UC23_gui_Controller implements Initializable {
 	public void haandterGem() {
 		navnDefault = fulde_navn.getText();
 		emailDefault = email.getText();
+		
+		if(tlfnummer.getText().isEmpty()){
+			tlfDefault = 0;
+		}else{
 		tlfDefault = Long.valueOf(tlfnummer.getText());
+		}
 
 		try {
 			ftp.indtastNyeInformationer(navnDefault, emailDefault, tlfDefault);
@@ -103,13 +105,13 @@ public class UC23_gui_Controller implements Initializable {
 			fulde_navn.setEditable(false);
 			tlfnummer.setEditable(false);
 		} catch (SQLException e) {
-			fejl.setTitle("Fejl");
-			fejl.setHeaderText("ups..");
-			fejl.setContentText(
-					"Der skete en uventet fejl. Prøv venligst at genstarte programmet, eller at kontakte kundeservice."); // TODO
-																															// fejl
-																															// koder.
+			
+			
 			e.printStackTrace();
+		} catch (InvalidInformationException e) {
+			setFejlIndtastning();
+			fejl.setContentText(e.getMessage());
+			fejl.showAndWait();
 		}
 	}
 
@@ -119,14 +121,27 @@ public class UC23_gui_Controller implements Initializable {
 	}
 
 	@FXML
-	public void haandteerTilbage() { // TODO måske skal tilbage ikke være med
-										// pga tabs?
+	public void haandteerTilbage() { 
 		email.setEditable(true);
 		fulde_navn.setEditable(true);
 		tlfnummer.setEditable(true);
 		email.setText(emailDefault);
 		fulde_navn.setText(navnDefault);
 		tlfnummer.setText(String.valueOf(tlfDefault));
-		tilbage.setText("Tilbage"); //TODO set til en final static øverst, meget pænere
+
+	}
+	
+	public void setFejlIndtastning(){
+		fejl.setTitle("Indtastningsfejl");
+		fejl.setHeaderText("Indtastningsfejl");
+	}
+	
+	public void setFejlSQL(){
+		
+			fejl.setTitle("SQL fejl");
+			fejl.setHeaderText("Fejl i databasen");
+			fejl.setContentText(Beskeder.UKENDT_SQL.getDescription()); 
+			fejl.showAndWait();
+		
 	}
 }

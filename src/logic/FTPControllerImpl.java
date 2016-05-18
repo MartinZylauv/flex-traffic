@@ -15,6 +15,8 @@ import domain.SlutDestination;
 import domain.SlutDestinationImpl;
 import domain.StartDestination;
 import domain.StartDestinationImpl;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import persistence.KoerselsKartotek;
 import persistence.KoerselsKartotekImpl;
 import persistence.ProfilKartotekImpl;
@@ -22,6 +24,7 @@ import sats.UnknownKommuneException;
 
 public class FTPControllerImpl extends Observable implements FTPController, Observer {
 
+	
 	long kundenummer;
 	PrisBeregnerImpl pb;
 	double pris = 0;
@@ -119,11 +122,14 @@ public class FTPControllerImpl extends Observable implements FTPController, Obse
 	}
 
 	@Override
-	public void indtastNyeInformationer(String fuldtNavn, String email, long tlfNummer) throws SQLException {
-		// TODO valider informationer, throw ny exception hvis de er forkerte,
-		// eller:
-		ProfilKartotekImpl profilkartotek = new ProfilKartotekImpl();
-		profilkartotek.redigerProfil(fuldtNavn, email, tlfNummer, kundenummer);
+	public void indtastNyeInformationer(String fuldtNavn, String email, long tlfNummer) throws SQLException, InvalidInformationException {
+		Validator validator = new ValidatorImpl();
+		
+			 if(validator.validerProfilRediger(fuldtNavn, email, tlfNummer)){
+				 ProfilKartotekImpl profilkartotek = new ProfilKartotekImpl();
+				profilkartotek.redigerProfil(fuldtNavn, email, tlfNummer, kundenummer);
+		}
+		
 
 	}
 

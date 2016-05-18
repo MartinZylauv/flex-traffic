@@ -16,8 +16,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import logic.Beskeder;
 import logic.FTPControllerImpl;
-import persistence.ProfilKartotekImpl;
+
 
 public class LoginController implements Initializable {
 
@@ -72,19 +73,37 @@ public class LoginController implements Initializable {
 				logInd.getScene().getWindow().hide(); 
 				}//får fat i en af noderne og får dens vindue, og lukker derefter vinduet.
 			} else{
-				fejl.setTitle("Fejl i kundenummer");
-				fejl.setHeaderText("Log-ind fejl.");
-				fejl.setContentText("Der findes ingen kunde med kundenummret du angav. Prøv venligst igen."); //TODO enum fejlbesked tak.
-				fejl.showAndWait();
+				ukendtKundenummerFejl();
 			}
 		} catch (SQLException e1) {
-			// TODO en form for fejlbesked tak.
+			SQLFejl();
 			e1.printStackTrace();
 		}catch (IOException e) {
-			//TODO EN FORM FOR FEJLBESKED.
+			IOFejl();
 			e.printStackTrace();
 		}
 
+	}
+	
+	public void ukendtKundenummerFejl(){
+		fejl.setTitle("Fejl i kundenummer");
+		fejl.setHeaderText("Log-ind fejl.");
+		fejl.setContentText(Beskeder.UKENDT_KUNDENUMMER.getDescription());
+		fejl.showAndWait();
+	}
+	
+	public void SQLFejl(){
+		fejl.setTitle("SQL fejl");
+		fejl.setHeaderText("Fejl i databasen");
+		fejl.setContentText(Beskeder.UKENDT_SQL.getDescription()); 
+		fejl.showAndWait();
+	}
+	
+	public void IOFejl(){
+		fejl.setTitle("I/O fejl");
+		fejl.setHeaderText("Ukendt fejl");
+		fejl.setContentText(Beskeder.UKENDT_FEJL.getDescription()); 
+		fejl.showAndWait();
 	}
 
 }

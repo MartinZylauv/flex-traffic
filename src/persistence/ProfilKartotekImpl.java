@@ -9,16 +9,9 @@ import domain.Profil;
 import domain.ProfilImpl;
 
 public class ProfilKartotekImpl implements ProfilKartotek {
-	
-	//TODO tilføj et admin check. Altså bare en "erAdmin boolean" i databasen.
 
 	final static String SELECT_PROFIL = "SELECT * FROM Profiler WHERE kundeNummer = ?";
-	final static String INSERT_PROFIL = "UPDATE PROFILER SET FULDT_NAVN=?,EMAIL=?,TLF_NUMMER = ? WHERE KUNDENUMMER=?;"; // TODO
-																														// refactor
-																														// lige
-																														// med
-																														// sm�t
-																														// pls
+	final static String INSERT_PROFIL = "UPDATE profiler SET fuldt_navn=?,email=?,tlf_nummer = ? WHERE kundenummer=?;"; 
 
 	@Override
 	public Profil anmodOmProfil(long kundeNummer) throws SQLException {

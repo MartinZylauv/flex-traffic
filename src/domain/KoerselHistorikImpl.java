@@ -16,6 +16,7 @@ public class KoerselHistorikImpl implements KoerselHistorik {
 	Time tid;
 	double antalKm;
 	double pris;
+	String adminKommentar;
 	
 	String startAdresse;
 	int startPostnummer;
@@ -205,5 +206,17 @@ public class KoerselHistorikImpl implements KoerselHistorik {
 		this.slutBynavn = bynavn;
 	}
 
+	
+	@Override
+	public String getAdminKommentar() {
+		
+		return adminKommentar;
+	}
+
+	@Override
+	public void setAdminKommentar(String adminKommentar) {
+		this.adminKommentar = adminKommentar;
+
+	}
 
 }

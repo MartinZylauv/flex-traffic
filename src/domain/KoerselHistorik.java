@@ -40,6 +40,8 @@ public interface KoerselHistorik {
 	Date getDato();
 
 	int getAntalHjaelpemidler();
+	void setAdminKommentar(String adminKommentar);
+	String getAdminKommentar();
 
 	
 	

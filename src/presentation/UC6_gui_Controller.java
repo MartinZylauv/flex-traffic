@@ -65,6 +65,10 @@ public class UC6_gui_Controller implements Initializable {
 	private TableColumn<KoerselHistorikImpl,Integer> bagage;
 	@FXML 
 	private TableColumn<KoerselHistorikImpl, Integer> antalPersoner;
+	@FXML 
+	private TableColumn<KoerselHistorikImpl, Integer> kundenummerCol;
+	@FXML 
+	private TableColumn<KoerselHistorikImpl, String> adminKommentar;
 	@FXML
 	private DatePicker startDato;
 	
@@ -108,6 +112,8 @@ public class UC6_gui_Controller implements Initializable {
 		 startPostnr.setCellValueFactory(new PropertyValueFactory<KoerselHistorikImpl, Integer>("startPostnummer"));
 		 slutAdresse.setCellValueFactory(new PropertyValueFactory<KoerselHistorikImpl, String>("slutAdresse"));
 		 slutPostnr.setCellValueFactory(new PropertyValueFactory<KoerselHistorikImpl, Integer>("slutPostnummer"));
+		 kundenummerCol.setCellValueFactory(new PropertyValueFactory<KoerselHistorikImpl, Integer>("brugerNummer"));
+		 adminKommentar.setCellValueFactory(new PropertyValueFactory<KoerselHistorikImpl, String>("adminKommentar"));
 		 
 		 ObservableList<KoerselHistorikImpl> oListHistorik = null;
 		 
