@@ -16,6 +16,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import logic.FTPControllerImpl;
 import persistence.ProfilKartotekImpl;
 
 public class LoginController implements Initializable {
@@ -44,12 +45,23 @@ public class LoginController implements Initializable {
 
 	@FXML
 	public void haandterLogInd() {
-		ProfilKartotekImpl profilkartotek = new ProfilKartotekImpl();
+		FTPControllerImpl ftp = new FTPControllerImpl();
 		try {
+			
 			loggedin.setkundenummer(Integer.parseInt(kundenr.getText()));
-			if(profilkartotek.checkProfil(loggedin.getKundenummer()) == true){ //TODO: FIX TIL AT DEN SPØRGER PÅ EN NY INSTANS AF CONTROLLEREN DER SÅ SENDER DEN VIDERE
-
-				MainHubController mainhub = new MainHubController(loggedin);
+			if(ftp.checkProfil(loggedin.getKundenummer())){ //TODO her ses særligt fokus på 3 lags modellen, vi kunne lige så godt have spurgt profilkartoteket direkte, me nvi vælger at spørge controlleren først så det kan afkobles senere.
+				if(ftp.checkAdmin(loggedin.getKundenummer())){
+					MainHubControllerAdmin mainhubadmin = new MainHubControllerAdmin(loggedin,ftp.checkAdmin(loggedin.getKundenummer()));
+					FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("MainHubAdmin.fxml"));
+					fxmlLoader.setController(mainhubadmin);
+					Parent root1 = (Parent) fxmlLoader.load();
+					Stage stage = new Stage();
+					stage.setTitle("Flexturs Program v1.0");
+					stage.setScene(new Scene(root1));
+					stage.show();
+					logInd.getScene().getWindow().hide();  
+				} else{
+				MainHubController mainhub = new MainHubController(loggedin,ftp.checkAdmin(loggedin.getKundenummer()));
 				FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("MainHub.fxml"));
 				fxmlLoader.setController(mainhub);
 				Parent root1 = (Parent) fxmlLoader.load();
@@ -57,7 +69,8 @@ public class LoginController implements Initializable {
 				stage.setTitle("Flexturs Program v1.0");
 				stage.setScene(new Scene(root1));
 				stage.show();
-				logInd.getScene().getWindow().hide();  				//får fat i en af noderne og får dens vindue, og lukker derefter vinduet.
+				logInd.getScene().getWindow().hide(); 
+				}//får fat i en af noderne og får dens vindue, og lukker derefter vinduet.
 			} else{
 				fejl.setTitle("Fejl i kundenummer");
 				fejl.setHeaderText("Log-ind fejl.");

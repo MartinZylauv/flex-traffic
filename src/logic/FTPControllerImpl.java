@@ -149,4 +149,20 @@ public class FTPControllerImpl extends Observable implements FTPController, Obse
 		return liste;
 	}
 
+	@Override
+	public boolean checkProfil(long kundenummer) throws SQLException {
+		ProfilKartotekImpl profilkartotek = new ProfilKartotekImpl();
+		if(profilkartotek.checkProfil(kundenummer)){
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public boolean checkAdmin(long kundenummer) throws SQLException {
+		ProfilKartotekImpl profilkartotek = new ProfilKartotekImpl();
+		
+		return profilkartotek.checkAdmin(kundenummer);
+	}
+
 };

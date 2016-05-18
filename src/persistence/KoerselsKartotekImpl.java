@@ -50,6 +50,9 @@ public class KoerselsKartotekImpl implements KoerselsKartotek {
 		ps.setInt(14,koersel.getAntalBagage());
 
 		ps.executeUpdate();
+		connection.close();
+		
+		ps.close();
 
 	}
 
@@ -84,6 +87,9 @@ public class KoerselsKartotekImpl implements KoerselsKartotek {
 			
 		}
 
+		connection.close();
+		resultset.close();
+		ps.close();
 		return liste;
 		
 
@@ -116,6 +122,10 @@ public class KoerselsKartotekImpl implements KoerselsKartotek {
 			liste.add(koersel);
 			
 		}
+		
+		connection.close();
+		resultset.close();
+		ps.close();
 
 		return liste;
 		
@@ -151,6 +161,10 @@ public class KoerselsKartotekImpl implements KoerselsKartotek {
 			liste.add(koersel);
 			
 		}
+		
+		connection.close();
+		resultset.close();
+		ps.close();
 
 		return liste;
 		
@@ -182,6 +196,10 @@ public class KoerselsKartotekImpl implements KoerselsKartotek {
 			koersel.setAntalBagage(resultset.getInt("bagage"));
 			liste.add(koersel);
 		}
+		
+		connection.close();
+		resultset.close();
+		ps.close();
 		return liste;
 	}
 

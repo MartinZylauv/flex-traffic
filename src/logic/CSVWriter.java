@@ -39,7 +39,6 @@ public class CSVWriter {
     	writer.append(',');
     	writer.append("Start postnummer");
     	writer.append(',');
-    	
     	writer.append("Slut adresse");
     	writer.append(',');
     	writer.append("Slut postnummer");

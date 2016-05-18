@@ -11,4 +11,6 @@ public interface ProfilKartotek {
 	public void redigerProfil(String navn, String email, Long tlf, Long kundenummer) throws SQLException;
 
 	boolean checkProfil(long kundeNummer) throws SQLException;
+	
+	boolean checkAdmin(long kundeNummer) throws SQLException;
 }

@@ -6,6 +6,9 @@ email varchar(255),
 tlf_nummer double NOT NULL,
 )
 
+ALTER TABLE Profiler
+ADD erAdmin boolean default false
+
 CREATE TABLE Koersler
 (
 KoerselsID bigint IDENTITY,

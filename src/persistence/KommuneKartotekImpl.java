@@ -21,6 +21,10 @@ public class KommuneKartotekImpl implements KommuneKartotek {
 			kommune = resultset.getString("Adresseringsnavn_1");
 
 		}
+		connection.close();
+		resultset.close();
+		ps.close();
+			
 		return kommune;
 	}
 }

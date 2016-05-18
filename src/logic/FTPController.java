@@ -38,4 +38,7 @@ public interface FTPController {
 	void setKundenummer(long kundenummer);
 
 	public ArrayList<KoerselHistorikImpl> anmodOmBrugeresKørselHistorik(int kundenummer, Date dato1, Date dato2) throws SQLException;
+	
+	public boolean checkProfil(long kundenummer) throws SQLException;
+	public boolean checkAdmin(long kundenummer) throws SQLException;
 }

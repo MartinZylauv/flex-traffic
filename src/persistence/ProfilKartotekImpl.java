@@ -30,6 +30,7 @@ public class ProfilKartotekImpl implements ProfilKartotek {
 		Profil profil = new ProfilImpl();
 
 		while (resultset.next()) {
+			
 			String fuldtNavn = resultset.getString("fuldt_navn");
 			String email = resultset.getString("email");
 			long tlfNummer = resultset.getLong("tlf_nummer");
@@ -39,6 +40,9 @@ public class ProfilKartotekImpl implements ProfilKartotek {
 			profil.setEmail(email);
 			profil.setTlfNummer(tlfNummer);
 		}
+		connection.close();
+		resultset.close();
+		ps.close();
 
 		return profil;
 	}
@@ -55,7 +59,9 @@ public class ProfilKartotekImpl implements ProfilKartotek {
 		ps.setLong(4, kundenummer);
 
 		ps.executeUpdate();
-
+		connection.close();
+		
+		ps.close();
 	}
 	
 	@Override
@@ -63,12 +69,47 @@ public class ProfilKartotekImpl implements ProfilKartotek {
 		DataAccessForSQL da = new DataAccessForSQL();
 		Connection connection = da.getConnection();
 		PreparedStatement ps = connection.prepareStatement(SELECT_PROFIL);
-		ps.setDouble(1, kundeNummer);
+		ps.setLong(1, kundeNummer);
 		ResultSet resultset = ps.executeQuery();
 			if(resultset.next()){
+				System.out.println("yo");
+				connection.close();
+				resultset.close();
+				ps.close();
 				return true;
 			} 
+			connection.close();
+			resultset.close();
+			ps.close();
 				return false;
 	}
+
+	@Override
+	public boolean checkAdmin(long kundeNummer) throws SQLException {
+		DataAccessForSQL da = new DataAccessForSQL();
+		Connection connection = da.getConnection();
+		PreparedStatement ps = connection.prepareStatement(SELECT_PROFIL);
+		ps.setDouble(1, kundeNummer);
+		ResultSet resultset = ps.executeQuery();
+		boolean erAdmin = false;
+
+		while (resultset.next()) {
+		
+			erAdmin = resultset.getBoolean("erAdmin");
+			return erAdmin;
+		
+			
+		}
+
+		connection.close();
+		resultset.close();
+		ps.close();
+		
+		return erAdmin;
+	
+	}	
+				
+	
+	
 
 }

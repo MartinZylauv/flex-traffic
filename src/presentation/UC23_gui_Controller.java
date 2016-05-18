@@ -50,7 +50,7 @@ public class UC23_gui_Controller implements Initializable {
 	long tlfDefault;
 
 	@Override
-	public void initialize(URL arg0, ResourceBundle arg1) {
+	public void initialize(URL arg0, ResourceBundle arg1) {				//TODO: vi skal have cpr-nummer med.
 		Profil profil = null;
 		kundenummer = loggedin.getKundenummer();
 		System.out.println(loggedin.getKundenummer());
