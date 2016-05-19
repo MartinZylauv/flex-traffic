@@ -1,7 +1,7 @@
 package logic;
 
 public enum Beskeder {
-	MANGLER("Indtast venligst følgende felter før du kan bestille din kørsel: "), BESTILSUCCESS(
+	MANGLER("Et eller flere nødvendige felter mangler informationer. Prøv at indtaste alle felter, og prøve igen. "), BESTILSUCCESS(
 			"Din bestilling blev succesfuldt udført!"), 
 	VALIDERINGSFEJL("Der var en ukendt fejl med dine informationer. Prøv vejligst igen"),
 	NAVN_IKKE_INDTASTET("Indtast venligst dit navn. Dette felt kan ikke være tomt."),
@@ -11,17 +11,18 @@ public enum Beskeder {
 	UKENDT_KUNDENUMMER("Der findes ingen kunde med kundenummret du angav. Prøv venligst igen."),
 	UKENDT_FEJL("Der skete en ukendt fejl. Prøv venligst at genstarte programmet, eller at kontakte kundeservice."),
 	
-	START_ADR_MANGLER(""),
-	START_POSTNR_MANGLER(""),
-	START_BY_MANGLER(""),
-	SLUT_ADR_MANGLER(""),
-	SLUT_POSTNR_MANGLER(""),
-	SLUT_BY_MANGLER(""),
+	START_ADR_MANGLER("Indtast venligst en startadresse."),
+	START_POSTNR_MANGLER("Indtast venligst et startpostnummer"),
+	START_BY_MANGLER("Indtast venligst en start by"),
+	SLUT_ADR_MANGLER("Indtast venligst en slutadresse"),
+	SLUT_POSTNR_MANGLER("Indtast venligst et slutpostnummer"),
+	SLUT_BY_MANGLER("Indtast venligst en slutby"),
 	
-	KM_MANGLER(""),
+	KM_MANGLER("Indtast venligst antal kilometer for din tur"),
 	
-	DATO_MANGLER("");		//TODO skriv beskeder der mangler.
-
+	DATO_MANGLER("Vælg venligst en dato"),
+	NUMMMER_FEJL("Du har skrevet bogstaver eller andre karakterer hvor der kun måtte være tal. Prøv venligst igen."),	
+	POSTNR_FEJL("Der må maks være 4 tal i et postnummer. Prøv igen");
 
 	private final String description;
 

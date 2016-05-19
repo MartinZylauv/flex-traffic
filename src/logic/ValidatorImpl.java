@@ -24,15 +24,7 @@ public class ValidatorImpl implements Validator {
 				&& slutDestination.getAdresse() != null && slutDestination.getPostnummer() != Double.NaN
 				&& difference >= 0 && koerselDom.getAntalPersoner() > 0 && koerselDom.getAntalPersoner() < 10
 				&& koerselDom.getHjaelpemidler() >= 0 && koerselDom.getAntalBagage() >= 0
-				&& koerselDom.getBrugerNummer() != Double.NaN) { // TODO
-																	// Implementer
-																	// validation
-																	// af
-																	// tidspunkt,
-																	// fucker
-																	// lidt op
-																	// men lav
-																	// senere. Fix med at den smider en fejlbesked
+				&& koerselDom.getBrugerNummer() != Double.NaN ) { 
 
 			return true;
 

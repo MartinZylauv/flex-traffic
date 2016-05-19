@@ -12,7 +12,7 @@ import domain.KoerselHistorikImpl;
 //TODO: http://stackoverflow.com/questions/3666007/how-to-serialize-object-to-csv-file
 public class CSVWriter {
 	
-    public void writeToCSV(ArrayList<KoerselHistorikImpl> koersel, File file) throws IOException
+    public void writeToCSV(ArrayList<KoerselHistorikImpl> koersel, File file,boolean erAdmin) throws IOException
     {
     	//TODO fix at admin. eksport er med de ekstra værdier, men kun i admin, ikke i bruger.
     	FileWriter writer = new FileWriter(file);
@@ -42,6 +42,10 @@ public class CSVWriter {
     	writer.append("Slut adresse");
     	writer.append(',');
     	writer.append("Slut postnummer");
+    	if(erAdmin){
+    		writer.append(',');
+    		writer.append("Admin.kommentar");
+    	}
     	
     	writer.append('\n');
     	for(KoerselHistorikImpl koerselobj : koersel){
@@ -71,10 +75,13 @@ public class CSVWriter {
         	writer.append(koerselobj.getSlutAdresse());
         	writer.append(',');
         	writer.append(String.valueOf(koerselobj.getSlutPostnummer()));
-        	
+        	if(erAdmin){
+        		writer.append(',');
+        		writer.append(koerselobj.getAdminKommentar());
+        	}
         	writer.append('\n');
     	}
-    	//TODO eventuelt tilføj start/slut bynavn.
+
  	    
  	   
  			

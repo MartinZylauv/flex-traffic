@@ -9,6 +9,9 @@ tlf_nummer double NOT NULL,
 ALTER TABLE Profiler
 ADD erAdmin boolean default false
 
+ALTER TABLE Profiler
+ADD cpr varchar(11)
+
 CREATE TABLE Koersler
 (
 KoerselsID bigint IDENTITY,

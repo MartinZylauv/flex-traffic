@@ -6,6 +6,7 @@ public class ProfilImpl implements Profil {
 	String fuldtNavn;
 	String email;
 	long tlfNummer;
+	String cpr;
 
 	@Override
 	public long getKundeNummer() {
@@ -48,6 +49,18 @@ public class ProfilImpl implements Profil {
 	public void setTlfNummer(long tlfNummer) {
 		this.tlfNummer = tlfNummer;
 
+	}
+
+	@Override
+	public void setCPR(String cpr) {
+		this.cpr=cpr;
+		
+	}
+
+	@Override
+	public String getCPR() {
+	
+		return cpr;
 	}
 
 }

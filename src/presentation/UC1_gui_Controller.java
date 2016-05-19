@@ -74,17 +74,6 @@ public class UC1_gui_Controller implements Initializable {
 	@FXML
 	private Button accepterKnap;
 
-	private boolean startAdresseAendret = false;
-	private boolean startPostnummerAendret = false;
-	private boolean startByAendret = false;
-	private boolean slutAdresseAendret = false; // TODO Slet eventuelt, de skal
-												// ikke bruges p.t.
-	private boolean slutPostnummerAendret = false;
-	private boolean slutByAendret = false;
-	private boolean kmAendret = false;
-	
-	
-	
 	LoggedIn loggedin = null;
 	FTPControllerImpl ftp = new FTPControllerImpl();
 	int brugerummer;
@@ -111,16 +100,25 @@ public class UC1_gui_Controller implements Initializable {
 		antalPersonerChoice.setItems(nulTilNi);
 	}
 	//TODO check hvad decrepated er herunder på stackoverflow.
-	public void haandterAccepter() {   //TODO lav noteditable textfields for de ting prisen udregnes for .
-		Time t = new Time(Integer.parseInt(tidHChoice.getValue()), Integer.parseInt(tidMChoice.getValue()), 0);
-		start.setAdresse(startAdresseFelt.getText());
-		start.setBynavn(startByFelt.getText());
-		start.setPostnummer(Integer.parseInt(startPostnummerFelt.getText()));
-		slut.setAdresse(slutAdresseFelt.getText());
-		slut.setBynavn(slutByFelt.getText());
-		slut.setPostnummer(Integer.parseInt(slutPostnummerFelt.getText()));
+	public void haandterAccepter() {   //TODO lav noteditable textfields for de ting prisen udregnes for, så en "udregn ny pris knap"
+
 
 		try {
+			Time t = new Time(Integer.parseInt(tidHChoice.getValue()), Integer.parseInt(tidMChoice.getValue()), 0);
+			start.setAdresse(startAdresseFelt.getText());
+			start.setBynavn(startByFelt.getText());
+			if(startPostnummerFelt.getText().length()==4){
+			start.setPostnummer(Integer.parseInt(startPostnummerFelt.getText()));
+			} else{
+				postNummerFejl();
+			}
+			slut.setAdresse(slutAdresseFelt.getText());
+			slut.setBynavn(slutByFelt.getText());
+			if(slutPostnummerFelt.getText().length()==4){
+				slut.setPostnummer(Integer.parseInt(slutPostnummerFelt.getText()));
+				} else{
+					postNummerFejl();
+				}
 			Date dato = Date.valueOf(datoVaelger.getValue());
 			ftp.angivInformationer(start, slut, dato, antalPersonerChoice.getValue(), antalHjaelpleChoice.getValue(),
 					antalBagageChoice.getValue(), kommentarArea.getText(), brugerummer, t,
@@ -132,18 +130,17 @@ public class UC1_gui_Controller implements Initializable {
 				info.showAndWait();
 			
 		} catch (NumberFormatException e) {
-			fejl.setHeaderText("Der er sket en fejl");
-			fejl.setContentText("Du har desværre indtastet bogstaver hvor der skulle have været tal. Prøv venligst at bestille igen.");
-			fejl.showAndWait();
+			nummerFejl();
 		} catch (InvalidInformationException e) {
-			fejl.setHeaderText("Der er sket en fejl");
-			fejl.setContentText("Du har desværre indtastet nogle ugyldige informationer. Prøv at indtaste dine informationer igen, og så at bestille igen."); //TODO FEJLKODER
+			setFejlIndtastning();
+			fejl.setContentText(e.getMessage());
 			fejl.showAndWait();
 		} catch(SQLException e){
-			fejl.setHeaderText("Der er sket en fejl");
-			fejl.setContentText("En uventet fejl er sket. Prøv venligst at genstarte programmet eller at kontakte kundeservice."); //TODO FEJLKODER
+			setFejlSQL();
+		} catch(NullPointerException e){
+			setFejlIndtastning();
+			fejl.setContentText(Beskeder.MANGLER.getDescription());
 			fejl.showAndWait();
-			e.printStackTrace();
 		}
 	}
 
@@ -152,17 +149,29 @@ public class UC1_gui_Controller implements Initializable {
 			throws NumberFormatException, SQLException, UnknownKommuneException, InterruptedException {
 		
 		
+		try{
 		
-		start.setAdresse(startAdresseFelt.getText());
-		start.setBynavn(startByFelt.getText());
-		start.setPostnummer(Integer.parseInt(startPostnummerFelt.getText()));
-		slut.setAdresse(slutAdresseFelt.getText());
-		slut.setBynavn(slutByFelt.getText());
-		slut.setPostnummer(Integer.parseInt(slutPostnummerFelt.getText()));
+		if(startPostnummerFelt.getText().length()==4 && slutPostnummerFelt.getText().length()==4 ){
+			start.setAdresse(startAdresseFelt.getText());
+			start.setBynavn(startByFelt.getText());
+			start.setPostnummer(Integer.parseInt(startPostnummerFelt.getText()));
+			slut.setPostnummer(Integer.parseInt(slutPostnummerFelt.getText()));
+			slut.setAdresse(slutAdresseFelt.getText());
+			slut.setBynavn(slutByFelt.getText());
+			ftp.getPrisTilbud(start, slut, Double.parseDouble(kmFelt.getText()),Date.valueOf(datoVaelger.getValue()));
+			progressBar.setVisible(true);
+			prisLabel.setText("Udregner pris, vent venligst...");
+			} else{
+				postNummerFejl();
+			}
 		
-		ftp.getPrisTilbud(start, slut, Double.parseDouble(kmFelt.getText()),Date.valueOf(datoVaelger.getValue()));
-		progressBar.setVisible(true);
-		prisLabel.setText("Udregner pris, vent venligst...");
+		} catch(NumberFormatException e){
+			nummerFejl();
+		} catch(NullPointerException e){
+			setDatoFejl();
+		}
+		
+		
 		//TODO vi skal have en form at håndtere hvis man har glemt at indtaste noget. 
 		new Thread(new Runnable() {
 			@Override
@@ -193,7 +202,38 @@ public class UC1_gui_Controller implements Initializable {
 		}).start();
 
 	}
+	public void nummerFejl(){
+		fejl.setTitle("Nummer fejl");
+		fejl.setHeaderText("Fejl i et eller flere felter");
+		fejl.setContentText(Beskeder.NUMMMER_FEJL.getDescription());
+		fejl.showAndWait();
+	}
 	
+	public void setFejlIndtastning(){
+		fejl.setTitle("Indtastningsfejl");
+		fejl.setHeaderText("Indtastningsfejl");
+	}
+	
+	public void setFejlSQL(){
+		
+		fejl.setTitle("SQL fejl");
+		fejl.setHeaderText("Fejl i databasen");
+		fejl.setContentText(Beskeder.UKENDT_SQL.getDescription()); 
+		fejl.showAndWait();
+	
+}
+	public void setDatoFejl(){
+		fejl.setTitle("Dato fejl.");
+		fejl.setHeaderText("Fejl i dato");
+		fejl.setContentText(Beskeder.DATO_MANGLER.getDescription());
+		fejl.showAndWait();
+	}
+	
+	public void postNummerFejl(){
+		fejl.setTitle("Postnummer fejl.");
+		fejl.setHeaderText("Fejl i postnummer");
+		fejl.setContentText(Beskeder.POSTNR_FEJL.getDescription());
+		fejl.showAndWait();
+	}
 	
 	}
-}

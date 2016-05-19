@@ -27,11 +27,13 @@ public class ProfilKartotekImpl implements ProfilKartotek {
 			String fuldtNavn = resultset.getString("fuldt_navn");
 			String email = resultset.getString("email");
 			long tlfNummer = resultset.getLong("tlf_nummer");
+			String cpr = resultset.getString("CPR");
 
 			profil.setKundeNummer(kundeNummer);
 			profil.setFuldtNavn(fuldtNavn);
 			profil.setEmail(email);
 			profil.setTlfNummer(tlfNummer);
+			profil.setCPR(cpr);
 		}
 		connection.close();
 		resultset.close();
@@ -65,7 +67,6 @@ public class ProfilKartotekImpl implements ProfilKartotek {
 		ps.setLong(1, kundeNummer);
 		ResultSet resultset = ps.executeQuery();
 			if(resultset.next()){
-				System.out.println("yo");
 				connection.close();
 				resultset.close();
 				ps.close();

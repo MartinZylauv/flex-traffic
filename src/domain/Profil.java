@@ -10,4 +10,6 @@ public interface Profil {
 	public void setEmail(String email);
 	public long getTlfNummer();
 	public void setTlfNummer(long tlfNummer);
+	public void setCPR(String cpr);
+	public String getCPR();
 }

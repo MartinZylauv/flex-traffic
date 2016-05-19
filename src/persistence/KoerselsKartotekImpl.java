@@ -17,7 +17,7 @@ public class KoerselsKartotekImpl implements KoerselsKartotek {
 	final static String INSERT_KOERSEL = "INSERT INTO KOERSLER( KOERSELSID, KUNDENUMMER,"
 			+ " START_ADRESSE, START_POSTNUMMER, TIDSPUNKT, SLUT_ADRESSE, SLUT_POSTNUMMER,"
 			+ " ANTAL_KM, BEREGNET_PRIS, GODKENDT_KØRSEL, BRUGERKOMMENTAR, ADMINSTRATIONSKOMMENTAR,"
-			+ " TID_PÅ_DAGE,PERSONER,HJAELPEMIDLER,BAGAGE )VALUES ( null,? , ?,? ,? , ?,? ,? ,? ,? , ?, null,?,?,?,? )"; //TODO: tilføj de sidste par informationer der mangler ift. ssdet osv.
+			+ " TID_PÅ_DAGE,PERSONER,HJAELPEMIDLER,BAGAGE )VALUES ( null,? , ?,? ,? , ?,? ,? ,? ,? , ?, null,?,?,?,? )"; 
 	
 	
 	final static String GET_ENKEL_TID = "SELECT * FROM KOERSLER WHERE kundenummer = ? AND tidspunkt>= ? AND tidspunkt <= ?";
@@ -81,8 +81,8 @@ public class KoerselsKartotekImpl implements KoerselsKartotek {
 			koersel.setAntalPersoner(resultset.getInt("personer"));
 			koersel.setHjaelplemidler(resultset.getInt("hjaelpemidler"));
 			koersel.setAntalBagage(resultset.getInt("bagage"));
-			koersel.setBrugerNummer(resultset.getInt("kundenummer"));
-			koersel.setAdminKommentar(resultset.getString("administrationskommentar"));
+
+			koersel.setAdminKommentar(resultset.getString("ADMINSTRATIONSKOMMENTAR"));
 			liste.add(koersel);
 			
 		}
@@ -119,6 +119,7 @@ public class KoerselsKartotekImpl implements KoerselsKartotek {
 			koersel.setAntalPersoner(resultset.getInt("personer"));
 			koersel.setHjaelplemidler(resultset.getInt("hjaelpemidler"));
 			koersel.setAntalBagage(resultset.getInt("bagage"));
+			koersel.setAdminKommentar(resultset.getString("ADMINSTRATIONSKOMMENTAR"));
 			liste.add(koersel);
 			
 		}
@@ -158,6 +159,7 @@ public class KoerselsKartotekImpl implements KoerselsKartotek {
 			koersel.setAntalPersoner(resultset.getInt("personer"));
 			koersel.setHjaelplemidler(resultset.getInt("hjaelpemidler"));
 			koersel.setAntalBagage(resultset.getInt("bagage"));
+			koersel.setAdminKommentar(resultset.getString("ADMINSTRATIONSKOMMENTAR"));
 			liste.add(koersel);
 			
 		}
@@ -194,6 +196,7 @@ public class KoerselsKartotekImpl implements KoerselsKartotek {
 			koersel.setAntalPersoner(resultset.getInt("personer"));
 			koersel.setHjaelplemidler(resultset.getInt("hjaelpemidler"));
 			koersel.setAntalBagage(resultset.getInt("bagage"));
+			koersel.setAdminKommentar(resultset.getString("ADMINSTRATIONSKOMMENTAR"));
 			liste.add(koersel);
 		}
 		

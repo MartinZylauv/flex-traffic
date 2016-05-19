@@ -52,6 +52,7 @@ public class LoginController implements Initializable {
 			loggedin.setkundenummer(Integer.parseInt(kundenr.getText()));
 			if(ftp.checkProfil(loggedin.getKundenummer())){ //TODO her ses særligt fokus på 3 lags modellen, vi kunne lige så godt have spurgt profilkartoteket direkte, me nvi vælger at spørge controlleren først så det kan afkobles senere.
 				if(ftp.checkAdmin(loggedin.getKundenummer())){
+					loggedin.setAdmin(ftp.checkAdmin(loggedin.getKundenummer()));
 					MainHubControllerAdmin mainhubadmin = new MainHubControllerAdmin(loggedin,ftp.checkAdmin(loggedin.getKundenummer()));
 					FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("MainHubAdmin.fxml"));
 					fxmlLoader.setController(mainhubadmin);
@@ -62,6 +63,7 @@ public class LoginController implements Initializable {
 					stage.show();
 					logInd.getScene().getWindow().hide();  
 				} else{
+					loggedin.setAdmin(ftp.checkAdmin(loggedin.getKundenummer()));
 				MainHubController mainhub = new MainHubController(loggedin,ftp.checkAdmin(loggedin.getKundenummer()));
 				FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("MainHub.fxml"));
 				fxmlLoader.setController(mainhub);

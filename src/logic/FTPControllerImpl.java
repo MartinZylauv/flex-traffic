@@ -92,10 +92,13 @@ public class FTPControllerImpl extends Observable implements FTPController, Obse
 	@Override
 	public void getPrisTilbud(StartDestination startdestination, SlutDestination slutdestination, double km, Date dato)
 			throws SQLException, UnknownKommuneException {
+		Validator validator =  new ValidatorImpl();
+		//TODO: validator tak :)
 		pb = new PrisBeregnerImpl(startdestination, slutdestination, km,dato);
+		
 		pb.addObserver(this);
 		(new Thread(pb)).start(); // TODO REFACTOR
-
+		
 	}
 
 	@Override

@@ -29,6 +29,7 @@ import javafx.stage.FileChooser;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import logic.Beskeder;
 import logic.CSVWriter;
 import logic.FTPControllerImpl;
 import logic.Tilstande;
@@ -85,7 +86,7 @@ public class UC45_gui_Controller implements Initializable {
 	String navnDefault;
 	String emailDefault;
 	long tlfDefault;
-	ArrayList koerselhistorik;
+	ArrayList<KoerselHistorikImpl> koerselhistorik;
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -112,7 +113,7 @@ public class UC45_gui_Controller implements Initializable {
 			koerselhistorik = ftp.anmodOmBrugeresKørselHistorik(kundenummer, null, null);
 			oListHistorik = FXCollections.observableArrayList(ftp.anmodOmBrugeresKørselHistorik(kundenummer, null, null));
 		} catch (SQLException e) {
-			// TODO FEJLBESKED ALERT HER
+			setFejlSQL();
 			e.printStackTrace();
 		}
 		 
@@ -136,9 +137,10 @@ public class UC45_gui_Controller implements Initializable {
          }
        
          try {
-			csv.writeToCSV(koerselhistorik, file);
+        	 
+			csv.writeToCSV(koerselhistorik, file, loggedin.getAdmin());
 		} catch (IOException e) {
-			// TODO fejlbesked her
+			IOFejl();
 			e.printStackTrace();
 		}
 	}
@@ -162,12 +164,28 @@ public class UC45_gui_Controller implements Initializable {
 				koerselhistorik = ftp.anmodOmBrugeresKørselHistorik(kundenummer, startDato, slutDato);
 				oListHistorik = FXCollections.observableArrayList(ftp.anmodOmBrugeresKørselHistorik(kundenummer, startDato, slutDato));
 			} catch (SQLException e) {
-				// TODO FEJLBESKED ALERT HER
+				setFejlSQL();
 				e.printStackTrace();
 			}
 			 
 				koerselsHistorik.setItems(oListHistorik );
 		}
+	
+	public void setFejlSQL(){
+		
+		fejl.setTitle("SQL fejl");
+		fejl.setHeaderText("Fejl i databasen");
+		fejl.setContentText(Beskeder.UKENDT_SQL.getDescription()); 
+		fejl.showAndWait();
+	
+}
+	
+	public void IOFejl(){
+		fejl.setTitle("I/O fejl");
+		fejl.setHeaderText("Ukendt fejl");
+		fejl.setContentText(Beskeder.UKENDT_FEJL.getDescription()); 
+		fejl.showAndWait();
+	}
 	}
 
 

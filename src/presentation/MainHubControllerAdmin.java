@@ -37,11 +37,6 @@ public class MainHubControllerAdmin implements Initializable {
 			Parent root = (Parent) fxmlLoader.load();
 			koerselshistorik.setContent(root);
 
-			
-			
-				
-			
-
 		} catch (IOException e) {
 			IOFejl();
 			e.printStackTrace();

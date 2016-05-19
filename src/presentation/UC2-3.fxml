@@ -6,14 +6,14 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="265.0" prefWidth="362.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" >
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="265.0" prefWidth="362.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label fx:id="kundeNummer" layoutX="136.0" layoutY="14.0" prefHeight="38.0" prefWidth="212.0">
+      <Label fx:id="kundeNummer" layoutX="136.0" layoutY="2.0" prefHeight="38.0" prefWidth="212.0">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <Label layoutX="14.0" layoutY="14.0" prefHeight="38.0" prefWidth="119.0" text="Kundenummer:">
+      <Label layoutX="14.0" layoutY="2.0" prefHeight="38.0" prefWidth="119.0" text="Kundenummer:">
          <font>
             <Font size="16.0" />
          </font>
@@ -40,5 +40,15 @@
       <Button fx:id="hjaelp" layoutX="14.0" layoutY="227.0" mnemonicParsing="false" onAction="#haandteerHjaelp" prefHeight="31.0" prefWidth="72.0" text="Hjælp" />
       <TextField fx:id="fulde_navn" editable="false" layoutX="143.0" layoutY="81.0" prefHeight="25.0" prefWidth="212.0" />
       <Button fx:id="gem" layoutX="226.0" layoutY="227.0" mnemonicParsing="false" onAction="#haandterGem" text="Gem" visible="false" />
+      <Label fx:id="cprNummer" layoutX="136.0" layoutY="40.0" prefHeight="31.0" prefWidth="212.0">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="17.0" layoutY="37.0" prefHeight="38.0" prefWidth="119.0" text="cpr-nummer:">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

@@ -40,6 +40,8 @@ public class UC23_gui_Controller implements Initializable {
 	private Button gem;
 	@FXML
 	private Button accepterKnap;
+	@FXML
+	private Label cprNummer;
 
 	FTPControllerImpl ftp = new FTPControllerImpl();
 	Alert fejl = new Alert(AlertType.WARNING);
@@ -52,11 +54,10 @@ public class UC23_gui_Controller implements Initializable {
 	long tlfDefault;
 
 	@Override
-	public void initialize(URL arg0, ResourceBundle arg1) {				//TODO: vi skal have cpr-nummer med.
+	public void initialize(URL arg0, ResourceBundle arg1) {	
 		Profil profil = null;
 
 		kundenummer = loggedin.getKundenummer();
-		System.out.println(loggedin.getKundenummer());
 		ftp.setKundenummer(kundenummer);
 		try {
 			profil = ftp.anmodOmProfil(kundenummer);
@@ -70,6 +71,7 @@ public class UC23_gui_Controller implements Initializable {
 		fulde_navn.setText(navnDefault);
 		email.setText(emailDefault);
 		tlfnummer.setText(String.valueOf(tlfDefault));
+		cprNummer.setText(profil.getCPR());
 	}
 
 	@FXML
