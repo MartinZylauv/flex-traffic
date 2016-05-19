@@ -158,7 +158,13 @@ public class UC1_gui_Controller implements Initializable {
 			slut.setPostnummer(Integer.parseInt(slutPostnummerFelt.getText()));
 			slut.setAdresse(slutAdresseFelt.getText());
 			slut.setBynavn(slutByFelt.getText());
-			ftp.getPrisTilbud(start, slut, Double.parseDouble(kmFelt.getText()),Date.valueOf(datoVaelger.getValue()));
+			try {
+				ftp.getPrisTilbud(start, slut, Double.parseDouble(kmFelt.getText()),Date.valueOf(datoVaelger.getValue()));
+			} catch (InvalidInformationException e) {
+				setFejlIndtastning();
+				fejl.setContentText(e.getMessage());
+				e.printStackTrace();
+			}
 			progressBar.setVisible(true);
 			prisLabel.setText("Udregner pris, vent venligst...");
 			} else{

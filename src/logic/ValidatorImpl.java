@@ -60,14 +60,16 @@ public class ValidatorImpl implements Validator {
 	public boolean validerTilbud(StartDestination startdestination, SlutDestination slutdestination, double km,
 			java.sql.Date dato) throws InvalidInformationException {
 		if(startdestination.getAdresse().isEmpty()){
-			
 			throw new InvalidInformationException(Beskeder.START_ADR_MANGLER.getDescription());
 		}else if(startdestination.getBynavn().isEmpty()){
 			throw new InvalidInformationException(Beskeder.START_BY_MANGLER.getDescription());
-		}else if(startdestination.getPostnummer() == 0){	 //TODO sæt postnummer til 0 hvis intet er tastet ind
-			throw new InvalidInformationException(Beskeder.START_POSTNR_MANGLER.getDescription());
+		} else if(slutdestination.getAdresse().isEmpty()){
+			throw new InvalidInformationException(Beskeder.SLUT_ADR_MANGLER.getDescription());
+		} else if(slutdestination.getBynavn().isEmpty()){
+			throw new InvalidInformationException(Beskeder.SLUT_BY_MANGLER.getDescription());
+		} 
 	
-	}return false;
+	return false;
 	}
 	
 

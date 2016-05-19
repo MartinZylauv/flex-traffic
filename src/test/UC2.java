@@ -16,7 +16,7 @@ import logic.FTPControllerImpl;
 import logic.InvalidInformationException;
 import sats.UnknownKommuneException;
 
-public class UC1 {
+public class UC2 {
 	
 	FTPControllerImpl ftp = new FTPControllerImpl();
 	StartDestinationImpl startdest = new StartDestinationImpl();
