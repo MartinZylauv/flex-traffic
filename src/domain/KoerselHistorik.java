@@ -42,7 +42,12 @@ public interface KoerselHistorik {
 	int getAntalHjaelpemidler();
 	void setAdminKommentar(String adminKommentar);
 	String getAdminKommentar();
+	
+	public int getID();
+	public void setID(int ID);
 
+	public void setErGodkendt(boolean godkendt);
+	public boolean getErGodkendt();
 	
 	
 

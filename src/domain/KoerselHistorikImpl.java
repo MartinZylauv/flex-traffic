@@ -25,6 +25,8 @@ public class KoerselHistorikImpl implements KoerselHistorik {
 	String slutAdresse;
 	int slutPostnummer;
 	String slutBynavn;
+	int ID;
+	boolean erGodkendt;
 	
 	@Override
 	public void setDato(Date dato) {
@@ -217,6 +219,30 @@ public class KoerselHistorikImpl implements KoerselHistorik {
 	public void setAdminKommentar(String adminKommentar) {
 		this.adminKommentar = adminKommentar;
 
+	}
+
+	@Override
+	public int getID() {
+		
+		return ID;
+	}
+
+	@Override
+	public void setID(int ID) {
+	this.ID = ID;
+		
+	}
+
+	@Override
+	public void setErGodkendt(boolean erGodkendt) {
+		this.erGodkendt = erGodkendt;
+		
+	}
+
+	@Override
+	public boolean getErGodkendt() {
+		
+		return erGodkendt;
 	}
 
 }

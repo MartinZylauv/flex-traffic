@@ -8,7 +8,9 @@ import java.sql.SQLException;
 import java.sql.Time;
 import java.util.ArrayList;
 
+import domain.Bil;
 import domain.Koersel;
+import domain.KoerselHistorik;
 import domain.KoerselHistorikImpl;
 import domain.SlutDestination;
 import domain.StartDestination;
@@ -24,6 +26,8 @@ public class KoerselsKartotekImpl implements KoerselsKartotek {
 	final static String GET_ENKEL ="SELECT * FROM KOERSLER WHERE kundenummer = ?";
 	final static String GET_FLERE_TID= "SELECT * FROM KOERSLER WHERE tidspunkt>= ? AND tidspunkt <= ?";
 	final static String GET_FLERE ="SELECT * FROM KOERSLER";
+	final static String GODKEND_KOERSEL ="INSERT INTO koerselstildeling(tildelt_bil,koersels_id) values(?,?)";
+	final static String SET_GODKENDT = "UPDATE koersler SET godkendt_kørsel = ? WHERE koerselsid = ?";
 
 	@Override
 	public void gemKoersel(StartDestination startDestination, SlutDestination slutDestination, Koersel koersel,
@@ -81,6 +85,8 @@ public class KoerselsKartotekImpl implements KoerselsKartotek {
 			koersel.setAntalPersoner(resultset.getInt("personer"));
 			koersel.setHjaelplemidler(resultset.getInt("hjaelpemidler"));
 			koersel.setAntalBagage(resultset.getInt("bagage"));
+			koersel.setID(resultset.getInt("Koerselsid"));
+			koersel.setErGodkendt(resultset.getBoolean("GODKENDT_KØRSEL"));
 
 			koersel.setAdminKommentar(resultset.getString("ADMINSTRATIONSKOMMENTAR"));
 			liste.add(koersel);
@@ -120,6 +126,8 @@ public class KoerselsKartotekImpl implements KoerselsKartotek {
 			koersel.setHjaelplemidler(resultset.getInt("hjaelpemidler"));
 			koersel.setAntalBagage(resultset.getInt("bagage"));
 			koersel.setAdminKommentar(resultset.getString("ADMINSTRATIONSKOMMENTAR"));
+			koersel.setID(resultset.getInt("Koerselsid"));
+			koersel.setErGodkendt(resultset.getBoolean("GODKENDT_KØRSEL"));
 			liste.add(koersel);
 			
 		}
@@ -160,6 +168,8 @@ public class KoerselsKartotekImpl implements KoerselsKartotek {
 			koersel.setHjaelplemidler(resultset.getInt("hjaelpemidler"));
 			koersel.setAntalBagage(resultset.getInt("bagage"));
 			koersel.setAdminKommentar(resultset.getString("ADMINSTRATIONSKOMMENTAR"));
+			koersel.setID(resultset.getInt("Koerselsid"));
+			koersel.setErGodkendt(resultset.getBoolean("GODKENDT_KØRSEL"));
 			liste.add(koersel);
 			
 		}
@@ -197,6 +207,8 @@ public class KoerselsKartotekImpl implements KoerselsKartotek {
 			koersel.setHjaelplemidler(resultset.getInt("hjaelpemidler"));
 			koersel.setAntalBagage(resultset.getInt("bagage"));
 			koersel.setAdminKommentar(resultset.getString("ADMINSTRATIONSKOMMENTAR"));
+			koersel.setID(resultset.getInt("Koerselsid"));
+			koersel.setErGodkendt(resultset.getBoolean("GODKENDT_KØRSEL"));
 			liste.add(koersel);
 		}
 		
@@ -231,5 +243,34 @@ public class KoerselsKartotekImpl implements KoerselsKartotek {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public void godkendKoersel(int bil, KoerselHistorik koerselhistorik) throws SQLException {
+		DataAccessForSQL da = new DataAccessForSQL();
+		Connection connection = da.getConnection();
+		PreparedStatement ps = connection.prepareStatement(GODKEND_KOERSEL);
+		ps.setInt(1, bil);
+		ps.setInt(2, koerselhistorik.getID());
+		ps.executeUpdate();
+		connection.close();
+		ps.close();
+		
+		
+	}
+	
+	@Override
+	public void setGodkendtKoersel(int bil, KoerselHistorik koerselhistorik) throws SQLException {
+		DataAccessForSQL da = new DataAccessForSQL();
+		Connection connection = da.getConnection();
+		PreparedStatement ps = connection.prepareStatement(SET_GODKENDT);
+		ps.setBoolean(1, true);
+		ps.setInt(2, koerselhistorik.getID());
+		ps.executeUpdate();
+		connection.close();
+		ps.close();
+		
+		
+	}
+	
 
 }

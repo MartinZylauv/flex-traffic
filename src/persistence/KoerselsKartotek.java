@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 import domain.Bil;
 import domain.Koersel;
+import domain.KoerselHistorik;
 import domain.KoerselHistorikImpl;
 import domain.KoerselImpl;
 import domain.SlutDestination;
@@ -34,5 +35,9 @@ public interface KoerselsKartotek {
 	
 	public ArrayList<KoerselHistorikImpl> visFlereBrugerKørslerAdmin()throws SQLException;
 	
-	public void godkendKoersel(Bil bil, Koersel koersel);
+
+
+	public void godkendKoersel(int bil, KoerselHistorik koerselhistorik) throws SQLException;
+
+	void setGodkendtKoersel(int bil, KoerselHistorik koerselhistorik) throws SQLException;
 }

@@ -9,12 +9,14 @@ import java.sql.Time;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import domain.Bil;
 import domain.KoerselHistorikImpl;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
@@ -79,7 +81,7 @@ public class UC6_gui_Controller implements Initializable {
 	private Button godkendKoersel;
 	
 	@FXML
-	private ComboBox bilComboBox;
+	private ChoiceBox<Integer> vaelgBilChoiceBox;
 	
 	@FXML
 	private TextField kundenummerField;
@@ -98,6 +100,14 @@ public class UC6_gui_Controller implements Initializable {
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+		
+		try {
+			
+			vaelgBilChoiceBox.setItems( FXCollections.observableArrayList(ftp.getBiler()));
+		} catch (SQLException e1) {
+			// TODO sql alert igen
+			e1.printStackTrace();
+		}
 
 	kundenummer = 0;
 	
@@ -185,6 +195,25 @@ public class UC6_gui_Controller implements Initializable {
 			 
 				koerselsHistorik.setItems(oListHistorik );
 		}
+	
+	@FXML
+	public void haandterGodkendKoersel(){
+		if(vaelgBilChoiceBox.getValue()!=null){
+			if(!koerselsHistorik.getSelectionModel().isEmpty()){
+				ftp.tildelBil(vaelgBilChoiceBox.getValue());
+				try {
+					ftp.angivKoerselTilVedligeholdelse(koerselsHistorik.getSelectionModel().getSelectedItem());
+					
+					koerselsHistorik.setItems(FXCollections.observableArrayList(ftp.anmodOmBrugeresKørselHistorik(kundenummer, null, null)) );
+				} catch (SQLException e) {
+					// TODO SQL ALERT HER
+					e.printStackTrace();
+				}
+			}
+			//alert med at en kørsel ikke er valgt.
+		}
+		//alert med at en bil ikke er valgt.
+	}
 	
 	public void setFejlSQL(){
 		

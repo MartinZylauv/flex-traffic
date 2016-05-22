@@ -4,12 +4,14 @@ import java.sql.Date;
 import java.sql.SQLException;
 import java.sql.Time;
 import java.util.ArrayList;
+import java.util.List;
 
 import domain.SlutDestination;
 import domain.StartDestination;
 import sats.UnknownKommuneException;
 import domain.Bil;
 import domain.Koersel;
+import domain.KoerselHistorik;
 import domain.KoerselHistorikImpl;
 import domain.KoerselImpl;
 import domain.Profil;
@@ -44,9 +46,11 @@ public interface FTPController {
 	public boolean checkProfil(long kundenummer) throws SQLException;
 	public boolean checkAdmin(long kundenummer) throws SQLException;
 	
-	public Bil getBil();
-	public void tildelBil(Bil bil);
+	public int getBil();
+	public void tildelBil(int bil);
 	
-	public Koersel getKoerselTilVedligeholdelse();
-	public void angivKoerselTilVedligeholdelse(Koersel koersel);
+
+	public void angivKoerselTilVedligeholdelse(KoerselHistorik koerselhistorik) throws SQLException;
+	
+	public List<Integer> getBiler() throws SQLException;
 }

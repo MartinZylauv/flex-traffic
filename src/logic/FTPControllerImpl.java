@@ -4,11 +4,13 @@ import java.sql.Date;
 import java.sql.SQLException;
 import java.sql.Time;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
 import domain.Bil;
 import domain.Koersel;
+import domain.KoerselHistorik;
 import domain.KoerselHistorikImpl;
 import domain.KoerselImpl;
 import domain.Profil;
@@ -19,6 +21,7 @@ import domain.StartDestination;
 import domain.StartDestinationImpl;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import persistence.BilKartotekImpl;
 import persistence.KoerselsKartotek;
 import persistence.KoerselsKartotekImpl;
 import persistence.ProfilKartotekImpl;
@@ -36,6 +39,7 @@ public class FTPControllerImpl extends Observable implements FTPController, Obse
 	SlutDestination slutdestination = new SlutDestinationImpl();
 	Time tid;
 	double antalKm;
+	int bil;
 
 	@Override
 	public void angivInformationer(StartDestination startDestination, SlutDestination slutDestination, Date dato,
@@ -176,26 +180,37 @@ public class FTPControllerImpl extends Observable implements FTPController, Obse
 	}
 
 	@Override
-	public Bil getBil() {
-		// TODO Auto-generated method stub
-		return null;
+	public int getBil() {
+		
+		return bil;
 	}
 
 	@Override
-	public void tildelBil(Bil bil) {
-		// TODO Auto-generated method stub
+	public void tildelBil(int bil) {
+		this.bil = bil;
 		
 	}
 
+	
+
 	@Override
-	public Koersel getKoerselTilVedligeholdelse() {
-		// TODO Auto-generated method stub
-		return null;
+	public void angivKoerselTilVedligeholdelse(KoerselHistorik koerselhistorik) throws SQLException {
+		KoerselsKartotekImpl koersel = new KoerselsKartotekImpl();
+		System.out.println(koerselhistorik.getErGodkendt());
+		if(!koerselhistorik.getErGodkendt()){
+		koersel.godkendKoersel(bil, koerselhistorik);
+		koersel.setGodkendtKoersel(bil, koerselhistorik);
+		} //TODO else throw ny forkert indtastning besked med at den allerede er tildelt en bil.
 	}
 
 	@Override
-	public void angivKoerselTilVedligeholdelse(Koersel koersel) {
-		// TODO Auto-generated method stub
+	public List<Integer> getBiler() throws SQLException {
+		ArrayList<Integer> biler = new ArrayList<Integer>();
+		BilKartotekImpl bilKartotek = new BilKartotekImpl();
+		for(Bil bil : bilKartotek.getBiler()){
+			biler.add(bil.getID());
+		}
+		return biler;
 		
 	}
 
