@@ -15,6 +15,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -75,6 +76,12 @@ public class UC6_gui_Controller implements Initializable {
 	private Button soeg;
 	
 	@FXML
+	private Button godkendKoersel;
+	
+	@FXML
+	private ComboBox bilComboBox;
+	
+	@FXML
 	private TextField kundenummerField;
 	
 
@@ -93,7 +100,7 @@ public class UC6_gui_Controller implements Initializable {
 	public void initialize(URL arg0, ResourceBundle arg1) {
 
 	kundenummer = 0;
-
+	
 		
 		 dato.setCellValueFactory(new PropertyValueFactory<KoerselHistorikImpl, Date>("dato"));
 		 antalPersoner.setCellValueFactory(new PropertyValueFactory<KoerselHistorikImpl, Integer>("antalPersoner"));
