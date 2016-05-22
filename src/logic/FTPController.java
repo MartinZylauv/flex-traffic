@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import domain.SlutDestination;
 import domain.StartDestination;
 import sats.UnknownKommuneException;
+import domain.Bil;
+import domain.Koersel;
 import domain.KoerselHistorikImpl;
 import domain.KoerselImpl;
 import domain.Profil;
@@ -41,4 +43,10 @@ public interface FTPController {
 	
 	public boolean checkProfil(long kundenummer) throws SQLException;
 	public boolean checkAdmin(long kundenummer) throws SQLException;
+	
+	public Bil getBil();
+	public void tildelBil(Bil bil);
+	
+	public Koersel getKoerselTilVedligeholdelse();
+	public void angivKoerselTilVedligeholdelse(Koersel koersel);
 }

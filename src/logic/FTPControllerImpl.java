@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
+import domain.Bil;
+import domain.Koersel;
 import domain.KoerselHistorikImpl;
 import domain.KoerselImpl;
 import domain.Profil;
@@ -171,6 +173,30 @@ public class FTPControllerImpl extends Observable implements FTPController, Obse
 		ProfilKartotekImpl profilkartotek = new ProfilKartotekImpl();
 		
 		return profilkartotek.checkAdmin(kundenummer);
+	}
+
+	@Override
+	public Bil getBil() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void tildelBil(Bil bil) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Koersel getKoerselTilVedligeholdelse() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void angivKoerselTilVedligeholdelse(Koersel koersel) {
+		// TODO Auto-generated method stub
+		
 	}
 
 };

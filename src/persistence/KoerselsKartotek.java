@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.sql.Time;
 import java.util.ArrayList;
 
+import domain.Bil;
 import domain.Koersel;
 import domain.KoerselHistorikImpl;
 import domain.KoerselImpl;
@@ -33,5 +34,5 @@ public interface KoerselsKartotek {
 	
 	public ArrayList<KoerselHistorikImpl> visFlereBrugerKørslerAdmin()throws SQLException;
 	
-	
+	public void godkendKoersel(Bil bil, Koersel koersel);
 }
