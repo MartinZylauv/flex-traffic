@@ -26,7 +26,6 @@ public class MainHubController implements Initializable {
 	@FXML
 	private Tab bestilKoersel;
 	
-	Alert fejl = new Alert(AlertType.ERROR);
 
 	@FXML
 	private Tab profilOplysninger;
@@ -36,6 +35,8 @@ public class MainHubController implements Initializable {
 
 	@FXML
 	private TabPane tabPane;
+	
+	Advarsler advarsler = new Advarsler();
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -61,15 +62,14 @@ public class MainHubController implements Initializable {
 			fxml3Loader.setController(uc45);
 			Parent root2 = (Parent) fxml3Loader.load();
 			koerselshistorik.setContent(root2);
-			
-			System.out.println(erAdmin);
+
 			
 			
 				
 			
 
 		} catch (IOException e) {
-			IOFejl();
+			advarsler.IOFejl().showAndWait();
 			e.printStackTrace();
 		}
 
@@ -77,12 +77,5 @@ public class MainHubController implements Initializable {
 
 	public void setKundenummer(int kundenummer) {
 		this.kundenummer = kundenummer;
-	}
-	
-	public void IOFejl(){
-		fejl.setTitle("I/O fejl");
-		fejl.setHeaderText("Ukendt fejl");
-		fejl.setContentText(Beskeder.UKENDT_FEJL.getDescription()); 
-		fejl.showAndWait();
 	}
 }

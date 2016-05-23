@@ -6,6 +6,12 @@ Projektstyring
 	Fulgte UP processen
 
 
+rapport styring:
+
+14 dage inden aflevering besluttede vi os for at opstille et minimunskrav til rapportskrivningen
+2,2 sider pr dag, 1,1 side pr mand pr dag som minimum for at opnå de 80% minimum af 40 normal sider som var kravet. Det er minimumssider pr dag, ikke det vi regner med.
+
+
 Systemudvikling
 	OC
 	UC

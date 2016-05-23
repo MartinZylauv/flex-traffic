@@ -36,7 +36,7 @@ public class LoginController implements Initializable {
 	private Button logInd;
 
 	int kundenummer; 
-	Alert fejl = new Alert(AlertType.ERROR);
+	Advarsler advarsel = new Advarsler();
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -75,37 +75,16 @@ public class LoginController implements Initializable {
 				logInd.getScene().getWindow().hide(); 
 				}//får fat i en af noderne og får dens vindue, og lukker derefter vinduet.
 			} else{
-				ukendtKundenummerFejl();
+				advarsel.ukendtKundenummerFejl().showAndWait();	
 			}
 		} catch (SQLException e1) {
-			SQLFejl();
+			advarsel.SQLFejl().showAndWait();	//TODO test
 			e1.printStackTrace();
 		}catch (IOException e) {
-			IOFejl();
+			advarsel.IOFejl().showAndWait();	//TODO TEST
 			e.printStackTrace();
 		}
 
-	}
-	
-	public void ukendtKundenummerFejl(){
-		fejl.setTitle("Fejl i kundenummer");
-		fejl.setHeaderText("Log-ind fejl.");
-		fejl.setContentText(Beskeder.UKENDT_KUNDENUMMER.getDescription());
-		fejl.showAndWait();
-	}
-	
-	public void SQLFejl(){
-		fejl.setTitle("SQL fejl");
-		fejl.setHeaderText("Fejl i databasen");
-		fejl.setContentText(Beskeder.UKENDT_SQL.getDescription()); 
-		fejl.showAndWait();
-	}
-	
-	public void IOFejl(){
-		fejl.setTitle("I/O fejl");
-		fejl.setHeaderText("Ukendt fejl");
-		fejl.setContentText(Beskeder.UKENDT_FEJL.getDescription()); 
-		fejl.showAndWait();
 	}
 
 }
