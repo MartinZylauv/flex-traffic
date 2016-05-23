@@ -42,11 +42,6 @@ ADD hjaelpemidler int(10),
 ADD bagage int(10)
 
 
-start_adresse varchar(255) NOT NULL,
-
-bruger_kommentar varchar(255),
-adminstration_kommentar varchar(255),
-godkendt_kørsel boolean(false),
 
 
 CREATE TABLE Koerselstildeling
