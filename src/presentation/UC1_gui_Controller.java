@@ -79,8 +79,8 @@ public class UC1_gui_Controller implements Initializable {
 	int brugerummer;
 	Tilstande tilstand;
 	double pris;
-	Alert info = new Alert(AlertType.INFORMATION);
-	Alert fejl = new Alert(AlertType.ERROR);
+	Advarsler advarsler = new Advarsler();
+Information info = new Information();
 
 	ObservableList<String> minutter = FXCollections.observableArrayList("00", "05", "10", "15", "20", "25", "30", "35",
 			"40", "45", "50", "55");
@@ -110,37 +110,30 @@ public class UC1_gui_Controller implements Initializable {
 			if(startPostnummerFelt.getText().length()==4){
 			start.setPostnummer(Integer.parseInt(startPostnummerFelt.getText()));
 			} else{
-				postNummerFejl();
+				advarsler.postnrFejl().showAndWait();
 			}
 			slut.setAdresse(slutAdresseFelt.getText());
 			slut.setBynavn(slutByFelt.getText());
 			if(slutPostnummerFelt.getText().length()==4){
 				slut.setPostnummer(Integer.parseInt(slutPostnummerFelt.getText()));
 				} else{
-					postNummerFejl();
+					advarsler.postnrFejl().showAndWait();
 				}
 			Date dato = Date.valueOf(datoVaelger.getValue());
 			ftp.angivInformationer(start, slut, dato, antalPersonerChoice.getValue(), antalHjaelpleChoice.getValue(),
 					antalBagageChoice.getValue(), kommentarArea.getText(), brugerummer, t,
 					Double.parseDouble(kmFelt.getText()));
-			Beskeder besked = ftp.accepterPris();
-				info.setTitle("Bestilling udført");
-				info.setHeaderText(besked.toString());
-				info.setContentText("Vi henter dig på:  " + start.getAdresse() + " klokken " + t );
-				info.showAndWait();
+				info.bestillingInfo(ftp.accepterPris(), start.getAdresse(), t).showAndWait();
+				
 			
 		} catch (NumberFormatException e) {
-			nummerFejl();
+			advarsler.nummerFejl().showAndWait();
 		} catch (InvalidInformationException e) {
-			setFejlIndtastning();
-			fejl.setContentText(e.getMessage());
-			fejl.showAndWait();
+			advarsler.indtastningFejl(e).showAndWait();	//TODO TEST
 		} catch(SQLException e){
-			setFejlSQL();
+			advarsler.SQLFejl().showAndWait();
 		} catch(NullPointerException e){
-			setFejlIndtastning();
-			fejl.setContentText(Beskeder.MANGLER.getDescription());
-			fejl.showAndWait();
+			advarsler.indtastningFejl(e).showAndWait();	//TODO TEST
 		}
 	}
 
@@ -161,21 +154,20 @@ public class UC1_gui_Controller implements Initializable {
 			try {
 				ftp.getPrisTilbud(start, slut, Double.parseDouble(kmFelt.getText()),Date.valueOf(datoVaelger.getValue()));
 			} catch (InvalidInformationException e) {
-				setFejlIndtastning();
-				fejl.setContentText(e.getMessage());
+				advarsler.indtastningFejl(e).showAndWait();	//TODO TEST
 				e.printStackTrace();
 			}
 			progressBar.setVisible(true);
 			prisLabel.setText("Udregner pris, vent venligst...");
 			} else{
-				postNummerFejl();
+				advarsler.postnrFejl().showAndWait();
 			}
 		
 		} catch(NumberFormatException e){
-			nummerFejl();
+			advarsler.nummerFejl().showAndWait();
 		} catch(NullPointerException e){
-			setDatoFejl();
-		}
+			advarsler.datoFejl().showAndWait();
+			}
 		
 		
 		//TODO vi skal have en form at håndtere hvis man har glemt at indtaste noget. 
@@ -187,9 +179,8 @@ public class UC1_gui_Controller implements Initializable {
 					try {
 						Thread.currentThread().sleep(1000);
 					} catch (InterruptedException e) {
-						fejl.setHeaderText("Der er sket en fejl");
-						fejl.setContentText("Der er sket en uventet fejl i programmet. Prøv at genstarte det og prøve at bestille igen. Fortsætter problemet bedes de henvende dem til kundeservice.");
-						fejl.showAndWait();
+						advarsler.ukendtFejl().showAndWait();
+						
 					}
 				}
 				Platform.runLater(new Runnable() {
@@ -207,39 +198,6 @@ public class UC1_gui_Controller implements Initializable {
 			}
 		}).start();
 
-	}
-	public void nummerFejl(){
-		fejl.setTitle("Nummer fejl");
-		fejl.setHeaderText("Fejl i et eller flere felter");
-		fejl.setContentText(Beskeder.NUMMMER_FEJL.getDescription());
-		fejl.showAndWait();
-	}
-	
-	public void setFejlIndtastning(){
-		fejl.setTitle("Indtastningsfejl");
-		fejl.setHeaderText("Indtastningsfejl");
-	}
-	
-	public void setFejlSQL(){
-		
-		fejl.setTitle("SQL fejl");
-		fejl.setHeaderText("Fejl i databasen");
-		fejl.setContentText(Beskeder.UKENDT_SQL.getDescription()); 
-		fejl.showAndWait();
-	
-}
-	public void setDatoFejl(){
-		fejl.setTitle("Dato fejl.");
-		fejl.setHeaderText("Fejl i dato");
-		fejl.setContentText(Beskeder.DATO_MANGLER.getDescription());
-		fejl.showAndWait();
-	}
-	
-	public void postNummerFejl(){
-		fejl.setTitle("Postnummer fejl.");
-		fejl.setHeaderText("Fejl i postnummer");
-		fejl.setContentText(Beskeder.POSTNR_FEJL.getDescription());
-		fejl.showAndWait();
 	}
 	
 	}

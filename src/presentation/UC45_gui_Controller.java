@@ -78,9 +78,9 @@ public class UC45_gui_Controller implements Initializable {
 	
 
 	FTPControllerImpl ftp = new FTPControllerImpl();
-	Alert fejl = new Alert(AlertType.WARNING);
-	Tilstande tilstand;
 	
+	Tilstande tilstand;
+	Advarsler advarsler = new Advarsler();
 	LoggedIn loggedin = null;
 	int kundenummer;
 	String navnDefault;
@@ -113,7 +113,7 @@ public class UC45_gui_Controller implements Initializable {
 			koerselhistorik = ftp.anmodOmBrugeresKørselHistorik(kundenummer, null, null);
 			oListHistorik = FXCollections.observableArrayList(ftp.anmodOmBrugeresKørselHistorik(kundenummer, null, null));
 		} catch (SQLException e) {
-			setFejlSQL();
+			advarsler.SQLFejl().showAndWait();
 			e.printStackTrace();
 		}
 		 
@@ -140,7 +140,7 @@ public class UC45_gui_Controller implements Initializable {
         	 
 			csv.writeToCSV(koerselhistorik, file, loggedin.getAdmin());
 		} catch (IOException e) {
-			IOFejl();
+			advarsler.IOFejl().showAndWait();
 			e.printStackTrace();
 		}
 	}
@@ -164,28 +164,14 @@ public class UC45_gui_Controller implements Initializable {
 				koerselhistorik = ftp.anmodOmBrugeresKørselHistorik(kundenummer, startDato, slutDato);
 				oListHistorik = FXCollections.observableArrayList(ftp.anmodOmBrugeresKørselHistorik(kundenummer, startDato, slutDato));
 			} catch (SQLException e) {
-				setFejlSQL();
+				advarsler.SQLFejl().showAndWait();
 				e.printStackTrace();
 			}
 			 
 				koerselsHistorik.setItems(oListHistorik );
 		}
 	
-	public void setFejlSQL(){
-		
-		fejl.setTitle("SQL fejl");
-		fejl.setHeaderText("Fejl i databasen");
-		fejl.setContentText(Beskeder.UKENDT_SQL.getDescription()); 
-		fejl.showAndWait();
-	
-}
-	
-	public void IOFejl(){
-		fejl.setTitle("I/O fejl");
-		fejl.setHeaderText("Ukendt fejl");
-		fejl.setContentText(Beskeder.UKENDT_FEJL.getDescription()); 
-		fejl.showAndWait();
-	}
+
 	}
 
 

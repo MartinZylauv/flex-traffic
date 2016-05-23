@@ -19,6 +19,8 @@ Systemudvikling
 	SD
 	osv osv
 
+Database: larman side 626
+
 Mockups
 	Udviklingen af mockups
 	

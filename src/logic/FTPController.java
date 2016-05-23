@@ -53,4 +53,8 @@ public interface FTPController {
 	public void angivKoerselTilVedligeholdelse(KoerselHistorik koerselhistorik) throws SQLException;
 	
 	public List<Integer> getBiler() throws SQLException;
+	
+	public Integer getBilFraID(int ID) throws SQLException;
+	
+	public void createDB() throws SQLException;
 }

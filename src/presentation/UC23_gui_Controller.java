@@ -9,9 +9,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
-import logic.Beskeder;
 import logic.FTPControllerImpl;
 import logic.InvalidInformationException;
 import logic.Tilstande;
@@ -44,7 +41,7 @@ public class UC23_gui_Controller implements Initializable {
 	private Label cprNummer;
 
 	FTPControllerImpl ftp = new FTPControllerImpl();
-	Alert fejl = new Alert(AlertType.WARNING);
+	Advarsler advarsler = new Advarsler();
 	Tilstande tilstand;
 	double pris;
 	LoggedIn loggedin = null;
@@ -62,7 +59,7 @@ public class UC23_gui_Controller implements Initializable {
 		try {
 			profil = ftp.anmodOmProfil(kundenummer);
 		} catch (SQLException e) {
-			setFejlSQL();																																																			
+			advarsler.SQLFejl().showAndWait();																																																		
 			e.printStackTrace();}
 		navnDefault = profil.getFuldtNavn();
 		emailDefault = profil.getEmail();
@@ -111,9 +108,7 @@ public class UC23_gui_Controller implements Initializable {
 			
 			e.printStackTrace();
 		} catch (InvalidInformationException e) {
-			setFejlIndtastning();
-			fejl.setContentText(e.getMessage());
-			fejl.showAndWait();
+			advarsler.indtastningFejl(e).showAndWait();
 		}
 	}
 
@@ -131,19 +126,5 @@ public class UC23_gui_Controller implements Initializable {
 		fulde_navn.setText(navnDefault);
 		tlfnummer.setText(String.valueOf(tlfDefault));
 
-	}
-	
-	public void setFejlIndtastning(){
-		fejl.setTitle("Indtastningsfejl");
-		fejl.setHeaderText("Indtastningsfejl");
-	}
-	
-	public void setFejlSQL(){
-		
-			fejl.setTitle("SQL fejl");
-			fejl.setHeaderText("Fejl i databasen");
-			fejl.setContentText(Beskeder.UKENDT_SQL.getDescription()); 
-			fejl.showAndWait();
-		
 	}
 }

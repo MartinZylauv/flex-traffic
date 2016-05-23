@@ -19,6 +19,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -67,6 +68,8 @@ public class UC6_gui_Controller implements Initializable {
 	private TableColumn<KoerselHistorikImpl, Integer> kundenummerCol;
 	@FXML 
 	private TableColumn<KoerselHistorikImpl, String> adminKommentar;
+	@FXML 
+	private TableColumn<KoerselHistorikImpl, Boolean> erGodkendt;
 	@FXML
 	private DatePicker startDato;
 	
@@ -86,9 +89,12 @@ public class UC6_gui_Controller implements Initializable {
 	@FXML
 	private TextField kundenummerField;
 	
+	@FXML
+	private Label bilTildelt;
+	
 
 	FTPControllerImpl ftp = new FTPControllerImpl();
-	Alert fejl = new Alert(AlertType.WARNING);
+	Advarsler advarsler = new Advarsler();
 	Tilstande tilstand;
 	
 	LoggedIn loggedin = null;
@@ -126,6 +132,7 @@ public class UC6_gui_Controller implements Initializable {
 		 slutPostnr.setCellValueFactory(new PropertyValueFactory<KoerselHistorikImpl, Integer>("slutPostnummer"));
 		 kundenummerCol.setCellValueFactory(new PropertyValueFactory<KoerselHistorikImpl, Integer>("brugerNummer"));
 		 adminKommentar.setCellValueFactory(new PropertyValueFactory<KoerselHistorikImpl, String>("adminKommentar"));
+		 erGodkendt.setCellValueFactory(new PropertyValueFactory<KoerselHistorikImpl, Boolean>("erGodkendt"));
 		 
 		 ObservableList<KoerselHistorikImpl> oListHistorik = null;
 		 
@@ -133,7 +140,7 @@ public class UC6_gui_Controller implements Initializable {
 			koerselhistorik = ftp.anmodOmBrugeresKørselHistorik(kundenummer, null, null);
 			oListHistorik = FXCollections.observableArrayList(ftp.anmodOmBrugeresKørselHistorik(kundenummer, null, null));
 		} catch (SQLException e) {
-			setFejlSQL();
+			advarsler.SQLFejl().showAndWait();
 			e.printStackTrace();
 		}
 		 
@@ -160,7 +167,7 @@ public class UC6_gui_Controller implements Initializable {
        	
 			csv.writeToCSV(koerselhistorik, file,loggedin.getAdmin());
 		} catch (IOException e) {
-			IOFejl();
+			advarsler.IOFejl().showAndWait();
 			e.printStackTrace();
 		}
 	}
@@ -189,7 +196,7 @@ public class UC6_gui_Controller implements Initializable {
 				koerselhistorik = ftp.anmodOmBrugeresKørselHistorik(kundenummer, startDato, slutDato);
 				oListHistorik = FXCollections.observableArrayList(ftp.anmodOmBrugeresKørselHistorik(kundenummer, startDato, slutDato));
 			} catch (SQLException e) {
-				setFejlSQL();
+				advarsler.SQLFejl().showAndWait();
 				e.printStackTrace();
 			}
 			 
@@ -214,21 +221,19 @@ public class UC6_gui_Controller implements Initializable {
 		}
 		//alert med at en bil ikke er valgt.
 	}
-	
-	public void setFejlSQL(){
-		
-		fejl.setTitle("SQL fejl");
-		fejl.setHeaderText("Fejl i databasen");
-		fejl.setContentText(Beskeder.UKENDT_SQL.getDescription()); 
-		fejl.showAndWait();
-	
-}
-	
-	public void IOFejl(){
-		fejl.setTitle("I/O fejl");
-		fejl.setHeaderText("Ukendt fejl");
-		fejl.setContentText(Beskeder.UKENDT_FEJL.getDescription()); 
-		fejl.showAndWait();
+
+	@FXML
+	public void haandterTableKlik(){
+		try {
+			if(koerselsHistorik.getSelectionModel().getSelectedItem().getErGodkendt()){
+			bilTildelt.setText(ftp.getBilFraID(koerselsHistorik.getSelectionModel().getSelectedItem().getID()).toString());
+			} else{
+				bilTildelt.setText("");
+			}
+		} catch (SQLException e) {
+			advarsler.SQLFejl().showAndWait();
+			e.printStackTrace();
+		}
 	}
 	}
 

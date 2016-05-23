@@ -22,6 +22,7 @@ import domain.StartDestinationImpl;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import persistence.BilKartotekImpl;
+import persistence.DBCreator;
 import persistence.KoerselsKartotek;
 import persistence.KoerselsKartotekImpl;
 import persistence.ProfilKartotekImpl;
@@ -213,5 +214,27 @@ public class FTPControllerImpl extends Observable implements FTPController, Obse
 		return biler;
 		
 	}
+
+	@Override
+	public Integer getBilFraID(int ID) throws SQLException {
+		Integer bil_id = 0;
+		BilKartotekImpl bilKartotek = new BilKartotekImpl();
+		bil_id = bilKartotek.getBilFromKoersel(ID);
+		return bil_id;
+	}
+
+	@Override
+	public void createDB() throws SQLException {
+		DBCreator dbcreate = new DBCreator();
+		dbcreate.createBilerDB();
+		dbcreate.createProfilerDB();
+		dbcreate.createKoerslerDB();
+		dbcreate.createKoerselstildelingDB();
+		dbcreate.insertProfil();
+		dbcreate.insertBil();
+		
+	}
+	
+	
 
 };

@@ -35,4 +35,49 @@ public class Advarsler {
 		return fejl;
 		
 	}
+	
+	public Alert nummerFejl(){
+		Alert fejl = new Alert(AlertType.ERROR);
+		fejl.setTitle("Nummer fejl");
+		fejl.setHeaderText("Fejl i et eller flere felter");
+		fejl.setContentText(Beskeder.NUMMMER_FEJL.getDescription());
+		return fejl;
+		
+	}
+	public Alert datoFejl(){
+		Alert fejl = new Alert(AlertType.ERROR);
+		fejl.setTitle("Dato fejl.");
+		fejl.setHeaderText("Fejl i dato");
+		fejl.setContentText(Beskeder.DATO_MANGLER.getDescription());
+		return fejl;
+		
+	}
+	
+	public Alert postnrFejl(){
+		Alert fejl = new Alert(AlertType.ERROR);
+		fejl.setTitle("Postnummer fejl.");
+		fejl.setHeaderText("Fejl i postnummer");
+		fejl.setContentText(Beskeder.POSTNR_FEJL.getDescription());
+		return fejl;
+		
+	}
+	
+	public Alert indtastningFejl(Exception e){
+		Alert fejl = new Alert(AlertType.ERROR);
+		fejl.setTitle("Indtastningsfejl");
+		fejl.setHeaderText("Indtastningsfejl");
+		fejl.setContentText(e.getMessage());
+		return fejl;
+		
+	}
+	
+	public Alert ukendtFejl(){
+		Alert fejl = new Alert(AlertType.ERROR);
+		fejl.setHeaderText("Der er sket en fejl");
+		fejl.setContentText("Der er sket en uventet fejl i programmet. "
+				+ "Prøv at genstarte det og prøve at bestille igen. "
+				+ "Fortsætter problemet bedes de henvende dem til kundeservice.");
+		return fejl;
+		
+	}
 }
