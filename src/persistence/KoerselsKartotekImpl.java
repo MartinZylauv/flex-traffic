@@ -30,10 +30,10 @@ public class KoerselsKartotekImpl implements KoerselsKartotek {
 	final static String SET_GODKENDT = "UPDATE koersler SET godkendt_kørsel = ? WHERE koerselsid = ?";
 	final static String GEM_KOMMENTAR = "UPDATE koersler SET ADMINSTRATIONSKOMMENTAR = ? WHERE koerselsid = ?";
 	final static String GET_KOMMENTAR = "SELECT * FROM koersler WHERE koerselsid = ?";
-	final static String GET_ENKEL_TID_AFHOLDT = "SELECT * FROM koersler WHERE kundenummer = ? AND tidspunkt>= ? AND tidspunkt <= ? AND tidspunkt >= NOW() AND GODKENDT_KØRSEL = true";
-	final static String GET_ENKEL_AFHOLDT ="SELECT * FROM koersler WHERE kundenummer = ? AND tidspunkt >= NOW() AND GODKENDT_KØRSEL = true";
-	final static String GET_FLERE_TID_AFHOLDT = "SELECT * FROM koersler WHERE tidspunkt>= ? AND tidspunkt <= ? AND tidspunkt >= NOW() AND GODKENDT_KØRSEL = true";
-	final static String GET_FLERE_AFHOLDT ="SELECT * FROM koersler AND tidspunkt >= NOW() AND GODKENDT_KØRSEL = true";
+	final static String GET_ENKEL_TID_AFHOLDT = "SELECT * FROM koersler WHERE kundenummer = ? AND tidspunkt>= ? AND tidspunkt <= ? AND tidspunkt < NOW() AND GODKENDT_KØRSEL = true";
+	final static String GET_ENKEL_AFHOLDT ="SELECT * FROM koersler WHERE kundenummer = ? AND tidspunkt < NOW() AND GODKENDT_KØRSEL = true";
+	final static String GET_FLERE_TID_AFHOLDT = "SELECT * FROM koersler WHERE tidspunkt>= ? AND tidspunkt <= ? AND tidspunkt < NOW() AND GODKENDT_KØRSEL = true";
+	final static String GET_FLERE_AFHOLDT ="SELECT * FROM koersler WHERE tidspunkt < now() AND GODKENDT_KØRSEL = true";
 	
 	@Override
 	public void gemKoersel(StartDestination startDestination, SlutDestination slutDestination, Koersel koersel,
@@ -317,7 +317,7 @@ public class KoerselsKartotekImpl implements KoerselsKartotek {
 			throws SQLException {
 		DataAccessForSQL da = new DataAccessForSQL();
 		Connection connection = da.getConnection();
-		PreparedStatement ps = connection.prepareStatement(GET_ENKEL_TID);
+		PreparedStatement ps = connection.prepareStatement(GET_ENKEL_TID_AFHOLDT);
 		ps.setInt(1, kundenummer);
 		ps.setDate(2, dato1);
 		ps.setDate(3, dato2);
@@ -359,7 +359,7 @@ public class KoerselsKartotekImpl implements KoerselsKartotek {
 	public ArrayList<KoerselHistorikImpl> visEnkeltBrugerKørslerAfholdt(int kundenummer) throws SQLException {
 		DataAccessForSQL da = new DataAccessForSQL();
 		Connection connection = da.getConnection();
-		PreparedStatement ps = connection.prepareStatement(GET_ENKEL);
+		PreparedStatement ps = connection.prepareStatement(GET_ENKEL_AFHOLDT);
 		ps.setInt(1, kundenummer);
 		ResultSet resultset = ps.executeQuery();
 		ArrayList<KoerselHistorikImpl> liste = new ArrayList<KoerselHistorikImpl>();
@@ -399,7 +399,7 @@ public class KoerselsKartotekImpl implements KoerselsKartotek {
 			throws SQLException {
 		DataAccessForSQL da = new DataAccessForSQL();
 		Connection connection = da.getConnection();
-		PreparedStatement ps = connection.prepareStatement(GET_FLERE_TID);
+		PreparedStatement ps = connection.prepareStatement(GET_FLERE_TID_AFHOLDT);
 		ps.setDate(1, dato1);
 		ps.setDate(2, dato2);
 		
@@ -440,7 +440,7 @@ public class KoerselsKartotekImpl implements KoerselsKartotek {
 	public ArrayList<KoerselHistorikImpl> visFlereBrugerKørslerAfholdt() throws SQLException {
 		DataAccessForSQL da = new DataAccessForSQL();
 		Connection connection = da.getConnection();
-		PreparedStatement ps = connection.prepareStatement(GET_FLERE);
+		PreparedStatement ps = connection.prepareStatement(GET_FLERE_AFHOLDT);
 		
 		ResultSet resultset = ps.executeQuery();
 		ArrayList<KoerselHistorikImpl> liste = new ArrayList<KoerselHistorikImpl>();

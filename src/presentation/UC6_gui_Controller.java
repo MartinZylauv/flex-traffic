@@ -271,6 +271,7 @@ public class UC6_gui_Controller implements Initializable {
 	@FXML
 	public void haandterCheckbox(){
 		if(afholdteKoersler.isSelected()){
+			
 			if(kundenummerField.getText().isEmpty()){
 				kundenummer = 0;
 		}else{
@@ -289,13 +290,14 @@ public class UC6_gui_Controller implements Initializable {
 		
 		 ObservableList<KoerselHistorikImpl> oListHistorik = null;
 			try {
+				
 				koerselhistorik = ftp.anmodOmBrugeresKørselHistorik(kundenummer, startDato, slutDato);
 				oListHistorik = FXCollections.observableArrayList(ftp.anmodOmBrugeresKørselHistorikAfholdt(kundenummer, startDato, slutDato));
 			} catch (SQLException e) {
 				advarsler.SQLFejl().showAndWait();
 				e.printStackTrace();
 			}
-			 
+			 	System.out.println(oListHistorik);
 				koerselsHistorik.setItems(oListHistorik );
 		;
 		} else if(afholdteKoersler.isSelected()==false){
