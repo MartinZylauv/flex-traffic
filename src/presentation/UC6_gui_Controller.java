@@ -13,6 +13,8 @@ import domain.Bil;
 import domain.KoerselHistorikImpl;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -150,6 +152,12 @@ public class UC6_gui_Controller implements Initializable {
 		}
 		 
 			koerselsHistorik.setItems(oListHistorik );
+			
+			kommenter.setOnAction(new EventHandler<ActionEvent>(){
+				public void handle(ActionEvent e){
+					System.out.println("yo det virker");
+				}
+			});
 		
 		}
 		 
