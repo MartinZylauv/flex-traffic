@@ -1,0 +1,66 @@
+CREATE TABLE Profiler
+(
+kundenummer bigint IDENTITY,
+fuldt_navn varchar(255) NOT NULL,
+email varchar(255),
+tlf_nummer double NOT NULL,
+)
+
+ALTER TABLE Profiler
+ADD erAdmin boolean default false
+
+ALTER TABLE Profiler
+ADD cpr varchar(11)
+
+CREATE TABLE Koersler
+(
+KoerselsID bigint IDENTITY,
+kundenummer bigint,
+FOREIGN KEY(kundenummer) REFERENCES profiler(kundenummer),
+start_adresse varchar(255) NOT NULL,
+start_postnummer decimal NOT NULL,
+--FOREIGN KEY(start_postnummer) REFERENCES regioner(POSTNR),
+tidspunkt Date NOT NULL,
+slut_adresse varchar(255) NOT NULL,
+slut_postnummer decimal NOT NULL,
+--FOREIGN KEY(slut_postnummer) REFERENCES regioner(POSTNR),
+antal_KM double NOT NULL,
+beregnet_pris double NOT NULL,
+godkendt_kørsel boolean
+)
+
+ALTER TABLE koersler
+ADD brugerkommentar varchar(1000),
+ADD Tid_på_dagen Time,
+
+ALTER TABLE koersler
+ADD adminstrationskommentar varchar(1000)
+
+ALTER TABLE koersler
+ADD personer int(10),
+ADD hjaelpemidler int(10),
+ADD bagage int(10)
+
+
+start_adresse varchar(255) NOT NULL,
+
+bruger_kommentar varchar(255),
+adminstration_kommentar varchar(255),
+godkendt_kørsel boolean(false),
+
+
+CREATE TABLE Koerselstildeling
+(
+tildelt_bil bigint,
+koersels_id bigint,
+FOREIGN KEY(tildelt_bil) REFERENCES biler(id),
+FOREIGN KEY(koersels_id) REFERENCES Koersler(KoerselsID),
+)
+
+CREATE TABLE Biler
+(
+id bigint IDENTITY,
+kapacitet double,
+nummerplade varchar(7)
+)
+

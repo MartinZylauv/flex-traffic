@@ -1,0 +1,15 @@
+
+
+CREATE TABLE PUBLIC.REGIONER
+(REGIONS_NR INTEGER,
+ADRESSERINGSNAVN VARCHAR(25),
+KOMMUNE_NR INTEGER,
+ADRESSERINGSNAVN_1 VARCHAR(50),
+POSTNR INTEGER,
+BYNAVN VARCHAR(25))
+
+dette skal sættes op, samt følgende fil:
+
+sql statements for regioner
+
+der kan findes i mappen sql på git

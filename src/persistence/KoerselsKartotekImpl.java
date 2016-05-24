@@ -28,8 +28,8 @@ public class KoerselsKartotekImpl implements KoerselsKartotek {
 	final static String GET_FLERE ="SELECT * FROM KOERSLER";
 	final static String GODKEND_KOERSEL ="INSERT INTO koerselstildeling(tildelt_bil,koersels_id) values(?,?)";
 	final static String SET_GODKENDT = "UPDATE koersler SET godkendt_kørsel = ? WHERE koerselsid = ?";
-	final static String GEM_KOMMENTAR = "UPDATE koersel SET ADMINSTRATIONSKOMMENTAR = ? WHERE koerselsid = ?";
-	final static String GET_KOMMENTAR = "SELECT * FROM koersel WHERE koerselsid = ?";
+	final static String GEM_KOMMENTAR = "UPDATE koersler SET ADMINSTRATIONSKOMMENTAR = ? WHERE koerselsid = ?";
+	final static String GET_KOMMENTAR = "SELECT * FROM koersler WHERE koerselsid = ?";
 	
 	@Override
 	public void gemKoersel(StartDestination startDestination, SlutDestination slutDestination, Koersel koersel,

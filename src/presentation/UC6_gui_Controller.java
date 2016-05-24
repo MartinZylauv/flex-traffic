@@ -273,7 +273,7 @@ public class UC6_gui_Controller implements Initializable {
 		if(afholdteKoersler.isSelected()){
 			System.out.println("jeg er valgt");
 		} else if(afholdteKoersler.isSelected()==false){
-			
+			System.out.println("lmaaooso");
 		}
 	}
 	}
