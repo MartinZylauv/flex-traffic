@@ -253,6 +253,26 @@ public class FTPControllerImpl extends Observable implements FTPController, Obse
 		return kommentar;
 	}
 	
-	
+	@Override
+	public ArrayList<KoerselHistorikImpl> anmodOmBrugeresKørselHistorikAfholdt(int kundenummer, Date dato1, Date dato2) throws SQLException {
+		KoerselsKartotekImpl koerselkartotek = new KoerselsKartotekImpl();
+		ArrayList<KoerselHistorikImpl> liste = new ArrayList<>();
+		if(kundenummer == 0){
+			if(dato1 == null || dato2 == null){
+				liste = koerselkartotek.visFlereBrugerKørslerAfholdt();
+			}else{
+			liste = koerselkartotek.visFlereBrugerKørslerTidsintervalAfholdt(dato1, dato2);
+			}
+		}else{
+			if(dato1 == null || dato2 == null){
+			liste = koerselkartotek.visEnkeltBrugerKørslerAfholdt(kundenummer);
+			} else{
+				liste = koerselkartotek.visEnkeltBrugerKørslerTidsintervalAfholdt(kundenummer, dato1, dato2);
+			}
+		}
+		
+		
+		return liste;
+	}
 
 };

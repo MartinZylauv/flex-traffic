@@ -44,4 +44,14 @@ public interface KoerselsKartotek {
 	public void godkendKoersel(int bil, KoerselHistorik koerselhistorik) throws SQLException;
 
 	void setGodkendtKoersel(int bil, KoerselHistorik koerselhistorik) throws SQLException;
-}
+
+	ArrayList<KoerselHistorikImpl> visEnkeltBrugerKørslerTidsintervalAfholdt(int kundenummer, Date dato1, Date dato2)
+			throws SQLException;
+
+	ArrayList<KoerselHistorikImpl> visFlereBrugerKørslerAfholdt() throws SQLException;
+
+	ArrayList<KoerselHistorikImpl> visFlereBrugerKørslerTidsintervalAfholdt(Date dato1, Date dato2) throws SQLException;
+
+	ArrayList<KoerselHistorikImpl> visEnkeltBrugerKørslerAfholdt(int kundenummer) throws SQLException;
+
+	}

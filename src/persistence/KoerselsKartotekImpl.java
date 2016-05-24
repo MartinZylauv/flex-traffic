@@ -22,14 +22,18 @@ public class KoerselsKartotekImpl implements KoerselsKartotek {
 			+ " TID_PÅ_DAGE,PERSONER,HJAELPEMIDLER,BAGAGE )VALUES ( null,?,?,?,?,?,?,?,?,?,?,?,?,?,?,? )"; 
 	
 	
-	final static String GET_ENKEL_TID = "SELECT * FROM KOERSLER WHERE kundenummer = ? AND tidspunkt>= ? AND tidspunkt <= ?";
-	final static String GET_ENKEL ="SELECT * FROM KOERSLER WHERE kundenummer = ?";
-	final static String GET_FLERE_TID= "SELECT * FROM KOERSLER WHERE tidspunkt>= ? AND tidspunkt <= ?";
-	final static String GET_FLERE ="SELECT * FROM KOERSLER";
+	final static String GET_ENKEL_TID = "SELECT * FROM koersler WHERE kundenummer = ? AND tidspunkt>= ? AND tidspunkt <= ?";
+	final static String GET_ENKEL ="SELECT * FROM koersler WHERE kundenummer = ?";
+	final static String GET_FLERE_TID= "SELECT * FROM koersler WHERE tidspunkt>= ? AND tidspunkt <= ?";
+	final static String GET_FLERE ="SELECT * FROM koersler";
 	final static String GODKEND_KOERSEL ="INSERT INTO koerselstildeling(tildelt_bil,koersels_id) values(?,?)";
 	final static String SET_GODKENDT = "UPDATE koersler SET godkendt_kørsel = ? WHERE koerselsid = ?";
 	final static String GEM_KOMMENTAR = "UPDATE koersler SET ADMINSTRATIONSKOMMENTAR = ? WHERE koerselsid = ?";
 	final static String GET_KOMMENTAR = "SELECT * FROM koersler WHERE koerselsid = ?";
+	final static String GET_ENKEL_TID_AFHOLDT = "SELECT * FROM koersler WHERE kundenummer = ? AND tidspunkt>= ? AND tidspunkt <= ? AND tidspunkt >= NOW() AND GODKENDT_KØRSEL = true";
+	final static String GET_ENKEL_AFHOLDT ="SELECT * FROM koersler WHERE kundenummer = ? AND tidspunkt >= NOW() AND GODKENDT_KØRSEL = true";
+	final static String GET_FLERE_TID_AFHOLDT = "SELECT * FROM koersler WHERE tidspunkt>= ? AND tidspunkt <= ? AND tidspunkt >= NOW() AND GODKENDT_KØRSEL = true";
+	final static String GET_FLERE_AFHOLDT ="SELECT * FROM koersler AND tidspunkt >= NOW() AND GODKENDT_KØRSEL = true";
 	
 	@Override
 	public void gemKoersel(StartDestination startDestination, SlutDestination slutDestination, Koersel koersel,
@@ -307,6 +311,166 @@ public class KoerselsKartotekImpl implements KoerselsKartotek {
 		ps.close();
 		return kommentar;
 }
-	
 
+	@Override
+	public ArrayList<KoerselHistorikImpl> visEnkeltBrugerKørslerTidsintervalAfholdt(int kundenummer, Date dato1, Date dato2)
+			throws SQLException {
+		DataAccessForSQL da = new DataAccessForSQL();
+		Connection connection = da.getConnection();
+		PreparedStatement ps = connection.prepareStatement(GET_ENKEL_TID);
+		ps.setInt(1, kundenummer);
+		ps.setDate(2, dato1);
+		ps.setDate(3, dato2);
+		ResultSet resultset = ps.executeQuery();
+		ArrayList<KoerselHistorikImpl> liste = new ArrayList<KoerselHistorikImpl>();
+
+		while (resultset.next()) {
+			KoerselHistorikImpl koersel = new KoerselHistorikImpl();
+			koersel.setBrugerNummer(resultset.getInt("kundenummer"));
+			koersel.setStartAdresse(resultset.getString("start_adresse"));
+			koersel.setStartPostnummer(resultset.getInt("start_postnummer"));
+			koersel.setDato(resultset.getDate("tidspunkt"));
+			koersel.setSlutAdresse(resultset.getString("slut_adresse"));
+			koersel.setSlutPostnummer(resultset.getInt("slut_postnummer"));
+			koersel.setAntalKm(resultset.getDouble("antal_km"));
+			koersel.setPris(resultset.getDouble("beregnet_pris"));
+			koersel.setKommentar(resultset.getString("brugerkommentar"));
+			koersel.setTime(resultset.getTime("tid_på_dage"));
+			koersel.setAntalPersoner(resultset.getInt("personer"));
+			koersel.setHjaelplemidler(resultset.getInt("hjaelpemidler"));
+			koersel.setAntalBagage(resultset.getInt("bagage"));
+			koersel.setID(resultset.getInt("Koerselsid"));
+			koersel.setErGodkendt(resultset.getBoolean("GODKENDT_KØRSEL"));
+
+			koersel.setAdminKommentar(resultset.getString("ADMINSTRATIONSKOMMENTAR"));
+			liste.add(koersel);
+			
+		}
+
+		connection.close();
+		resultset.close();
+		ps.close();
+		return liste;
+		
+
+	}
+
+	@Override
+	public ArrayList<KoerselHistorikImpl> visEnkeltBrugerKørslerAfholdt(int kundenummer) throws SQLException {
+		DataAccessForSQL da = new DataAccessForSQL();
+		Connection connection = da.getConnection();
+		PreparedStatement ps = connection.prepareStatement(GET_ENKEL);
+		ps.setInt(1, kundenummer);
+		ResultSet resultset = ps.executeQuery();
+		ArrayList<KoerselHistorikImpl> liste = new ArrayList<KoerselHistorikImpl>();
+
+		while (resultset.next()) {
+			KoerselHistorikImpl koersel = new KoerselHistorikImpl();
+			koersel.setBrugerNummer(resultset.getInt("kundenummer"));
+			koersel.setStartAdresse(resultset.getString("start_adresse"));
+			koersel.setStartPostnummer(resultset.getInt("start_postnummer"));
+			koersel.setDato(resultset.getDate("tidspunkt"));
+			koersel.setSlutAdresse(resultset.getString("slut_adresse"));
+			koersel.setSlutPostnummer(resultset.getInt("slut_postnummer"));
+			koersel.setAntalKm(resultset.getDouble("antal_km"));
+			koersel.setPris(resultset.getDouble("beregnet_pris"));
+			koersel.setKommentar(resultset.getString("brugerkommentar"));
+			koersel.setTime(resultset.getTime("tid_på_dage"));
+			koersel.setAntalPersoner(resultset.getInt("personer"));
+			koersel.setHjaelplemidler(resultset.getInt("hjaelpemidler"));
+			koersel.setAntalBagage(resultset.getInt("bagage"));
+			koersel.setAdminKommentar(resultset.getString("ADMINSTRATIONSKOMMENTAR"));
+			koersel.setID(resultset.getInt("Koerselsid"));
+			koersel.setErGodkendt(resultset.getBoolean("GODKENDT_KØRSEL"));
+			liste.add(koersel);
+			
+		}
+		
+		connection.close();
+		resultset.close();
+		ps.close();
+
+		return liste;
+		
+	}
+
+	@Override
+	public ArrayList<KoerselHistorikImpl> visFlereBrugerKørslerTidsintervalAfholdt(Date dato1, Date dato2)
+			throws SQLException {
+		DataAccessForSQL da = new DataAccessForSQL();
+		Connection connection = da.getConnection();
+		PreparedStatement ps = connection.prepareStatement(GET_FLERE_TID);
+		ps.setDate(1, dato1);
+		ps.setDate(2, dato2);
+		
+		ResultSet resultset = ps.executeQuery();
+		ArrayList<KoerselHistorikImpl> liste = new ArrayList<KoerselHistorikImpl>();
+
+		while (resultset.next()) {
+			KoerselHistorikImpl koersel = new KoerselHistorikImpl();
+			koersel.setBrugerNummer(resultset.getInt("kundenummer"));
+			koersel.setStartAdresse(resultset.getString("start_adresse"));
+			koersel.setStartPostnummer(resultset.getInt("start_postnummer"));
+			koersel.setDato(resultset.getDate("tidspunkt"));
+			koersel.setSlutAdresse(resultset.getString("slut_adresse"));
+			koersel.setSlutPostnummer(resultset.getInt("slut_postnummer"));
+			koersel.setAntalKm(resultset.getDouble("antal_km"));
+			koersel.setPris(resultset.getDouble("beregnet_pris"));
+			koersel.setKommentar(resultset.getString("brugerkommentar"));
+			koersel.setTime(resultset.getTime("tid_på_dage"));
+			koersel.setAntalPersoner(resultset.getInt("personer"));
+			koersel.setHjaelplemidler(resultset.getInt("hjaelpemidler"));
+			koersel.setAntalBagage(resultset.getInt("bagage"));
+			koersel.setAdminKommentar(resultset.getString("ADMINSTRATIONSKOMMENTAR"));
+			koersel.setID(resultset.getInt("Koerselsid"));
+			koersel.setErGodkendt(resultset.getBoolean("GODKENDT_KØRSEL"));
+			liste.add(koersel);
+			
+		}
+		
+		connection.close();
+		resultset.close();
+		ps.close();
+
+		return liste;
+		
+	}
+
+	@Override
+	public ArrayList<KoerselHistorikImpl> visFlereBrugerKørslerAfholdt() throws SQLException {
+		DataAccessForSQL da = new DataAccessForSQL();
+		Connection connection = da.getConnection();
+		PreparedStatement ps = connection.prepareStatement(GET_FLERE);
+		
+		ResultSet resultset = ps.executeQuery();
+		ArrayList<KoerselHistorikImpl> liste = new ArrayList<KoerselHistorikImpl>();
+
+		while (resultset.next()) {
+			KoerselHistorikImpl koersel = new KoerselHistorikImpl();
+			koersel.setBrugerNummer(resultset.getInt("kundenummer"));
+			koersel.setStartAdresse(resultset.getString("start_adresse"));
+			koersel.setStartPostnummer(resultset.getInt("start_postnummer"));
+			koersel.setDato(resultset.getDate("tidspunkt"));
+			koersel.setSlutAdresse(resultset.getString("slut_adresse"));
+			koersel.setSlutPostnummer(resultset.getInt("slut_postnummer"));
+			koersel.setAntalKm(resultset.getDouble("antal_km"));
+			koersel.setPris(resultset.getDouble("beregnet_pris"));
+			koersel.setKommentar(resultset.getString("brugerkommentar"));
+			koersel.setTime(resultset.getTime("tid_på_dage"));
+			koersel.setAntalPersoner(resultset.getInt("personer"));
+			koersel.setHjaelplemidler(resultset.getInt("hjaelpemidler"));
+			koersel.setAntalBagage(resultset.getInt("bagage"));
+			koersel.setAdminKommentar(resultset.getString("ADMINSTRATIONSKOMMENTAR"));
+			koersel.setID(resultset.getInt("Koerselsid"));
+			koersel.setErGodkendt(resultset.getBoolean("GODKENDT_KØRSEL"));
+			liste.add(koersel);
+		}
+		
+		connection.close();
+		resultset.close();
+		ps.close();
+		return liste;
+	}
+
+	
 }

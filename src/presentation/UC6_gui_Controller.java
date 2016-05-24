@@ -271,9 +271,61 @@ public class UC6_gui_Controller implements Initializable {
 	@FXML
 	public void haandterCheckbox(){
 		if(afholdteKoersler.isSelected()){
-			System.out.println("jeg er valgt");
+			if(kundenummerField.getText().isEmpty()){
+				kundenummer = 0;
+		}else{
+		kundenummer = Integer.parseInt(kundenummerField.getText());
+		}
+		Date startDato;
+		Date slutDato;
+		if(this.slutDato.getValue() == null || this.startDato.getValue() == null){
+			startDato = null;
+			slutDato = null;
+		} else{
+			startDato = Date.valueOf(this.startDato.getValue());
+			slutDato = Date.valueOf(this.slutDato.getValue());
+			
+		}
+		
+		 ObservableList<KoerselHistorikImpl> oListHistorik = null;
+			try {
+				koerselhistorik = ftp.anmodOmBrugeresKørselHistorik(kundenummer, startDato, slutDato);
+				oListHistorik = FXCollections.observableArrayList(ftp.anmodOmBrugeresKørselHistorikAfholdt(kundenummer, startDato, slutDato));
+			} catch (SQLException e) {
+				advarsler.SQLFejl().showAndWait();
+				e.printStackTrace();
+			}
+			 
+				koerselsHistorik.setItems(oListHistorik );
+		;
 		} else if(afholdteKoersler.isSelected()==false){
-			System.out.println("lmaaooso");
+			if(kundenummerField.getText().isEmpty()){
+				kundenummer = 0;
+		}else{
+		kundenummer = Integer.parseInt(kundenummerField.getText());
+		}
+		Date startDato;
+		Date slutDato;
+		if(this.slutDato.getValue() == null || this.startDato.getValue() == null){
+			startDato = null;
+			slutDato = null;
+		} else{
+			startDato = Date.valueOf(this.startDato.getValue());
+			slutDato = Date.valueOf(this.slutDato.getValue());
+			
+		}
+		
+		 ObservableList<KoerselHistorikImpl> oListHistorik = null;
+			try {
+				koerselhistorik = ftp.anmodOmBrugeresKørselHistorik(kundenummer, startDato, slutDato);
+				oListHistorik = FXCollections.observableArrayList(ftp.anmodOmBrugeresKørselHistorik(kundenummer, startDato, slutDato));
+			} catch (SQLException e) {
+				advarsler.SQLFejl().showAndWait();
+				e.printStackTrace();
+			}
+			 
+				koerselsHistorik.setItems(oListHistorik );
+		;
 		}
 	}
 	}

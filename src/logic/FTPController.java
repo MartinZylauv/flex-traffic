@@ -114,4 +114,7 @@ public interface FTPController {
 	public void indtastKommentar(String kommentar, int ID) throws SQLException;
 	
 	public String getKommentar(int ID) throws SQLException;
+
+	ArrayList<KoerselHistorikImpl> anmodOmBrugeresKørselHistorikAfholdt(int kundenummer, Date dato1, Date dato2)
+			throws SQLException;
 }
