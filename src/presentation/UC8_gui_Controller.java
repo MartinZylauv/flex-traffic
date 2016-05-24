@@ -76,6 +76,7 @@ public class UC8_gui_Controller implements Initializable {
 	@FXML
 	private Button accepterKnap;
 
+	boolean erAdmin = true;
 	LoggedIn loggedin = null;
 	FTPControllerImpl ftp = new FTPControllerImpl();
 	Tilstande tilstand;
@@ -126,7 +127,7 @@ Information info = new Information();
 			}			
 			ftp.angivInformationer(start, slut, dato, antalPersonerChoice.getValue(), antalHjaelpleChoice.getValue(),
 					antalBagageChoice.getValue(), kommentarArea.getText(), Integer.parseInt(brugernrFelt.getText()), t,
-					Double.parseDouble(kmFelt.getText()));
+					Double.parseDouble(kmFelt.getText()), erAdmin);
 				info.bestillingInfo(ftp.accepterPris(), start.getAdresse(), t).showAndWait();
 				
 			

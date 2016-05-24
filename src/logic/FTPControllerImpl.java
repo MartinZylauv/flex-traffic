@@ -45,7 +45,7 @@ public class FTPControllerImpl extends Observable implements FTPController, Obse
 	@Override
 	public void angivInformationer(StartDestination startDestination, SlutDestination slutDestination, Date dato,
 			int antalPersoner, int antalHjaelpemidler, int antalBagage, String kommentarer, int brugerNummer, Time tid,
-			double antalKm) throws InvalidInformationException {
+			double antalKm, boolean erAdmin) throws InvalidInformationException {
 
 		Validator validator = new ValidatorImpl();
 		koersel.setAntalBagage(antalBagage);
@@ -55,7 +55,11 @@ public class FTPControllerImpl extends Observable implements FTPController, Obse
 		koersel.setTime(tid);
 		koersel.setAntalKm(antalKm);
 		koersel.setHjaelplemidler(antalHjaelpemidler);
-		koersel.setKommentar(kommentarer);
+		if(erAdmin == false){
+			koersel.setKommentar(kommentarer);
+		} else{
+			koersel.setAdminKommentar(kommentarer);
+		}
 		koersel.setPris(pris);
 		koersel.setAntalKm(antalKm);
 		this.startdestination = startDestination;

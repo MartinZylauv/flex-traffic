@@ -15,6 +15,7 @@ public class KoerselImpl implements Koersel {
 	Time tid;
 	double antalKm;
 	double pris;
+	String adminKommentar;
 
 	@Override
 	public void setDato(Date dato) {
@@ -104,5 +105,15 @@ public class KoerselImpl implements Koersel {
 	@Override
 	public void setPris(double pris) {
 		this.pris = pris;
+	}
+
+	@Override
+	public void setAdminKommentar(String adminKommentar) {
+		this.adminKommentar = adminKommentar;
+	}
+
+	@Override
+	public String getAdminKommentar() {
+		return adminKommentar;
 	}
 }

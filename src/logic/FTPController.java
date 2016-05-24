@@ -54,7 +54,7 @@ public interface FTPController {
 	 */
 	public void angivInformationer(StartDestination startDestination, SlutDestination slutDestination, Date dato,
 			int antalPersoner, int antalHjaelpemidler, int antalBagage, String kommentarer, int brugerNummer, Time tid,
-			double antalKm) throws InvalidInformationException;
+			double antalKm, boolean erAdmin) throws InvalidInformationException;
 
 	/**
 	 * A method for saving the trip in the database. Will throw a SQL exception

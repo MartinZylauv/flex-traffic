@@ -19,7 +19,7 @@ public class KoerselsKartotekImpl implements KoerselsKartotek {
 	final static String INSERT_KOERSEL = "INSERT INTO KOERSLER( KOERSELSID, KUNDENUMMER,"
 			+ " START_ADRESSE, START_POSTNUMMER, TIDSPUNKT, SLUT_ADRESSE, SLUT_POSTNUMMER,"
 			+ " ANTAL_KM, BEREGNET_PRIS, GODKENDT_KØRSEL, BRUGERKOMMENTAR, ADMINSTRATIONSKOMMENTAR,"
-			+ " TID_PÅ_DAGE,PERSONER,HJAELPEMIDLER,BAGAGE )VALUES ( null,? , ?,? ,? , ?,? ,? ,? ,? , ?, null,?,?,?,? )"; 
+			+ " TID_PÅ_DAGE,PERSONER,HJAELPEMIDLER,BAGAGE )VALUES ( null,?,?,?,?,?,?,?,?,?,?,?,?,?,?,? )"; 
 	
 	
 	final static String GET_ENKEL_TID = "SELECT * FROM KOERSLER WHERE kundenummer = ? AND tidspunkt>= ? AND tidspunkt <= ?";
@@ -46,10 +46,11 @@ public class KoerselsKartotekImpl implements KoerselsKartotek {
 		ps.setDouble(8, koersel.getPris());
 		ps.setBoolean(9, false);
 		ps.setString(10, koersel.getKommentar());
-		ps.setTime(11, tid);
-		ps.setInt(12,koersel.getAntalPersoner() );
-		ps.setInt(13, koersel.getHjaelpemidler());
-		ps.setInt(14,koersel.getAntalBagage());
+		ps.setString(11,  koersel.getAdminKommentar());
+		ps.setTime(12, tid);
+		ps.setInt(13,koersel.getAntalPersoner() );
+		ps.setInt(14, koersel.getHjaelpemidler());
+		ps.setInt(15,koersel.getAntalBagage());
 
 		ps.executeUpdate();
 		connection.close();

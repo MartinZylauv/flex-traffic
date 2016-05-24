@@ -29,6 +29,10 @@ public interface Koersel {
 
 	public String getKommentar();
 
+	public void setAdminKommentar(String adminKommentar);
+
+	public String getAdminKommentar();
+	
 	public void setBrugerNummer(int brugerNummer);
 
 	public int getBrugerNummer();
