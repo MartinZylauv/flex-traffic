@@ -18,8 +18,10 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.ContextMenu;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -103,10 +105,13 @@ public class UC6_gui_Controller implements Initializable {
 	String emailDefault;
 	long tlfDefault;
 	ArrayList<KoerselHistorikImpl> koerselhistorik;
-
+	ContextMenu menu = new ContextMenu();
+	MenuItem kommenter = new MenuItem("Kommenter");
+	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		
+		menu.getItems().add(kommenter);
+		koerselsHistorik.setContextMenu(menu);
 		try {
 			
 			vaelgBilChoiceBox.setItems( FXCollections.observableArrayList(ftp.getBiler()));
@@ -234,6 +239,10 @@ public class UC6_gui_Controller implements Initializable {
 			advarsler.SQLFejl().showAndWait();
 			e.printStackTrace();
 		}
+	}
+	@FXML
+	public void haandterMenu(){
+	
 	}
 	}
 
