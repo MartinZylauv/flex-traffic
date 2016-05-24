@@ -22,7 +22,8 @@ public enum Beskeder {
 	
 	DATO_MANGLER("Vælg venligst en dato"),
 	NUMMMER_FEJL("Du har skrevet bogstaver eller andre karakterer hvor der kun måtte være tal. Prøv venligst igen."),	
-	POSTNR_FEJL("Der må maks være 4 tal i et postnummer. Prøv igen");
+	POSTNR_FEJL("Der må maks være 4 tal i et postnummer. Prøv igen"),
+	BRUGERNR_FEJL("Der mangler et brugernummer indtastet for at kunne registrere kørslen");
 
 	private final String description;
 

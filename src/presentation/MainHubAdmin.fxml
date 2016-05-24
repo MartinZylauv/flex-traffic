@@ -9,7 +9,7 @@
       <TabPane prefHeight="554.0" prefWidth="1111.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
           <Tab fx:id="koerselshistorik" text="Kørsels Historik" />
-          <Tab fx:id="profilOplysninger" text="Profiloplysninger" />
+          <Tab fx:id="registrerKoersel" text="Registrer Kørsel" />
             <Tab text="Kørsels Historik">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />

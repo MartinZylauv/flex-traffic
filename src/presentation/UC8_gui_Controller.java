@@ -78,7 +78,6 @@ public class UC8_gui_Controller implements Initializable {
 
 	LoggedIn loggedin = null;
 	FTPControllerImpl ftp = new FTPControllerImpl();
-	int brugerummer;
 	Tilstande tilstand;
 	double pris;
 	Advarsler advarsler = new Advarsler();
@@ -94,7 +93,6 @@ Information info = new Information();
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		brugerummer = loggedin.getKundenummer();
 		tidHChoice.setItems(timer);
 		tidMChoice.setItems(minutter);
 		antalBagageChoice.setItems(nulTilNi);
@@ -122,8 +120,12 @@ Information info = new Information();
 					advarsler.postnrFejl().showAndWait();
 				}
 			Date dato = Date.valueOf(datoVaelger.getValue());
+			
+			if(brugernrFelt.getText().isEmpty()){
+				throw new InvalidInformationException(Beskeder.BRUGERNR_FEJL.toString());
+			}			
 			ftp.angivInformationer(start, slut, dato, antalPersonerChoice.getValue(), antalHjaelpleChoice.getValue(),
-					antalBagageChoice.getValue(), kommentarArea.getText(), brugerummer, t,
+					antalBagageChoice.getValue(), kommentarArea.getText(), Integer.parseInt(brugernrFelt.getText()), t,
 					Double.parseDouble(kmFelt.getText()));
 				info.bestillingInfo(ftp.accepterPris(), start.getAdresse(), t).showAndWait();
 				
@@ -137,6 +139,7 @@ Information info = new Information();
 		} catch(NullPointerException e){
 			advarsler.indtastningFejl(e).showAndWait();	//TODO TEST
 		}
+		
 	}
 
 	@FXML

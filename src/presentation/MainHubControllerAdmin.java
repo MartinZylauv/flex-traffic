@@ -25,7 +25,8 @@ public class MainHubControllerAdmin implements Initializable {
 	Alert fejl = new Alert(AlertType.ERROR);
 	@FXML
 	private Tab koerselshistorik;
-
+	@FXML
+	private Tab registrerKoersel;
 
 	
 	@Override
@@ -37,6 +38,11 @@ public class MainHubControllerAdmin implements Initializable {
 			Parent root = (Parent) fxmlLoader.load();
 			koerselshistorik.setContent(root);
 
+			UC8_gui_Controller uc8 = new UC8_gui_Controller(loggedin);
+			FXMLLoader fxmlLoader2 = new FXMLLoader(getClass().getResource("UC8.fxml"));
+			fxmlLoader2.setController(uc8); 
+			Parent root2 = (Parent) fxmlLoader2.load();
+			registrerKoersel.setContent(root2);
 		} catch (IOException e) {
 			IOFejl();
 			e.printStackTrace();
