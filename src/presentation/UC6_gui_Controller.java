@@ -19,6 +19,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ContextMenu;
@@ -87,6 +88,8 @@ public class UC6_gui_Controller implements Initializable {
 	private Button eksporter;
 	@FXML
 	private Button soeg;
+	@FXML
+	private CheckBox afholdteKoersler;
 	
 	@FXML
 	private Button godkendKoersel;
@@ -266,8 +269,12 @@ public class UC6_gui_Controller implements Initializable {
 		}
 	}
 	@FXML
-	public void haandterMenu(){
-	
+	public void haandterCheckbox(){
+		if(afholdteKoersler.isSelected()){
+			System.out.println("jeg er valgt");
+		} else if(afholdteKoersler.isSelected()==false){
+			
+		}
 	}
 	}
 
