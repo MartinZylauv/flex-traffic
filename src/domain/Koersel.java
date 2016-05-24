@@ -4,7 +4,11 @@ import java.sql.Date;
 import java.sql.Time;
 
 public interface Koersel {
-
+	/**
+	 * @author Steffen & Martin
+	 * Domainclass for constructing an ordered trip, used for saving the trip in a database.
+	 * 
+	 */
 	public void setDato(Date dato);
 
 	public Date getDate();

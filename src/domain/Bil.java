@@ -1,6 +1,12 @@
 package domain;
 
 public interface Bil {
+	
+	/**
+	 * @author Steffen
+	 * Domainclass for the car object used for assigning cars to ordered trips.
+	 * 
+	 */
 
 	public int getID();
 	

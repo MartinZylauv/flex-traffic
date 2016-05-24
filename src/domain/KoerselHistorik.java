@@ -6,7 +6,11 @@ import java.time.LocalDate;
 
 public interface KoerselHistorik {
 
-	
+	/**
+	 * @author Steffen & Martin
+	 * Domainclass for constructing an ordered trips history, used for showing the ordered trip in a table in the gui.
+	 * 
+	 */
 	
 	public void setDato(Date dato);
 	public void setAntalPersoner(int antalPersoner);
