@@ -57,4 +57,19 @@ public class UC9_gui_Controller implements Initializable {
 			e.printStackTrace();
 		}
 	}
+	@FXML
+	public void haandterGem(){
+		try {
+			ftp.indtastKommentar(kommentarArea.getText(), koerselID);
+		} catch (SQLException e) {
+			// TODO FEJLBOKS
+			e.printStackTrace();
+		}
+		gemKnap.getScene().getWindow().hide();
+	}
+	
+	@FXML
+	public void haandterAnnuller(){
+		annullerKnap.getScene().getWindow().hide();
+	}
 		}
