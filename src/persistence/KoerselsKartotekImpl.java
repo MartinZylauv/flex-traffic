@@ -28,7 +28,9 @@ public class KoerselsKartotekImpl implements KoerselsKartotek {
 	final static String GET_FLERE ="SELECT * FROM KOERSLER";
 	final static String GODKEND_KOERSEL ="INSERT INTO koerselstildeling(tildelt_bil,koersels_id) values(?,?)";
 	final static String SET_GODKENDT = "UPDATE koersler SET godkendt_kørsel = ? WHERE koerselsid = ?";
-
+	final static String GEM_KOMMENTAR = "UPDATE koersel SET ADMINSTRATIONSKOMMENTAR = ? WHERE koerselsid = ?";
+	final static String GET_KOMMENTAR = "SELECT * FROM koersel WHERE koerselsid = ?";
+	
 	@Override
 	public void gemKoersel(StartDestination startDestination, SlutDestination slutDestination, Koersel koersel,
 			Time tid) throws SQLException {
@@ -272,6 +274,39 @@ public class KoerselsKartotekImpl implements KoerselsKartotek {
 		
 		
 	}
+
+	@Override
+	public void gemKommentar(String kommentar, int ID) throws SQLException {
+		DataAccessForSQL da = new DataAccessForSQL();
+		Connection connection = da.getConnection();
+		PreparedStatement ps = connection.prepareStatement(GEM_KOMMENTAR);
+		ps.setString(1, kommentar);
+		ps.setInt(2, ID);
+		ps.executeUpdate();
+		connection.close();
+		ps.close();
+	}
+
+	@Override
+	public String getKommentar(int ID) throws SQLException {
+		DataAccessForSQL da = new DataAccessForSQL();
+		Connection connection = da.getConnection();
+		PreparedStatement ps = connection.prepareStatement(GET_KOMMENTAR);
+		ps.setInt(1, ID);
+		
+		ResultSet resultset = ps.executeQuery();
+		
+		String kommentar = null;
+		
+		while (resultset.next()) {
+			kommentar = resultset.getString("ADMINSTRATIONSKOMMENTAR");
+		}
+		
+		connection.close();
+		resultset.close();
+		ps.close();
+		return kommentar;
+}
 	
 
 }

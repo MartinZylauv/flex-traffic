@@ -16,6 +16,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
@@ -29,6 +30,9 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import logic.Beskeder;
@@ -155,7 +159,20 @@ public class UC6_gui_Controller implements Initializable {
 			
 			kommenter.setOnAction(new EventHandler<ActionEvent>(){
 				public void handle(ActionEvent e){
-					System.out.println("yo det virker");
+					UC9_gui_Controller uc9 = new UC9_gui_Controller(koerselsHistorik.getSelectionModel().getSelectedItem().getID());
+					FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("UC9.fxml"));
+					fxmlLoader.setController(uc9);
+					Parent root = null;
+					try {
+						root = (Parent) fxmlLoader.load();
+					} catch (IOException e1) {
+						// TODO Indsæt fejlboks
+						e1.printStackTrace();
+					}
+					Stage stage = new Stage();
+					stage.setTitle("Kommenter");
+					stage.setScene(new Scene(root));
+					stage.show();
 				}
 			});
 		

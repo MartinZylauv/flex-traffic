@@ -110,4 +110,8 @@ public interface FTPController {
 	public Integer getBilFraID(int ID) throws SQLException;
 
 	public void createDB() throws SQLException;
+	
+	public void indtastKommentar(String kommentar, int ID) throws SQLException;
+	
+	public String getKommentar(int ID) throws SQLException;
 }

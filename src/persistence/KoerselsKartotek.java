@@ -35,7 +35,11 @@ public interface KoerselsKartotek {
 	
 	public ArrayList<KoerselHistorikImpl> visFlereBrugerKørslerAdmin()throws SQLException;
 	
-
+	public void gemKommentar(String kommentar, int ID) throws SQLException;
+	
+	public String getKommentar(int ID) throws SQLException;
+	
+	
 
 	public void godkendKoersel(int bil, KoerselHistorik koerselhistorik) throws SQLException;
 

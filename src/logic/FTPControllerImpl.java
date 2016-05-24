@@ -238,6 +238,20 @@ public class FTPControllerImpl extends Observable implements FTPController, Obse
 		dbcreate.insertBil();
 		
 	}
+
+	@Override
+	public void indtastKommentar(String kommentar, int ID) throws SQLException {
+		KoerselsKartotekImpl koersel = new KoerselsKartotekImpl();
+		koersel.gemKommentar(kommentar, ID);
+		
+	}
+
+	@Override
+	public String getKommentar(int ID) throws SQLException {
+		KoerselsKartotekImpl koersel = new KoerselsKartotekImpl();
+		String kommentar = koersel.getKommentar(ID);
+		return kommentar;
+	}
 	
 	
 
