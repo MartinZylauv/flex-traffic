@@ -130,11 +130,11 @@ Information info = new Information();
 		} catch (NumberFormatException e) {
 			advarsler.nummerFejl().showAndWait();
 		} catch (InvalidInformationException e) {
-			advarsler.indtastningFejl(e).showAndWait();	//TODO TEST
+			advarsler.indtastningFejl(e).showAndWait();	
 		} catch(SQLException e){
 			advarsler.SQLFejl().showAndWait();
 		} catch(NullPointerException e){
-			advarsler.indtastningFejl(e).showAndWait();	//TODO TEST
+			advarsler.indtastningFejl(e).showAndWait();	
 		}
 	}
 
@@ -169,9 +169,12 @@ Information info = new Information();
 		} catch(NullPointerException e){
 			advarsler.datoFejl().showAndWait();
 			}
+		catch (UnknownKommuneException e){
+			//TODO kommune error her
+		} 
 		
 		
-		//TODO vi skal have en form at håndtere hvis man har glemt at indtaste noget. 
+		 
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
@@ -188,11 +191,17 @@ Information info = new Information();
 
 					@Override
 					public void run() {
+						if(ftp.getPris() == -1.0){
+							progressBar.setVisible(false);
+							prisLabel.setText("0 Kr");
+							advarsler.postnrUkendtFejl().showAndWait();
+						} else{
+						
 						prisLabel.setVisible(true);
 						progressBar.setVisible(false);
 						prisLabel.setText(String.valueOf(ftp.getPris()));
 						accepterKnap.setVisible(true);
-
+						}
 					}
 				});
 

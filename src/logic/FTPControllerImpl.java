@@ -94,10 +94,13 @@ public class FTPControllerImpl extends Observable implements FTPController, Obse
 	@Override
 	public void update(Observable o, Object arg) {
 
+		if(pb.getTilstand() == Tilstande.BEREGNINGSFEJL){
+			this.pris = -1.0;
+		} else {
+		
 		this.pris = pb.getPris();
-
 		tilstand = Tilstande.BEREGNET;
-
+		}
 	}
 
 	@Override
@@ -107,8 +110,11 @@ public class FTPControllerImpl extends Observable implements FTPController, Obse
 		validator.validerTilbud(startdestination, slutdestination, km, dato);
 		pb = new PrisBeregnerImpl(startdestination, slutdestination, km,dato);
 		pb.addObserver(this);
+		try{
 		(new Thread(pb)).start(); // TODO REFACTOR
-		
+		} catch(Exception e){
+			System.out.println("heyo");
+		}
 	}
 
 	@Override

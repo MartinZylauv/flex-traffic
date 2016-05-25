@@ -25,9 +25,15 @@ Mockups
 	Udviklingen af mockups
 	
 Brugertest
+-brugertest martins far -> unknowkumme exception ikke handled, er fixet
+-brugertest Martin kæreste -> nullpointer i helt forkert postnummer, også fixet (pris sættes til minus af programmet, og gui checker efter en minus pris)
+
 
 Overvejelser
 Vi overvejede at anvende km som et krav der skulle indtastes, dog blev det droppet da det ikke kunne forefindes i usecasen overhovedet, og da vi fik en jar fil der efter sigende kunne udregne prisen 100% for os.
+
+
+
 
 
 	

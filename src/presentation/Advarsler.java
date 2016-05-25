@@ -80,4 +80,12 @@ public class Advarsler {
 		return fejl;
 		
 	}
+	
+	public Alert postnrUkendtFejl(){
+		Alert fejl = new Alert(AlertType.ERROR);
+		fejl.setHeaderText("Postnummer fejl");
+		fejl.setContentText(Beskeder.POSTNR_FEJL_UKENDT.getDescription());
+		return fejl;
+		
+	}
 }

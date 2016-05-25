@@ -42,6 +42,10 @@ public class PrisBeregnerImpl extends Observable implements PrisBeregner {
 				} catch (UnknownKommuneException | SQLException e) {
 					
 					e.printStackTrace();
+				} catch (NullPointerException e){
+					tilstand = Tilstande.BEREGNINGSFEJL;
+					setChanged();
+					notifyObservers();
 				}
 
 			
@@ -51,9 +55,13 @@ public class PrisBeregnerImpl extends Observable implements PrisBeregner {
 
 	@Override
 	public double beregnPris(StartDestination startDestination, SlutDestination slutDestination, Date dato)
-			throws UnknownKommuneException, SQLException {
+			throws UnknownKommuneException, SQLException{
 		KommuneKartotekImpl kk = new KommuneKartotekImpl();
+		
 		String startKommune = kk.postnummerTilKommune(startDestination.getPostnummer());
+		
+			
+		
 		startKommune = startKommune.replace(" Kommune", "");
 		startKommune = startKommune.replace("-", "/");
 		String slutKommune = kk.postnummerTilKommune(slutDestination.getPostnummer());
