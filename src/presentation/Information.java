@@ -17,4 +17,13 @@ public class Information {
 		return info;
 		
 	}
+	
+	public Alert godkendInfo(){
+		Alert info = new Alert(AlertType.INFORMATION);
+		info.setTitle("Godkendelse udført");
+		info.setHeaderText("Godkendelse udført!");
+		info.setContentText(Beskeder.GODKEND_INFO.getDescription() );
+		return info;
+		
+	}
 }

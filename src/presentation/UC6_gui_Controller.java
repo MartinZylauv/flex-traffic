@@ -106,6 +106,7 @@ public class UC6_gui_Controller implements Initializable {
 
 	FTPControllerImpl ftp = new FTPControllerImpl();
 	Advarsler advarsler = new Advarsler();
+	Information info = new Information();
 	Tilstande tilstand;
 	
 	LoggedIn loggedin = null;
@@ -125,7 +126,7 @@ public class UC6_gui_Controller implements Initializable {
 			
 			vaelgBilChoiceBox.setItems( FXCollections.observableArrayList(ftp.getBiler()));
 		} catch (SQLException e1) {
-			// TODO sql alert igen
+			advarsler.SQLFejl().showAndWait();
 			e1.printStackTrace();
 		}
 
@@ -169,7 +170,7 @@ public class UC6_gui_Controller implements Initializable {
 					try {
 						root = (Parent) fxmlLoader.load();
 					} catch (IOException e1) {
-						// TODO Indsæt fejlboks
+						advarsler.IOFejl().showAndWait();
 						e1.printStackTrace();
 					}
 					Stage stage = new Stage();
@@ -189,19 +190,20 @@ public class UC6_gui_Controller implements Initializable {
 	public void haandterEksporter() {
 		FileChooser fileChooser = new FileChooser();
 		fileChooser.setTitle("Eksporter historik");
-         CSVWriter csv = new CSVWriter();
-         
-         File file = fileChooser.showSaveDialog(eksporter.getScene().getWindow());
-         if(!file.toString().toLowerCase().endsWith(".csv")){
-        	 file = new File(file + ".csv");
-         }
-       
-         try {
-       	
-			csv.writeToCSV(koerselhistorik, file,loggedin.getAdmin());
+		
+		try {
+			File file = fileChooser.showSaveDialog(eksporter.getScene().getWindow());
+
+			if (!file.toString().toLowerCase().endsWith(".csv")) {
+				file = new File(file + ".csv");
+			}
+
+			ftp.writeToCsv(koerselhistorik, file, loggedin.getAdmin());
 		} catch (IOException e) {
 			advarsler.IOFejl().showAndWait();
 			e.printStackTrace();
+		} catch (NullPointerException e) {
+				//TODO Der sker intet her ,brugen skal jo have lov til at ikke indtaste noget.
 		}
 	}
 
@@ -245,14 +247,19 @@ public class UC6_gui_Controller implements Initializable {
 					ftp.angivKoerselTilVedligeholdelse(koerselsHistorik.getSelectionModel().getSelectedItem());
 					
 					koerselsHistorik.setItems(FXCollections.observableArrayList(ftp.anmodOmBrugeresKørselHistorik(kundenummer, null, null)) );
+					info.godkendInfo().showAndWait();
 				} catch (SQLException e) {
-					// TODO SQL ALERT HER
+					advarsler.SQLFejl().showAndWait();
 					e.printStackTrace();
 				}
+			} else{
+				advarsler.koerselFejl().showAndWait();
 			}
-			//alert med at en kørsel ikke er valgt.
+			
+		} else{
+			advarsler.bilFejl().showAndWait();
 		}
-		//alert med at en bil ikke er valgt.
+		
 	}
 
 	@FXML

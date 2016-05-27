@@ -1,5 +1,7 @@
 package logic;
 
+import java.io.File;
+import java.io.IOException;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.sql.Time;
@@ -52,6 +54,8 @@ public interface FTPController {
 	 *             a custom made exception, which is thrown when the information
 	 *             given is invalid.
 	 */
+	
+
 	public void angivInformationer(StartDestination startDestination, SlutDestination slutDestination, Date dato,
 			int antalPersoner, int antalHjaelpemidler, int antalBagage, String kommentarer, int brugerNummer, Time tid,
 			double antalKm, boolean erAdmin) throws InvalidInformationException;
@@ -117,4 +121,6 @@ public interface FTPController {
 
 	ArrayList<KoerselHistorikImpl> anmodOmBrugeresKørselHistorikAfholdt(int kundenummer, Date dato1, Date dato2)
 			throws SQLException;
+	
+	public void writeToCsv(ArrayList<KoerselHistorikImpl> koerselhistorik, File file, boolean erAdmin) throws IOException;
 }

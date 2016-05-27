@@ -88,4 +88,20 @@ public class Advarsler {
 		return fejl;
 		
 	}
+	
+	public Alert koerselFejl(){
+		Alert fejl = new Alert(AlertType.ERROR);
+		fejl.setHeaderText("Koersel ikke valgt");
+		fejl.setContentText(Beskeder.KOERSEL_FEJL.getDescription());
+		return fejl;
+		
+	}
+	
+	public Alert bilFejl(){
+		Alert fejl = new Alert(AlertType.ERROR);
+		fejl.setHeaderText("Bil ikke valgt");
+		fejl.setContentText(Beskeder.BIL_FEJL.getDescription());
+		return fejl;
+		
+	}
 }

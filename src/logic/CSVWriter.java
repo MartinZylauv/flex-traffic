@@ -14,14 +14,14 @@ public class CSVWriter {
 	
     public void writeToCSV(ArrayList<KoerselHistorikImpl> koersel, File file,boolean erAdmin) throws IOException
     {
-    	//TODO fix at admin. eksport er med de ekstra værdier, men kun i admin, ikke i bruger.
+    
     	FileWriter writer = new FileWriter(file);
 		 
     	writer.append("Dato");
     	writer.append(',');
     	writer.append("Antal personer");
     	writer.append(',');
-    	writer.append("Antal hjælpemidler"); //TODO Æ'ET BLIVER IKKE FORMATERET RIGTIGT I CSV FILEN DESVÆRRE.
+    	writer.append("Antal hjælpemidler"); 
     	writer.append(',');
     	writer.append("Antal bagage");
     	writer.append(',');

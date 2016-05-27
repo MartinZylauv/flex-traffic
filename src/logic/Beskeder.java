@@ -24,7 +24,10 @@ public enum Beskeder {
 	NUMMMER_FEJL("Du har skrevet bogstaver eller andre karakterer hvor der kun måtte være tal. Prøv venligst igen."),	
 	POSTNR_FEJL("Der må maks være 4 tal i et postnummer. Prøv igen"),
 	POSTNR_FEJL_UKENDT("Du har indtastet et ukendt postnummer. Prøv venligst igen."),
-	BRUGERNR_FEJL("Der mangler et brugernummer indtastet for at kunne registrere kørslen");
+	BRUGERNR_FEJL("Der mangler et brugernummer indtastet for at kunne registrere kørslen"),
+	KOERSEL_FEJL("En kørsel er ikke valgt. Vælg venligst en ved at klikke på en i tabellen."),
+	BIL_FEJL("En bil er ikke valgt. Vælg venligst en i listen over biler."),
+	GODKEND_INFO("Kørslen er godkendt og har fået tildelt en bil!");
 
 	private final String description;
 

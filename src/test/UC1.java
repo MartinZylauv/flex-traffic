@@ -31,7 +31,7 @@ public class UC1 {
 		slutdest.setBynavn("test");
 		slutdest.setPostnummer(1234);
 		try {
-			ftp.angivInformationer(startdest, slutdest, Date.valueOf(LocalDate.of(2015, 07, 07)), 1, 1, 1, "", 1, Time.valueOf(LocalTime.now()), 10);
+			ftp.angivInformationer(startdest, slutdest, Date.valueOf(LocalDate.of(2015, 07, 07)), 1, 1, 1, "", 1, Time.valueOf(LocalTime.now()), 10, false);
 			fail("Exception bliver ikke kastet.");
 		} catch (InvalidInformationException e) {
 			//success
@@ -49,7 +49,7 @@ public class UC1 {
 		slutdest.setBynavn("test");
 		slutdest.setPostnummer(1234);
 		try {
-			ftp.angivInformationer(startdest, slutdest, Date.valueOf(LocalDate.of(2017, 07, 07)), 11, 1, 1, "", 1, Time.valueOf(LocalTime.now()), 10);
+			ftp.angivInformationer(startdest, slutdest, Date.valueOf(LocalDate.of(2017, 07, 07)), 11, 1, 1, "", 1, Time.valueOf(LocalTime.now()), 10, false);
 			fail("Exception bliver ikke kastet.");
 		} catch (InvalidInformationException e) {
 			//success
@@ -67,7 +67,7 @@ public class UC1 {
 		slutdest.setBynavn("test");
 		slutdest.setPostnummer(1234);
 		try {
-			ftp.angivInformationer(startdest, slutdest, Date.valueOf(LocalDate.of(2015, 07, 07)), 1, 1, 1, "", 1, Time.valueOf(LocalTime.now()), 10);
+			ftp.angivInformationer(startdest, slutdest, Date.valueOf(LocalDate.of(2015, 07, 07)), 1, 1, 1, "", 1, Time.valueOf(LocalTime.now()), 10, false);
 			fail("Exception bliver ikke kastet.");
 		} catch (InvalidInformationException e) {
 			//success

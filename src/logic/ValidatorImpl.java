@@ -18,7 +18,7 @@ public class ValidatorImpl implements Validator {
 	public boolean validerInformationer() {
 
 		Date iDag = new Date(Calendar.getInstance().getTime().getTime()); // http://stackoverflow.com/questions/18257648/get-the-current-date-in-java-sql-date-format
-		double difference = koerselDom.getDate().compareTo(iDag);
+		double difference = koerselDom.getDate().compareTo(iDag); //TODO difference bruges til at finde ud af om datoen er før eller efter i dag eller lig med i dag.
 
 		if (startDestination.getAdresse() != null && startDestination.getPostnummer() != Double.NaN
 				&& slutDestination.getAdresse() != null && slutDestination.getPostnummer() != Double.NaN

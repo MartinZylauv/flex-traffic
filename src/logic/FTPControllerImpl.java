@@ -1,5 +1,7 @@
 package logic;
 
+import java.io.File;
+import java.io.IOException;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.sql.Time;
@@ -207,7 +209,6 @@ public class FTPControllerImpl extends Observable implements FTPController, Obse
 	@Override
 	public void angivKoerselTilVedligeholdelse(KoerselHistorik koerselhistorik) throws SQLException {
 		KoerselsKartotekImpl koersel = new KoerselsKartotekImpl();
-		System.out.println(koerselhistorik.getErGodkendt());
 		if(!koerselhistorik.getErGodkendt()){
 		koersel.godkendKoersel(bil, koerselhistorik);
 		koersel.setGodkendtKoersel(bil, koerselhistorik);
@@ -279,6 +280,12 @@ public class FTPControllerImpl extends Observable implements FTPController, Obse
 		
 		
 		return liste;
+	}
+
+	@Override
+	public void writeToCsv(ArrayList<KoerselHistorikImpl> koerselhistorik, File file, boolean erAdmin) throws IOException {
+		CSVWriter csv = new CSVWriter();
+		csv.writeToCSV(koerselhistorik, file, erAdmin);
 	}
 
 };

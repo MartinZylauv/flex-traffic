@@ -32,6 +32,17 @@ Brugertest
 Overvejelser
 Vi overvejede at anvende km som et krav der skulle indtastes, dog blev det droppet da det ikke kunne forefindes i usecasen overhovedet, og da vi fik en jar fil der efter sigende kunne udregne prisen 100% for os.
 
+i uc5 eksport af csv gemmer vi en liste selvom den er tom, da midttraffik feks stadig skal kunne fremvise en tom liste hvis de ingen kørsler har haft den foregående månede.
+
+i uc6 har vi valgt at ikke have sd med da den næsten er identisk med uc4 i den form at vi blot har en ekstra if else med.
+
+i uc7 er en sd ikke med da den ikke er stor eller interresant nok. Det er blot et databasekald ned på vores peristence pakke, og det er allerede forefundet i et sd af vores før vi har med i projektet.
+
+UC8 er kun en formel usecase da den er 99% ens med uc1, da den eneste forskel er et textfield med brugernummer der indtastes.
+
+oc1 uc9 ingen sd pga for simpel.
+
+
 
 
 
