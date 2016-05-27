@@ -114,4 +114,34 @@ public class Advarsler {
 		return fejl;
 		
 	}
+	
+	public Alert SQLFejlDBCreate(){
+		Alert fejl = new Alert(AlertType.ERROR);
+		fejl.setTitle("SQL fejl");
+		fejl.setHeaderText("Fejl i databasen");
+		fejl.setContentText(Beskeder.SQL_DBCREATE.getDescription()); 
+		
+		return fejl;
+		
+	}
+	
+	public Alert KommuneFejl(){
+		Alert fejl = new Alert(AlertType.ERROR);
+		fejl.setTitle("Kommune fejl");
+		fejl.setHeaderText("Fejl i indtastet postnummer");
+		fejl.setContentText(Beskeder.KOMMUNE_FEJL.getDescription()); 
+		
+		return fejl;
+		
+	}
+	
+	public Alert tlfFejl(){
+		Alert fejl = new Alert(AlertType.ERROR);
+		fejl.setTitle("Telefonnummer fejl");
+		fejl.setHeaderText("Fejl i indtastet telefonnummer");
+		fejl.setContentText(Beskeder.TLF_FEJL.getDescription()); 
+		
+		return fejl;
+		
+	}
 }

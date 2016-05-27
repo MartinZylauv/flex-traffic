@@ -88,14 +88,16 @@ public class UC23_gui_Controller implements Initializable {
 	public void haandterGem() {
 		navnDefault = fulde_navn.getText();
 		emailDefault = email.getText();
-		
+		try {
 		if(tlfnummer.getText().isEmpty()){
 			tlfDefault = 0;
-		}else{
-		tlfDefault = Long.valueOf(tlfnummer.getText());
+		}else if(tlfnummer.getText().length()!= 8){
+		throw new NumberFormatException();
+		} else{
+			tlfDefault = Long.valueOf(tlfnummer.getText());
 		}
 
-		try {
+		
 			ftp.indtastNyeInformationer(navnDefault, emailDefault, tlfDefault);
 
 			gem.setVisible(false);
@@ -109,6 +111,8 @@ public class UC23_gui_Controller implements Initializable {
 			e.printStackTrace();
 		} catch (InvalidInformationException e) {
 			advarsler.indtastningFejl(e).showAndWait();
+		} catch (NumberFormatException e){
+			advarsler.tlfFejl().showAndWait();
 		}
 	}
 

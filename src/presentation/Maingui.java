@@ -1,5 +1,8 @@
 package presentation;
 	
+import java.io.IOException;
+import java.sql.SQLException;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
@@ -12,25 +15,34 @@ import javafx.scene.layout.AnchorPane;
 public class Maingui extends Application {
 	@Override
 	public void start(Stage primaryStage) {
+		Advarsler advarsel = new Advarsler();
 		FTPControllerImpl ftp = new FTPControllerImpl();
 		LoggedIn loggedin = new LoggedIn();
-		try {
+		
 			
 			FXMLLoader loader = new FXMLLoader();
 			LoginController logincontroller = new LoginController(loggedin);
 			loader.setLocation(Maingui.class.getResource("Login.fxml"));
 			loader.setController(logincontroller);
 			
-				AnchorPane mainWindow = (AnchorPane) loader.load();
+				AnchorPane mainWindow = null;
+				try {
+					mainWindow = (AnchorPane) loader.load();
+				} catch (IOException e1) {
+				advarsel.IOFejl().showAndWait();
+				}
 				Scene scene = new Scene(mainWindow);
 				
 				primaryStage.setScene(scene);
 				primaryStage.show();
-				ftp.createDB();//TODO SQL ALERT DB KUNNE IKKE LAVES, KONTAKT ADMINISTRATOR 
+				try {
+					ftp.createDB();
+				} catch (SQLException e) {
+					advarsel.SQLFejlDBCreate().showAndWait();
+					e.printStackTrace();
+				}
 				
-			} catch (Exception exc) {
-				exc.printStackTrace();
-			}
+			
 	}
 
 	public static void main(String[] args) {

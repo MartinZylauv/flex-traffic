@@ -78,10 +78,10 @@ public class LoginController implements Initializable {
 				advarsel.ukendtKundenummerFejl().showAndWait();	
 			}
 		} catch (SQLException e1) {
-			advarsel.SQLFejl().showAndWait();	//TODO test
+			advarsel.SQLFejl().showAndWait();	
 			e1.printStackTrace();
 		}catch (IOException e) {
-			advarsel.IOFejl().showAndWait();	//TODO TEST
+			advarsel.IOFejl().showAndWait();	
 			e.printStackTrace();
 		}
 

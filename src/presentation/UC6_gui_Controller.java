@@ -39,6 +39,7 @@ import javafx.scene.control.Alert.AlertType;
 import logic.Beskeder;
 import logic.CSVWriter;
 import logic.FTPControllerImpl;
+import logic.InvalidInformationException;
 import logic.Tilstande;
 
 public class UC6_gui_Controller implements Initializable {
@@ -251,6 +252,8 @@ public class UC6_gui_Controller implements Initializable {
 				} catch (SQLException e) {
 					advarsler.SQLFejl().showAndWait();
 					e.printStackTrace();
+				} catch (InvalidInformationException e) {
+					advarsler.indtastningFejl(e).showAndWait();
 				}
 			} else{
 				advarsler.koerselFejl().showAndWait();

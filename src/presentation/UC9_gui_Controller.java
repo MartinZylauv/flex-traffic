@@ -3,7 +3,6 @@ package presentation;
 import java.net.URL;
 import java.sql.Date;
 import java.sql.SQLException;
-import java.sql.Time;
 import java.util.ResourceBundle;
 
 import domain.SlutDestination;
@@ -46,6 +45,8 @@ public class UC9_gui_Controller implements Initializable {
 
 	int koerselID;
 	
+	Advarsler advarsel = new Advarsler();
+	
 	FTPControllerImpl ftp = new FTPControllerImpl();
 
 	@Override
@@ -53,7 +54,7 @@ public class UC9_gui_Controller implements Initializable {
 		try {
 			kommentarArea.setText(ftp.getKommentar(koerselID));
 		} catch (SQLException e) {
-			// TODO indsæt fejlboks
+			advarsel.SQLFejl().showAndWait();
 			e.printStackTrace();
 		}
 	}
@@ -62,7 +63,7 @@ public class UC9_gui_Controller implements Initializable {
 		try {
 			ftp.indtastKommentar(kommentarArea.getText(), koerselID);
 		} catch (SQLException e) {
-			// TODO FEJLBOKS
+			advarsel.SQLFejl().showAndWait();
 			e.printStackTrace();
 		}
 		gemKnap.getScene().getWindow().hide();

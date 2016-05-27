@@ -113,9 +113,9 @@ public class FTPControllerImpl extends Observable implements FTPController, Obse
 		pb = new PrisBeregnerImpl(startdestination, slutdestination, km,dato);
 		pb.addObserver(this);
 		try{
-		(new Thread(pb)).start(); // TODO REFACTOR
+		(new Thread(pb)).start(); 
 		} catch(Exception e){
-			System.out.println("heyo");
+
 		}
 	}
 
@@ -207,12 +207,14 @@ public class FTPControllerImpl extends Observable implements FTPController, Obse
 	
 
 	@Override
-	public void angivKoerselTilVedligeholdelse(KoerselHistorik koerselhistorik) throws SQLException {
+	public void angivKoerselTilVedligeholdelse(KoerselHistorik koerselhistorik) throws SQLException, InvalidInformationException {
 		KoerselsKartotekImpl koersel = new KoerselsKartotekImpl();
 		if(!koerselhistorik.getErGodkendt()){
 		koersel.godkendKoersel(bil, koerselhistorik);
 		koersel.setGodkendtKoersel(bil, koerselhistorik);
-		} //TODO else throw ny forkert indtastning besked med at den allerede er tildelt en bil.
+		}else{
+			throw new InvalidInformationException(Beskeder.BIL_ALLEREDE_TILDELT.getDescription());
+		}
 	}
 
 	@Override

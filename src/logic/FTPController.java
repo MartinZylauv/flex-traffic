@@ -107,7 +107,7 @@ public interface FTPController {
 
 	public void tildelBil(int bil);
 
-	public void angivKoerselTilVedligeholdelse(KoerselHistorik koerselhistorik) throws SQLException;
+	public void angivKoerselTilVedligeholdelse(KoerselHistorik koerselhistorik) throws SQLException, InvalidInformationException;
 
 	public List<Integer> getBiler() throws SQLException;
 

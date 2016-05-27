@@ -76,6 +76,7 @@ public class UC8_gui_Controller implements Initializable {
 	@FXML
 	private Button accepterKnap;
 
+	boolean prisUdregnet = false;
 	boolean erAdmin = true;
 	LoggedIn loggedin = null;
 	FTPControllerImpl ftp = new FTPControllerImpl();
@@ -89,6 +90,7 @@ Information info = new Information();
 	ObservableList<String> timer = FXCollections.observableArrayList("00", "01", "02", "03", "04", "05", "06", "07",
 			"08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23");
 	ObservableList<Integer> nulTilNi = FXCollections.observableArrayList(0, 1, 2, 3, 4, 5, 6, 7, 8, 9);
+	ObservableList<Integer> etTilNi = FXCollections.observableArrayList( 1, 2, 3, 4, 5, 6, 7, 8, 9);
 	StartDestination start = new StartDestinationImpl();
 	SlutDestination slut = new SlutDestinationImpl();
 
@@ -98,7 +100,7 @@ Information info = new Information();
 		tidMChoice.setItems(minutter);
 		antalBagageChoice.setItems(nulTilNi);
 		antalHjaelpleChoice.setItems(nulTilNi);
-		antalPersonerChoice.setItems(nulTilNi);
+		antalPersonerChoice.setItems(etTilNi);
 	}
 	//TODO check hvad decrepated er herunder på stackoverflow.
 	public void haandterAccepter() {   //TODO lav noteditable textfields for de ting prisen udregnes for, så en "udregn ny pris knap"
@@ -134,11 +136,11 @@ Information info = new Information();
 		} catch (NumberFormatException e) {
 			advarsler.nummerFejl().showAndWait();
 		} catch (InvalidInformationException e) {
-			advarsler.indtastningFejl(e).showAndWait();	//TODO TEST
+			advarsler.indtastningFejl(e).showAndWait();	
 		} catch(SQLException e){
 			advarsler.SQLFejlAdmin().showAndWait();
 		} catch(NullPointerException e){
-			advarsler.indtastningFejl(e).showAndWait();	//TODO TEST
+			advarsler.indtastningFejl(e).showAndWait();	
 		}
 		
 	}
@@ -146,37 +148,54 @@ Information info = new Information();
 	@FXML
 	public void haandterUdregn()
 			throws NumberFormatException, SQLException, UnknownKommuneException, InterruptedException {
-		
-		
+		if(prisUdregnet == false){
+			prisUdregnet = true;
+			ikkeAendreFelt();
+		 
 		try{
 		
 		if(startPostnummerFelt.getText().length()==4 && slutPostnummerFelt.getText().length()==4 ){
+			try {
 			start.setAdresse(startAdresseFelt.getText());
 			start.setBynavn(startByFelt.getText());
 			start.setPostnummer(Integer.parseInt(startPostnummerFelt.getText()));
 			slut.setPostnummer(Integer.parseInt(slutPostnummerFelt.getText()));
 			slut.setAdresse(slutAdresseFelt.getText());
 			slut.setBynavn(slutByFelt.getText());
-			try {
+			
 				ftp.getPrisTilbud(start, slut, Double.parseDouble(kmFelt.getText()),Date.valueOf(datoVaelger.getValue()));
+				progressBar.setVisible(true);
+				prisLabel.setText("Udregner pris, vent venligst...");
 			} catch (InvalidInformationException e) {
-				advarsler.indtastningFejl(e).showAndWait();	//TODO TEST
-				e.printStackTrace();
+				prisUdregnet = false;
+				ikkeAendreFelt();
+			
+				advarsler.indtastningFejl(e).showAndWait();	
+				
 			}
-			progressBar.setVisible(true);
-			prisLabel.setText("Udregner pris, vent venligst...");
+			
 			} else{
+				prisUdregnet = false;
+				ikkeAendreFelt();
 				advarsler.postnrFejl().showAndWait();
+				
 			}
+		}
 		
-		} catch(NumberFormatException e){
-			advarsler.nummerFejl().showAndWait();
+		 catch(NumberFormatException e){
+			 prisUdregnet = false;
+				ikkeAendreFelt();
+			 advarsler.nummerFejl().showAndWait();
+			
 		} catch(NullPointerException e){
+			prisUdregnet = false;
+			ikkeAendreFelt();
 			advarsler.datoFejl().showAndWait();
+			
 			}
 		
 		
-		//TODO vi skal have en form at håndtere hvis man har glemt at indtaste noget. 
+		
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
@@ -186,6 +205,8 @@ Information info = new Information();
 						Thread.currentThread().sleep(1000);
 					} catch (InterruptedException e) {
 						advarsler.ukendtFejl().showAndWait();
+						prisUdregnet = false;
+						ikkeAendreFelt();
 						
 					}
 				}
@@ -204,6 +225,41 @@ Information info = new Information();
 			}
 		}).start();
 
+	} else if(prisUdregnet){
+		prisUdregnet = false;
+		ikkeAendreFelt();
+		
+		
+	}
+	}
+	
+	
+	public void ikkeAendreFelt(){
+		if(prisUdregnet == true){
+			udregnKnap.setText("Udregn ny pris");
+			
+		startAdresseFelt.setEditable(false);
+		startPostnummerFelt.setEditable(false);
+		startByFelt.setEditable(false);
+		slutAdresseFelt.setEditable(false);
+		slutPostnummerFelt.setEditable(false);
+		slutByFelt.setEditable(false);
+		kmFelt.setEditable(false);
+		
+		
+		} else if(prisUdregnet == false){
+			prisLabel.setText("0 Kr");
+			udregnKnap.setText("Udregn pris");
+			accepterKnap.setVisible(false);
+			startAdresseFelt.setEditable(true);
+			startPostnummerFelt.setEditable(true);
+			startByFelt.setEditable(true);
+			slutAdresseFelt.setEditable(true);
+			slutPostnummerFelt.setEditable(true);
+			slutByFelt.setEditable(true);
+			kmFelt.setEditable(true);
+		}
+		
 	}
 	
 	}

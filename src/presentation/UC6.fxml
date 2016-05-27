@@ -29,7 +29,7 @@
             <TableColumn fx:id="antalPersoner" prefWidth="71.0" text="Personer" />
             <TableColumn fx:id="kundenummerCol" prefWidth="68.0" text="Kundenr." />
             <TableColumn fx:id="adminKommentar" text="Admins. kommentarer" />
-            <TableColumn fx:id="erGodkendt" prefWidth="70.0" text="Godkendt4" />
+            <TableColumn fx:id="erGodkendt" prefWidth="70.0" text="Godkendt" />
         </columns>
       </TableView>
       <DatePicker fx:id="startDato" layoutX="544.0" layoutY="325.0" prefHeight="25.0" prefWidth="139.0" />

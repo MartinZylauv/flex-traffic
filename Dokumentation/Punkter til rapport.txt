@@ -40,9 +40,11 @@ i uc7 er en sd ikke med da den ikke er stor eller interresant nok. Det er blot e
 
 UC8 er kun en formel usecase da den er 99% ens med uc1, da den eneste forskel er et textfield med brugernummer der indtastes.
 
+
+nogle fejlbeskeder er ikke 100% færddiglavede da de ikke var særligt relevante for vores kravspecifikationer. vi har dog poleret et par stykker for at vise at vi godt kan konstruere dem.
 oc1 uc9 ingen sd pga for simpel.
 
-
+email ikke sat til tjek med snabela da vi ikke gider.
 
 
 
