@@ -9,16 +9,16 @@
 
 <AnchorPane prefHeight="520.0" prefWidth="523.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <PasswordField fx:id="kodeord" layoutX="77.0" layoutY="260.0" prefHeight="47.0" prefWidth="371.0" promptText="Indtast dit personlige kodeord">
-         <font>
-            <Font size="24.0" />
-         </font>
-      </PasswordField>
       <TextField fx:id="kundenr" layoutX="77.0" layoutY="187.0" prefHeight="51.0" prefWidth="371.0" promptText="Indtast dit kundenummer">
          <font>
             <Font size="24.0" />
          </font>
       </TextField>
+      <PasswordField fx:id="kodeord" layoutX="77.0" layoutY="260.0" prefHeight="47.0" prefWidth="371.0" promptText="Indtast dit personlige kodeord">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </PasswordField>
       <Label layoutX="223.0" layoutY="65.0" text="Velkommen til " />
       <Label layoutX="106.0" layoutY="95.0" text="FlexTurs Bestillingssystem!">
          <font>
