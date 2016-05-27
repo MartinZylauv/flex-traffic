@@ -277,6 +277,9 @@ public class UC6_gui_Controller implements Initializable {
 			advarsler.SQLFejl().showAndWait();
 			e.printStackTrace();
 		}
+		catch(NullPointerException e){
+			
+		}
 	}
 	@FXML
 	public void haandterCheckbox(){
