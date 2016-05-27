@@ -30,7 +30,7 @@ public class DBCreator {
 			+ "beregnet_pris double NOT NULL,"
 			+ "godkendt_kørsel boolean,"
 			+ "brugerkommentar varchar(1000),"
-			+ "Tid_på_dagen Time,"
+			+ "Tid_på_dage Time,"
 			+ "adminstrationskommentar varchar(1000),"
 			+ "personer int,"
 			+ "hjaelpemidler int,"
