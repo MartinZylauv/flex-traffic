@@ -136,7 +136,7 @@ Information info = new Information();
 		} catch (InvalidInformationException e) {
 			advarsler.indtastningFejl(e).showAndWait();	//TODO TEST
 		} catch(SQLException e){
-			advarsler.SQLFejl().showAndWait();
+			advarsler.SQLFejlAdmin().showAndWait();
 		} catch(NullPointerException e){
 			advarsler.indtastningFejl(e).showAndWait();	//TODO TEST
 		}

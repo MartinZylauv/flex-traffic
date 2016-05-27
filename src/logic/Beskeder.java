@@ -27,7 +27,8 @@ public enum Beskeder {
 	BRUGERNR_FEJL("Der mangler et brugernummer indtastet for at kunne registrere kørslen"),
 	KOERSEL_FEJL("En kørsel er ikke valgt. Vælg venligst en ved at klikke på en i tabellen."),
 	BIL_FEJL("En bil er ikke valgt. Vælg venligst en i listen over biler."),
-	GODKEND_INFO("Kørslen er godkendt og har fået tildelt en bil!");
+	GODKEND_INFO("Kørslen er godkendt og har fået tildelt en bil!"),
+	UKENDT_SQL_ADMIN("Der skete en uventet fejl. Prøv venligst at genstarte programmet, eller at kontakte kundeservice. Eventuelt har du indtastet et brugernummer der ikke eksisterer. Dobbeltjek venligst og prøv igen.");
 
 	private final String description;
 

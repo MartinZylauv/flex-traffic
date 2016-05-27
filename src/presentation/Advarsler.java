@@ -104,4 +104,14 @@ public class Advarsler {
 		return fejl;
 		
 	}
+	
+	public Alert SQLFejlAdmin(){
+		Alert fejl = new Alert(AlertType.ERROR);
+		fejl.setTitle("SQL fejl");
+		fejl.setHeaderText("Fejl i databasen");
+		fejl.setContentText(Beskeder.UKENDT_SQL_ADMIN.getDescription()); 
+		
+		return fejl;
+		
+	}
 }

@@ -16,7 +16,7 @@ import logic.FTPControllerImpl;
 import logic.InvalidInformationException;
 import sats.UnknownKommuneException;
 
-public class UC2 {
+public class UC23test {
 	
 	FTPControllerImpl ftp = new FTPControllerImpl();
 
@@ -40,9 +40,6 @@ public class UC2 {
 	@Test
 	public void testAnmodOmProfilKundenummer123() {
 		
-		
-		
-		
 	
 		ftp.setKundenummer(123);
 		
@@ -56,6 +53,9 @@ public class UC2 {
 			fail("SQLException");
 		}
 		}
+	
+	
+		
 		
 	
 	

@@ -16,7 +16,7 @@ import logic.FTPControllerImpl;
 import logic.InvalidInformationException;
 import sats.UnknownKommuneException;
 
-public class UC1 {
+public class UC1test {
 	
 	FTPControllerImpl ftp = new FTPControllerImpl();
 	StartDestinationImpl startdest = new StartDestinationImpl();
@@ -62,19 +62,23 @@ public class UC1 {
 	public void testAngivInformationerRigtig() {
 		startdest.setAdresse("test");
 		startdest.setBynavn("test");
-		startdest.setPostnummer(1234); 
+		startdest.setPostnummer(7400); 
 		slutdest.setAdresse("test");
 		slutdest.setBynavn("test");
-		slutdest.setPostnummer(1234);
+		slutdest.setPostnummer(7400);
 		try {
-			ftp.angivInformationer(startdest, slutdest, Date.valueOf(LocalDate.of(2015, 07, 07)), 1, 1, 1, "", 1, Time.valueOf(LocalTime.now()), 10, false);
-			fail("Exception bliver ikke kastet.");
-		} catch (InvalidInformationException e) {
+			ftp.angivInformationer(startdest, slutdest, Date.valueOf(LocalDate.of(2017, 07, 07)), 1, 1, 1, "", 1, Time.valueOf(LocalTime.now()), 10, false);
 			//success
+		} catch (InvalidInformationException e) {
+			fail();
 
 		}
 		
 	}
+	
+	
+		
+	
 
 
 
