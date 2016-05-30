@@ -30,7 +30,6 @@ Brugertest
 
 
 Overvejelser
-Vi overvejede at anvende km som et krav der skulle indtastes, dog blev det droppet da det ikke kunne forefindes i usecasen overhovedet, og da vi fik en jar fil der efter sigende kunne udregne prisen 100% for os.
 
 i uc5 eksport af csv gemmer vi en liste selvom den er tom, da midttraffik feks stadig skal kunne fremvise en tom liste hvis de ingen kørsler har haft den foregående månede.
 

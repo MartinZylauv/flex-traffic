@@ -22,10 +22,10 @@ public class DBCreator {
 			+ "kundenummer bigint,"
 			+ "FOREIGN KEY(kundenummer) REFERENCES Profiler(kundenummer),"
 			+ "start_adresse varchar(255) NOT NULL,"
-			+ "start_postnummer decimal NOT NULL,"
+			+ "start_postnummer bigint NOT NULL,"
 			+ "tidspunkt Date NOT NULL,"
 			+ "slut_adresse varchar(255) NOT NULL,"
-			+ "slut_postnummer decimal NOT NULL,"
+			+ "slut_postnummer bigint NOT NULL,"
 			+ "antal_KM double NOT NULL,"
 			+ "beregnet_pris double NOT NULL,"
 			+ "godkendt_kørsel boolean,"
@@ -44,7 +44,7 @@ public class DBCreator {
 			+ ")";
 	private static String CREATE_BILER=CREATE+"Biler("
 			+ "id bigint IDENTITY,"
-			+ "kapacitet double,"
+			+ "kapacitet bigint,"
 			+ "nummerplade varchar(7)"
 			+ ")";
 	
