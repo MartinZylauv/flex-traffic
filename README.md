@@ -1,8 +1,16 @@
 # FlexMartinSteffen
 Welcome to our repository for our exam project for finishing our second semester at EAMV.
 
+A quick few notes about the structure of this repository:
+
 This projects programming is inside the src folder and consists of different packages which have the normal naming convention for the 
 modelview-control design pattern.
+
+The classpath and .project files must never be committed to this repository from your local repository.
+
+Please place your documentation inside the "Dokumentation" folder with a proper naming of the file.
+
+Please update the project plan when you are done with a step.
 
 If you are using code from this project, we would like to ask you to include our names as authors of it, but only if the code is copied 
 directly, if its just for inspiration, then go ahead and edit the code for your liking.
