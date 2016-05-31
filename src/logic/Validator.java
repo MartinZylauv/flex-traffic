@@ -8,7 +8,7 @@ import domain.StartDestination;
 
 public interface Validator {
 
-	public double angivInformationer(StartDestination startDestination, SlutDestination slutDestination, 
+	public void angivInformationer(StartDestination startDestination, SlutDestination slutDestination, 
 			Koersel koerselDom);
 	
 	public boolean validerInformationer();

@@ -39,7 +39,7 @@ public class KoerselsKartotekImpl implements KoerselsKartotek {
 	public void gemKoersel(StartDestination startDestination, SlutDestination slutDestination, Koersel koersel,
 			Time tid) throws SQLException {
 
-		DataAccessImpl da = new DataAccessImpl();
+		DataAccess da = new DataAccess();
 		Connection connection = da.getConnection();
 		PreparedStatement ps = connection.prepareStatement(INSERT_KOERSEL);
 		ps.setInt(1, koersel.getBrugerNummer());
@@ -68,7 +68,7 @@ public class KoerselsKartotekImpl implements KoerselsKartotek {
 	@Override
 	public ArrayList<KoerselHistorikImpl> visEnkeltBrugerKørslerTidsinterval(int kundenummer, Date dato1, Date dato2)
 			throws SQLException {
-		DataAccessImpl da = new DataAccessImpl();
+		DataAccess da = new DataAccess();
 		Connection connection = da.getConnection();
 		PreparedStatement ps = connection.prepareStatement(GET_ENKEL_TID);
 		ps.setInt(1, kundenummer);
@@ -110,7 +110,7 @@ public class KoerselsKartotekImpl implements KoerselsKartotek {
 
 	@Override
 	public ArrayList<KoerselHistorikImpl> visEnkeltBrugerKørsler(int kundenummer) throws SQLException {
-		DataAccessImpl da = new DataAccessImpl();
+		DataAccess da = new DataAccess();
 		Connection connection = da.getConnection();
 		PreparedStatement ps = connection.prepareStatement(GET_ENKEL);
 		ps.setInt(1, kundenummer);
@@ -150,7 +150,7 @@ public class KoerselsKartotekImpl implements KoerselsKartotek {
 	@Override
 	public ArrayList<KoerselHistorikImpl> visFlereBrugerKørslerTidsinterval(Date dato1, Date dato2)
 			throws SQLException {
-		DataAccessImpl da = new DataAccessImpl();
+		DataAccess da = new DataAccess();
 		Connection connection = da.getConnection();
 		PreparedStatement ps = connection.prepareStatement(GET_FLERE_TID);
 		ps.setDate(1, dato1);
@@ -191,7 +191,7 @@ public class KoerselsKartotekImpl implements KoerselsKartotek {
 
 	@Override
 	public ArrayList<KoerselHistorikImpl> visFlereBrugerKørsler() throws SQLException {
-		DataAccessImpl da = new DataAccessImpl();
+		DataAccess da = new DataAccess();
 		Connection connection = da.getConnection();
 		PreparedStatement ps = connection.prepareStatement(GET_FLERE);
 		
@@ -225,35 +225,11 @@ public class KoerselsKartotekImpl implements KoerselsKartotek {
 		return liste;
 	}
 
-	@Override
-	public ArrayList<KoerselHistorikImpl> visEnkeltBrugerKørslerTidsintervalAdmin(int kundenummer, Date dato1,
-			Date dato2) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
-	@Override
-	public ArrayList<KoerselHistorikImpl> visEnkeltBrugerKørslerAdmin(int kundenummer) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public ArrayList<KoerselHistorikImpl> visFlereBrugerKørslerTidsintervalAdmin(Date dato1, Date dato2)
-			throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public ArrayList<KoerselHistorikImpl> visFlereBrugerKørslerAdmin() throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	@Override
 	public void godkendKoersel(int bil, KoerselHistorik koerselhistorik) throws SQLException {
-		DataAccessImpl da = new DataAccessImpl();
+		DataAccess da = new DataAccess();
 		Connection connection = da.getConnection();
 		PreparedStatement ps = connection.prepareStatement(GODKEND_KOERSEL);
 		ps.setInt(1, bil);
@@ -267,7 +243,7 @@ public class KoerselsKartotekImpl implements KoerselsKartotek {
 	
 	@Override
 	public void setGodkendtKoersel(int bil, KoerselHistorik koerselhistorik) throws SQLException {
-		DataAccessImpl da = new DataAccessImpl();
+		DataAccess da = new DataAccess();
 		Connection connection = da.getConnection();
 		PreparedStatement ps = connection.prepareStatement(SET_GODKENDT);
 		ps.setBoolean(1, true);
@@ -281,7 +257,7 @@ public class KoerselsKartotekImpl implements KoerselsKartotek {
 
 	@Override
 	public void gemKommentar(String kommentar, int ID) throws SQLException {
-		DataAccessImpl da = new DataAccessImpl();
+		DataAccess da = new DataAccess();
 		Connection connection = da.getConnection();
 		PreparedStatement ps = connection.prepareStatement(GEM_KOMMENTAR);
 		ps.setString(1, kommentar);
@@ -293,7 +269,7 @@ public class KoerselsKartotekImpl implements KoerselsKartotek {
 
 	@Override
 	public String getKommentar(int ID) throws SQLException {
-		DataAccessImpl da = new DataAccessImpl();
+		DataAccess da = new DataAccess();
 		Connection connection = da.getConnection();
 		PreparedStatement ps = connection.prepareStatement(GET_KOMMENTAR);
 		ps.setInt(1, ID);
@@ -315,7 +291,7 @@ public class KoerselsKartotekImpl implements KoerselsKartotek {
 	@Override
 	public ArrayList<KoerselHistorikImpl> visEnkeltBrugerKørslerTidsintervalAfholdt(int kundenummer, Date dato1, Date dato2)
 			throws SQLException {
-		DataAccessImpl da = new DataAccessImpl();
+		DataAccess da = new DataAccess();
 		Connection connection = da.getConnection();
 		PreparedStatement ps = connection.prepareStatement(GET_ENKEL_TID_AFHOLDT);
 		ps.setInt(1, kundenummer);
@@ -357,7 +333,7 @@ public class KoerselsKartotekImpl implements KoerselsKartotek {
 
 	@Override
 	public ArrayList<KoerselHistorikImpl> visEnkeltBrugerKørslerAfholdt(int kundenummer) throws SQLException {
-		DataAccessImpl da = new DataAccessImpl();
+		DataAccess da = new DataAccess();
 		Connection connection = da.getConnection();
 		PreparedStatement ps = connection.prepareStatement(GET_ENKEL_AFHOLDT);
 		ps.setInt(1, kundenummer);
@@ -397,7 +373,7 @@ public class KoerselsKartotekImpl implements KoerselsKartotek {
 	@Override
 	public ArrayList<KoerselHistorikImpl> visFlereBrugerKørslerTidsintervalAfholdt(Date dato1, Date dato2)
 			throws SQLException {
-		DataAccessImpl da = new DataAccessImpl();
+		DataAccess da = new DataAccess();
 		Connection connection = da.getConnection();
 		PreparedStatement ps = connection.prepareStatement(GET_FLERE_TID_AFHOLDT);
 		ps.setDate(1, dato1);
@@ -438,7 +414,7 @@ public class KoerselsKartotekImpl implements KoerselsKartotek {
 
 	@Override
 	public ArrayList<KoerselHistorikImpl> visFlereBrugerKørslerAfholdt() throws SQLException {
-		DataAccessImpl da = new DataAccessImpl();
+		DataAccess da = new DataAccess();
 		Connection connection = da.getConnection();
 		PreparedStatement ps = connection.prepareStatement(GET_FLERE_AFHOLDT);
 		

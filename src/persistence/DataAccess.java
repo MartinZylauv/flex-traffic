@@ -1,14 +1,30 @@
 package persistence;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 
+public class DataAccess {
 
-public interface DataAccess {
+	protected Connection connection = null;
 
-	public Connection getConnection();
-	public void commit();
-	public void rollback();
-	public void close();	
-	public void setAutoCommit(boolean bool);
+	public DataAccess() throws SQLException {
+		
+			connection = DriverManager.getConnection("jdbc:hsqldb:hsql://localhost/mydatabase", "SA", "");
+		} 
+
 	
-}
+
+	
+	public Connection getConnection() {
+		return connection;
+	}
+
+	
+
+	
+
+
+	}
+
+

@@ -15,7 +15,7 @@ public class ProfilKartotekImpl implements ProfilKartotek {
 
 	@Override
 	public Profil anmodOmProfil(long kundeNummer) throws SQLException {
-		DataAccessImpl da = new DataAccessImpl();
+		DataAccess da = new DataAccess();
 		Connection connection = da.getConnection();
 		PreparedStatement ps = connection.prepareStatement(SELECT_PROFIL);
 		ps.setDouble(1, kundeNummer);
@@ -44,7 +44,7 @@ public class ProfilKartotekImpl implements ProfilKartotek {
 
 	@Override
 	public void redigerProfil(String navn, String email, Long tlf, Long kundenummer) throws SQLException {
-		DataAccessImpl da = new DataAccessImpl();
+		DataAccess da = new DataAccess();
 		Connection connection = da.getConnection();
 		PreparedStatement ps = connection.prepareStatement(INSERT_PROFIL);
 		ps.setString(1, navn);
@@ -61,7 +61,7 @@ public class ProfilKartotekImpl implements ProfilKartotek {
 	
 	@Override
 	public boolean checkProfil(long kundeNummer) throws SQLException {
-		DataAccessImpl da = new DataAccessImpl();
+		DataAccess da = new DataAccess();
 		Connection connection = da.getConnection();
 		PreparedStatement ps = connection.prepareStatement(SELECT_PROFIL);
 		ps.setLong(1, kundeNummer);
@@ -80,7 +80,7 @@ public class ProfilKartotekImpl implements ProfilKartotek {
 
 	@Override
 	public boolean checkAdmin(long kundeNummer) throws SQLException {
-		DataAccessImpl da = new DataAccessImpl();
+		DataAccess da = new DataAccess();
 		Connection connection = da.getConnection();
 		PreparedStatement ps = connection.prepareStatement(SELECT_PROFIL);
 		ps.setDouble(1, kundeNummer);

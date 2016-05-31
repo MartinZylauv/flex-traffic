@@ -27,13 +27,6 @@ public interface KoerselsKartotek {
 	
 	public ArrayList<KoerselHistorikImpl> visFlereBrugerKørsler() throws SQLException;
 
-	public ArrayList<KoerselHistorikImpl> visEnkeltBrugerKørslerTidsintervalAdmin(int kundenummer,Date  dato1,Date dato2)throws SQLException;
-	
-	public ArrayList<KoerselHistorikImpl> visEnkeltBrugerKørslerAdmin(int kundenummer)throws SQLException;
-	
-	public ArrayList<KoerselHistorikImpl> visFlereBrugerKørslerTidsintervalAdmin(Date dato1,Date dato2) throws SQLException;
-	
-	public ArrayList<KoerselHistorikImpl> visFlereBrugerKørslerAdmin()throws SQLException;
 	
 	public void gemKommentar(String kommentar, int ID) throws SQLException;
 	

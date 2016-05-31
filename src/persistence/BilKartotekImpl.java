@@ -11,14 +11,14 @@ import domain.Bil;
 import domain.BilImpl;
 import domain.KoerselHistorikImpl;
 
-public class BilKartotekImpl {
+public class BilKartotekImpl implements BilKartotek {
 	
 	private static String GET_BILER = "SELECT * FROM biler";
 	private static String GET_BIL_FRA_ID="SELECT tildelt_bil FROM koerselstildeling WHERE koersels_id =?";
 
 	public ArrayList<Bil> getBiler() throws SQLException{
 		ArrayList<Bil> biler = new ArrayList<Bil>();
-		DataAccessImpl da = new DataAccessImpl();
+		DataAccess da = new DataAccess();
 		Connection connection = da.getConnection();
 		PreparedStatement ps = connection.prepareStatement(GET_BILER);
 		ResultSet resultset = ps.executeQuery();
@@ -41,7 +41,7 @@ public class BilKartotekImpl {
 	}
 	
 	public int getBilFromKoersel(int koersel) throws SQLException{
-		DataAccessImpl da = new DataAccessImpl();
+		DataAccess da = new DataAccess();
 		Connection connection = da.getConnection();
 		PreparedStatement ps = connection.prepareStatement(GET_BIL_FRA_ID);
 		ps.setInt(1, koersel);

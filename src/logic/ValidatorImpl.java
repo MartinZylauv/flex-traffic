@@ -33,13 +33,13 @@ public class ValidatorImpl implements Validator {
 	}
 
 	@Override
-	public double angivInformationer(StartDestination startDestination, SlutDestination slutDestination,
+	public void angivInformationer(StartDestination startDestination, SlutDestination slutDestination,
 			Koersel koerselDom) {
 		this.koerselDom = koerselDom;
 		this.startDestination = startDestination;
 		this.slutDestination = slutDestination;
 
-		return 0;
+		
 	}
 
 	@Override
