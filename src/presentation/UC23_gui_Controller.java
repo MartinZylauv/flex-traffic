@@ -52,8 +52,9 @@ public class UC23_gui_Controller implements Initializable {
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {	
+		tilbage.setText("Anullér");
 		Profil profil = null;
-
+		tilbage.setVisible(false);
 		kundenummer = loggedin.getKundenummer();
 		ftp.setKundenummer(kundenummer);
 		try {
@@ -73,12 +74,13 @@ public class UC23_gui_Controller implements Initializable {
 
 	@FXML
 	public void haandterRediger() {
+		tilbage.setVisible(true);
 		gem.setVisible(true);
 		rediger.setVisible(false);
 		email.setEditable(true);
 		fulde_navn.setEditable(true);
 		tlfnummer.setEditable(true);
-		tilbage.setText("Anullér rediger");
+		
 		navnDefault = fulde_navn.getText();
 		emailDefault = email.getText();
 		tlfDefault = Long.valueOf(tlfnummer.getText());
@@ -90,11 +92,14 @@ public class UC23_gui_Controller implements Initializable {
 		emailDefault = email.getText();
 		try {
 		if(tlfnummer.getText().isEmpty()){
+			
 			tlfDefault = 0;
+			tilbage.setVisible(false);
 		}else if(tlfnummer.getText().length()!= 8){
 		throw new NumberFormatException();
 		} else{
 			tlfDefault = Long.valueOf(tlfnummer.getText());
+			tilbage.setVisible(false);
 		}
 
 		
@@ -123,6 +128,9 @@ public class UC23_gui_Controller implements Initializable {
 
 	@FXML
 	public void haandteerTilbage() { 
+		gem.setVisible(false);
+		rediger.setVisible(true);
+		tilbage.setVisible(false);
 		email.setEditable(true);
 		fulde_navn.setEditable(true);
 		tlfnummer.setEditable(true);

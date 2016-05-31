@@ -46,16 +46,6 @@ public class StartDestinationImpl implements StartDestination {
 
 	}
 
-	@Override
-	public LocalDate getDato() {
 
-		return localDate;
-	}
-
-	@Override
-	public void setDato(LocalDate localDate) {
-		this.localDate = localDate;
-
-	}
 
 }

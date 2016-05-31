@@ -10,7 +10,7 @@ public class KommuneKartotekImpl implements KommuneKartotek {
 
 	@Override
 	public String postnummerTilKommune(int postnummer) throws SQLException {
-		DataAccessForSQL da = new DataAccessForSQL();
+		DataAccessImpl da = new DataAccessImpl();
 		Connection connection = da.getConnection();
 		PreparedStatement ps = connection.prepareStatement(SELECT_PROFIL);
 		ps.setDouble(1, postnummer);

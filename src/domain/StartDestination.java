@@ -19,6 +19,5 @@ public interface StartDestination {
 	public void setPostnummer(int postnummer);
 	public String getBynavn();
 	public void setBynavn(String bynavn);
-	public LocalDate getDato();
-	public void setDato(LocalDate localDate);
+
 }

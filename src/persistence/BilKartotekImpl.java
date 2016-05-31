@@ -18,7 +18,7 @@ public class BilKartotekImpl {
 
 	public ArrayList<Bil> getBiler() throws SQLException{
 		ArrayList<Bil> biler = new ArrayList<Bil>();
-		DataAccessForSQL da = new DataAccessForSQL();
+		DataAccessImpl da = new DataAccessImpl();
 		Connection connection = da.getConnection();
 		PreparedStatement ps = connection.prepareStatement(GET_BILER);
 		ResultSet resultset = ps.executeQuery();
@@ -41,7 +41,7 @@ public class BilKartotekImpl {
 	}
 	
 	public int getBilFromKoersel(int koersel) throws SQLException{
-		DataAccessForSQL da = new DataAccessForSQL();
+		DataAccessImpl da = new DataAccessImpl();
 		Connection connection = da.getConnection();
 		PreparedStatement ps = connection.prepareStatement(GET_BIL_FRA_ID);
 		ps.setInt(1, koersel);

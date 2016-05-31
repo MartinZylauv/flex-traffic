@@ -55,7 +55,7 @@ public class DBCreator {
 	
 	public void createProfilerDB() throws SQLException{
 		
-		DataAccessForSQL da = new DataAccessForSQL();
+		DataAccessImpl da = new DataAccessImpl();
 		Connection con = da.getConnection();
 		Statement statement = con.createStatement();
 		
@@ -72,7 +72,7 @@ public class DBCreator {
 	
 public void createBilerDB() throws SQLException{
 		
-		DataAccessForSQL da = new DataAccessForSQL();
+		DataAccessImpl da = new DataAccessImpl();
 		Connection con = da.getConnection();
 		Statement statement = con.createStatement();
 		statement.executeUpdate(CREATE_BILER);
@@ -83,7 +83,7 @@ public void createBilerDB() throws SQLException{
 	}
 public void createKoerslerDB() throws SQLException{
 	
-	DataAccessForSQL da = new DataAccessForSQL();
+	DataAccessImpl da = new DataAccessImpl();
 	Connection con = da.getConnection();
 	Statement statement = con.createStatement();
 	statement.executeUpdate(CREATE_KOERSLER);
@@ -94,7 +94,7 @@ public void createKoerslerDB() throws SQLException{
 }
 public void createKoerselstildelingDB() throws SQLException{
 	
-	DataAccessForSQL da = new DataAccessForSQL();
+	DataAccessImpl da = new DataAccessImpl();
 	Connection con = da.getConnection();
 	Statement statement = con.createStatement();
 	
@@ -106,7 +106,7 @@ public void createKoerselstildelingDB() throws SQLException{
 }
 
 public void insertProfil() throws SQLException{
-	DataAccessForSQL da = new DataAccessForSQL();
+	DataAccessImpl da = new DataAccessImpl();
 	Connection con = da.getConnection();
 	Statement statement = con.createStatement();
 	
@@ -137,7 +137,7 @@ public void insertProfil() throws SQLException{
 }
 
 public void insertBil() throws SQLException{
-	DataAccessForSQL da = new DataAccessForSQL();
+	DataAccessImpl da = new DataAccessImpl();
 	Connection con = da.getConnection();
 	Statement statement = con.createStatement();
 	

@@ -13,6 +13,7 @@ public interface KoerselHistorik {
 	 */
 	
 	public void setDato(Date dato);
+	public Date getDato();
 	public void setAntalPersoner(int antalPersoner);
 	public int getAntalPersoner();
 	public void setHjaelplemidler(int antalHjaelplemidler);
@@ -41,7 +42,7 @@ public interface KoerselHistorik {
 	public void setSlutPostnummer(int postnummer);
 	public String getSlutBynavn();
 	public void setSlutBynavn(String bynavn);
-	Date getDato();
+
 
 	int getAntalHjaelpemidler();
 	void setAdminKommentar(String adminKommentar);
