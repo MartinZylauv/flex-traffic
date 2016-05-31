@@ -1,0 +1,12 @@
+Opsætning af database til Flexturs programmet
+
+Da programmet allerede opsætter de fleste tabeller skal du kun lave 1 tabel, samt indsætte data til denne.
+1.	Først kopieres indholdet af filen ”1. Tabel opsætning”
+2.	Dette indsættes i din hsqldb konsol.
+3.	Der trykkes på exceute, og  hsqldb burde sige at den er eksekveret.
+
+4.	Indholdet af filen ”2.Data” kopieres
+5.	Dette indsættes i din hsqldb konsol
+6.	Der trykkes på exceute, og hsqldb burde sige at den er eksekveret.
+
+7.	Husk at din hsqldb lokale server skal være kørende på din computer og startet op inden vores program fungerer.
