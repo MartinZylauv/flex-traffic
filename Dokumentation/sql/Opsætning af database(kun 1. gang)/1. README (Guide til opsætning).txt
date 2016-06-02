@@ -10,3 +10,10 @@ Da programmet allerede opsætter de fleste tabeller skal du kun lave 1 tabel, sam
 6.	Der trykkes på exceute, og hsqldb burde sige at den er eksekveret.
 
 7.	Husk at din hsqldb lokale server skal være kørende på din computer og startet op inden vores program fungerer.
+
+Der kan logges ind med to forskellige brugere:
+Bruger:
+Brugernummer "0", Password ""
+
+Admin
+Brugernummer "1", Password ""
