@@ -13,14 +13,16 @@ public class KommuneKartotekImpl implements KommuneKartotek {
 		DataAccess da = new DataAccess();
 		Connection connection = da.getConnection();
 		PreparedStatement ps = connection.prepareStatement(SELECT_PROFIL);
-		ps.setDouble(1, postnummer);
+		ps.setInt(1, postnummer);
 		ResultSet resultset = ps.executeQuery();
 		String kommune = null;
 		while (resultset.next()) {
 
 			kommune = resultset.getString("Adresseringsnavn_1");
+		
 
 		}
+		System.out.println(kommune);
 		connection.close();
 		resultset.close();
 		ps.close();
