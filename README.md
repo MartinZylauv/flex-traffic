@@ -21,3 +21,5 @@ mainly the eldery which needs some help with the helping-aids and luggage.
 We made a solution in java, with all the nescessary graphs and diagrams which where a requirement from the assignment we got.
 
 The process took 5 weeks from start to finish, including a 40 page paper on the project as a whole, and the work process within.
+
+The project was presented on june 20th and got judged by our teachers. We both passed this exam.
