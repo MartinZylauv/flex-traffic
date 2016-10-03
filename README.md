@@ -1,4 +1,4 @@
-# FlexMartinSteffen
+# FlexTraffik Computer Science exam 2016 EAMV 2. semester.
 Welcome to our repository for our exam project for finishing our second semester at EAMV.
 
 A quick few notes about the structure of this repository:
