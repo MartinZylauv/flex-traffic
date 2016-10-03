@@ -1,6 +1,8 @@
 # FlexTraffik Computer Science exam 2016 EAMV 2. semester.
 Welcome to our repository for our exam project for finishing our second semester at EAMV.
 
+This repository is left untouched and shows me and my team-partners knowledge of programming at june 2016. This repository is a clone of our original repository which was based in our teachers private repository so that he could follow our programming during the project.
+
 A quick few notes about the structure of this repository:
 
 This projects programming is inside the src folder and consists of different packages which have the normal naming convention for the 
